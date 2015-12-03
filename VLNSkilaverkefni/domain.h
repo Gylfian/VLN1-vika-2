@@ -55,6 +55,7 @@ public:
      */
     void deleteScientist(CScientist cSci, string tableName);
 
+    void addScientist(CScientist, string tableName);
 
     /*
      * Name: normalizeName
@@ -69,6 +70,9 @@ private:
     string createSelectQuery(CScientist cSci, string tableName);
 
     string createDeleteQuery(CScientist cSci, string tableName);
+
+    string createInsertQuery(CScientist cSci, string tableName);
+
 
 };
 

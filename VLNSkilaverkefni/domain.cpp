@@ -75,6 +75,16 @@ string Domain::createSelectQuery(CScientist cSci, string tableName)
     return sql;
 }
 
+string Domain::createInsertQuery(CScientist cSci, string tableName)
+{
+    string insertValues = " (name, gender, dob, dod) ";
+    if(tableName == "computers")
+        insertValues = " (name, yearbuilt, type, built) ";
+
+    string sql = "INSERT INTO " + tableName + insertValues + "VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    return sql;
+}
+
 string Domain::createDeleteQuery(CScientist cSci, string tableName)
 {
     string sql = "DELETE FROM " + tableName + " WHERE name='" + cSci.getName() + "' AND gender='" + cSci.getGender() +
@@ -91,6 +101,12 @@ vector<CScientist> Domain::search(CScientist cSci, string tableName)
     return searchResults;
 }
 
+void Domain::addScientist(CScientist cSci, string tableName)
+{
+    string insertQuery = createInsertQuery(cSci, tableName);
+    //Data data;
+    //insertQuery = data.executeQuery(search);
+}
 
 void Domain::deleteScientist(CScientist cSci, string tableName)
 {
