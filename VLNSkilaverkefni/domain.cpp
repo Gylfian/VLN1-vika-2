@@ -44,50 +44,59 @@ void Domain::sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice)
     }
 }
 
-string Domain::search(CScientist cSci)
+string Domain::createSelectQuery(CScientist cSci, string tableName)
 {
     string sql = "SELECT *";
-        sql += " FROM WHERE ";
-        if(!cSci.getName().empty())
-        {
-            sql += "name LIKE '%" + cSci.getName() + "%' AND ";
-        }
+    sql += " FROM " + tableName + " WHERE ";
+    if(!cSci.getName().empty())
+    {
+        sql += "name LIKE '%" + cSci.getName() + "%' AND ";
+    }
 
-        if(!cSci.getGender().empty())
-        {
-            if(cSci.getGender() == "Male")
-                sql += "gender LIKE 'Male' AND ";
-            else
-                sql += "gender LIKE 'Female' AND ";
-        }
+    if(!cSci.getGender().empty())
+    {
+        if(cSci.getGender() == "Male")
+            sql += "gender='Male' AND ";
+        else
+            sql += "gender='Female' AND ";
+    }
 
-        if(!cSci.getDob().empty())
-        {
-            sql += "dob LIKE '" + cSci.getDob() + "' AND ";
-        }
+    if(!cSci.getDob().empty())
+    {
+        sql += "dob='" + cSci.getDob() + "' AND ";
+    }
 
-        if(!cSci.getDod().empty())
-        {
-            sql += "dod LIKE '" + cSci.getDod() + "' AND ";
-        }
-        if (sql.size () > 0)  sql.resize (sql.size () - 5);
+    if(!cSci.getDod().empty())
+    {
+        sql += "dod='" + cSci.getDod() + "' AND ";
+    }
+    if (sql.size () > 0)  sql.resize (sql.size () - 5);
+    sql += ";";
+    return sql;
+}
 
-        return sql;
+string Domain::createDeleteQuery(CScientist cSci, string tableName)
+{
+    string sql = "DELETE FROM " + tableName + " WHERE name='" + cSci.getName() + "' AND gender='" + cSci.getGender() +
+            "' AND dob='" + cSci.getDob() + "' AND dod='" + cSci.getDod() + "';";
+    return sql;
+}
+
+vector<CScientist> Domain::search(CScientist cSci, string tableName)
+{
+    vector<CScientist> searchResults;
+    string searchQuery = createSelectQuery(cSci, tableName);
+    //Data data;
+    //searchResults = data.executeQuery(search);
+    return searchResults;
 }
 
 
-void Domain::deleteScientist(CScientist indexToDelete, vector<CScientist> &cSciList)
+void Domain::deleteScientist(CScientist cSci, string tableName)
 {
-    for(unsigned int j = 0; j < cSciList.size(); j++)
-    {
-        if(cSciList[j].getName() == indexToDelete.getName())
-        {
-            cSciList.erase(cSciList.begin()+j);
-        }
-
-    }
-    Data data;
-    data.writeToFile("scientists.txt", cSciList, true);
+    string deleteQuery = createDeleteQuery(cSci, tableName);
+    //Data data;
+    //deleteQuery = data.executeQuery(search);
 }
 
 

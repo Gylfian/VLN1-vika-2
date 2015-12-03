@@ -309,7 +309,7 @@ void Presentation::deleteFromList()
         {
             case ('Y'):
             case ('y'):
-                d1.deleteScientist(searchValue[number-1], scientist);
+
                 break;
             default:
                 printListText();
