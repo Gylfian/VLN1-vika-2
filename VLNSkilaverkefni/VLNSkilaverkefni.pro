@@ -1,5 +1,6 @@
 QT += core
 QT -= gui
+QT += sql
 
 TARGET = VLNSkilaverkefni
 CONFIG += console

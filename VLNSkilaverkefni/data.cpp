@@ -1,5 +1,5 @@
 #include "presentation.h"
-
+#include <QtSql>
 
 vector<CScientist> Data::readFromFile(string docName)
 {
