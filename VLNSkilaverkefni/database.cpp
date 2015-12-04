@@ -15,6 +15,12 @@ void database::addDatabase()
     QString dbName = "VLN1.sqlite";
     db.setDatabaseName(dbName);
     db.open();
+    addQuery(db);
+
+}
+
+void database::addQuery(QSqlDatabase db)
+{
     QSqlQuery query(db);
     if (!query.exec("SELECT * FROM Computerscientists")) {
         cout << "exec returns false: " << endl;
@@ -44,9 +50,4 @@ void database::addDatabase()
 
     //int employeeId = query.value(0).toInt();
     //cout << employeeId;
-}
-
-void database::addQuery()
-{
-;
 }

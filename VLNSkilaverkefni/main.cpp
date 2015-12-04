@@ -7,7 +7,6 @@ int main()
     //Interface.mainPage();
     database d1;
     d1.addDatabase();
-    d1.addQuery();
 
     return 0;
 }

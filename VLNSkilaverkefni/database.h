@@ -13,7 +13,7 @@ class database
 {
 public:
     database();
-    void addQuery();
+    void addQuery(QSqlDatabase db);
     void addDatabase();
 };
 
