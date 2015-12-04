@@ -12,7 +12,7 @@ void database::addDatabase()
     cout << "Add database function" << endl;
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "C:\\Users\\Johanna\\Desktop\\VLN1-vika-2\\VLN1.sqlite";
+    QString dbName = "VLN1.sqlite";
     db.setDatabaseName(dbName);
     db.open();
     QSqlQuery query(db);
