@@ -98,9 +98,8 @@ void Data::addQuery(QSqlDatabase db, const QString& command, vector<CScientist>&
     }
 }
 
-void Data::sciQuery(CScientist& sci, QSqlQuery query)
+void Data::sciQuery(CScientist& temp, QSqlQuery query)
 {
-    CScientist temp;
     unsigned int qId = query.value("ID").toUInt();
     temp.setId(qId);
     cout << temp.getId() << endl;
@@ -119,6 +118,7 @@ void Data::sciQuery(CScientist& sci, QSqlQuery query)
     bool qIsActive = query.value("IsActive").toBool();
     temp.setIsActive(qIsActive);
     cout << temp.getIsActive() << endl;
+
 }
 
 void Data::comQuery(Computer & comp, QSqlQuery query)
