@@ -80,7 +80,7 @@ int Domain::findLongestName(vector<CScientist> cSciList)
     int length = 0;
     for(int i = 0; i < cSciList.size(); i++)
     {
-        if(i+1 > cSciList)
+        if(i+1 > cSciList.size())
             break;
 
         if(length > cSciList[i].getName().length())

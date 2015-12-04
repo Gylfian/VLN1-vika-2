@@ -1,4 +1,4 @@
-#include "presentation.h"
+#include "data.h"
 #include <QtSql>
 
 vector<CScientist> Data::readFromFile(string docName)
