@@ -3,6 +3,13 @@
 #include <fstream>
 #include <vector>
 #include "computerscientist.h"
+#include <iostream>
+#include <string>
+#include <QVariant>
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+using namespace std;
 
 class Data
 {
@@ -34,7 +41,10 @@ public:
      * (void)Output/Return: The text file scientists.txt is filled with data from the vector cSciList
      */
     void writeToFile(string docName, vector <CScientist>& scientists, bool overwrite);
-
+    database();
+    void addQuery(QSqlDatabase db);
+    QSqlDatabase addDatabase();
+    Data();
 
 };
 
