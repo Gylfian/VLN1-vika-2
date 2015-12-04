@@ -45,8 +45,6 @@ void Presentation::addScientist()
         scientists.push_back(cSci);
 
     }while(another());
-    Domain dom1;
-    dom1.addToFile(scientists);
     system("CLS");
     mainPage();
 }
@@ -161,9 +159,6 @@ void Presentation::listOptions()
         }break;
         case ('4'):
         {
-            Domain d1;
-            vector<CScientist> scientists = d1.readFile();
-            printList(scientists);
             printListText();
             printListOptions();
         }break;
@@ -194,8 +189,6 @@ void Presentation::whichOrder(char pChoice)
             listOptions();
     }
 
-    Domain d1;
-    vector<CScientist> scientists = d1.readFile();
     char ans = getch();
     system("CLS");
 
@@ -204,8 +197,7 @@ void Presentation::whichOrder(char pChoice)
         case ('1'):
         case ('2'):
         {
-            d1.sortBy(scientists, pChoice, ans);
-            printList(scientists);
+
             printListText();
             printListOptions();
 
@@ -246,7 +238,7 @@ void Presentation::searchOptions()
 
     char ans = getch();
     Domain d1;
-    vector <CScientist> searchValue, scientist = d1.readFile();
+    vector <CScientist> searchValue;
     string search;
 
     switch(ans)
@@ -293,7 +285,7 @@ void Presentation::deleteFromList()
 {
     string name;
     Domain d1;
-    vector <CScientist> searchValue, scientist = d1.readFile();
+    vector <CScientist> searchValue;
     cout << "Enter the name of the scientist you wish to delete: ";
     getline(cin, name);
     printList(searchValue);

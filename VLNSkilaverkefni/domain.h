@@ -31,24 +31,6 @@ public:
     int findLongestName(vector<CScientist> cSciList);
 
     /*
-     * Name: addToFile
-     * Parameter/s: vector<CScientist> &cSciList
-     * Description: Takes in choice of sorting method from user and salls appropriate sorting function
-     * Usage: vector<CScientist> vec = searchByDateDeath(cSciList, "1905"):
-     * (vector<CScientist>)Output/Return: Retrieves everyone with specific death date, in this case 1905
-     */
-    void addToFile(vector<CScientist> &cSciList);
-
-    /*
-     * Name: readFile
-     * Parameter/s: None
-     * Description: Takes in choice of sorting method from user and salls appropriate sorting function
-     * Usage: vector<CScientist> vec = searchByDateDeath(cSciList, "1905"):
-     * (vector<CScientist>)Output/Return: Retrieves everyone with specific death date, in this case 1905
-     */
-    vector<CScientist> readFile();
-
-    /*
      * Name: deleteScientist
      * Parameter/s: CScientist cSci
      * Description: Deletes a specific scientist from the list
