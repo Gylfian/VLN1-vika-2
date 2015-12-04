@@ -46,6 +46,7 @@ public:
     void addQuery(QSqlDatabase db, const QString& command, vector <CScientist>& sci);
     void addQuery(QSqlDatabase db, const QString& command, vector <Computer>& sci);
     void sciQuery(CScientist& sci, QSqlQuery query);
+    void comQuery(Computer & comp, QSqlQuery query);
     QSqlDatabase addDatabase();
 
 };

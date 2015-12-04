@@ -74,7 +74,9 @@ void Data::addQuery(QSqlDatabase db, const QString& command, vector<Computer>& s
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
-
+        Computer temp;
+        comQuery(temp,query);
+        sci.push_back(temp);
     }
 }
 
@@ -111,4 +113,17 @@ void Data::sciQuery(CScientist& sci, QSqlQuery query)
     cout << qDod << endl;
     bool qIsActive = query.value("IsActive").toBool();
     cout << qIsActive << endl;
+}
+
+void Data::comQuery(Computer & comp, QSqlQuery query)
+{
+    Computer temp;
+    unsigned int qID = query.value("ID").toUInt();
+    cout << qID << endl;
+    string qName = query.value("Name").toString().toStdString();
+    cout << qName << endl;
+    string qType = query.value("Type").toString().toStdString();
+    cout << qType << endl;
+    string qBuilt = query.value("Built").toString().toStdString();
+    cout << qBuilt << endl;
 }

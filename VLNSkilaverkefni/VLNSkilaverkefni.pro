@@ -20,9 +20,6 @@ HEADERS += \
     domain.h \
     presentation.h \
     computerscientist.h \
-<<<<<<< HEAD
-    computer.h
-=======
     computer.h \
->>>>>>> c9c922024d0711b372082c7ce340c08945fec457
+
 
