@@ -26,6 +26,10 @@ public:
 
     vector<CScientist> search(CScientist cSci, string tableName);
 
+    void requestSciSql(QSqlDatabase db, QString sql, vector<CScientist> &cSciList);
+
+    void requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList);
+
     void sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice);
 
     int findLongestName(vector<CScientist> cSciList);
@@ -51,11 +55,11 @@ public:
 
 private:
 
-    string createSelectQuery(CScientist cSci, string tableName);
+    QString createSelectQuery(CScientist cSci, string tableName);
 
-    string createDeleteQuery(CScientist cSci, string tableName);
+    QString createDeleteQuery(CScientist cSci, string tableName);
 
-    string createInsertQuery(CScientist cSci, string tableName);
+    QString createInsertQuery(CScientist cSci, string tableName);
 
 
 };

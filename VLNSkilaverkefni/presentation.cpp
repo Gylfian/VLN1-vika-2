@@ -217,7 +217,7 @@ void Presentation::printList(vector<CScientist> scientists)
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
     cout << setfill(' ') << left << setw(longest +6) << "ID | Name" << "|Gender |Birth Year" << "|Death Year" << endl;
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
-    for(int i = 0; i < scientists.size(); i++)
+    for(unsigned int i = 0; i < scientists.size(); i++)
     {
         cout << setfill(' ') << right << setw(3) << i+1 << "| " << left << setw(longest+2)
         << scientists[i].getName() << setw(8) << scientists[i].getGender() << setw(11) << scientists[i].getDob()
