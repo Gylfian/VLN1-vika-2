@@ -59,41 +59,56 @@ QSqlDatabase Data::addDatabase()
     db = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "VLN1.sqlite";
     db.setDatabaseName(dbName);
-    db.open();
     return db;
 
 }
 
-void Data::addQuery(QSqlDatabase db)
+void Data::addQuery(QSqlDatabase db, const QString& command, vector<Computer>& sci)
 {
-    cout << "virkar";
     QSqlQuery query(db);
-    if (!query.exec("SELECT * FROM Computerscientists")) {
+    if (!query.exec(command)) {
         cout << "exec returns false: " << endl;
         qDebug() << query.lastError().text();
     }
-
     query.first();
     cout << "is active: " << query.isActive() << endl;
-
-    cout << query.value(1).toString().toStdString() << endl;
-
     while(query.next())
     {
-        int fff = query.value("ID").toUInt();
-        cout << fff << endl;
-        string bla = query.value("Name").toString().toStdString();
-        cout << bla << endl;
-        string fla = query.value("Gender").toString().toStdString();
-        cout << fla << endl;
-        string zla = query.value("Dob").toString().toStdString();
-        cout << zla << endl;
-        string dla = query.value("Dod").toString().toStdString();
-        cout << dla << endl;
-    }
-    cout << query.size();
-    cout << query.isValid();
 
-    //int employeeId = query.value(0).toInt();
-    //cout << employeeId;
+    }
+}
+
+void Data::addQuery(QSqlDatabase db, const QString& command, vector<CScientist>& sci)
+{
+    QSqlQuery query(db);
+    if (!query.exec(command))
+    {
+        cout << "exec returns false: " << endl;
+        qDebug() << query.lastError().text();
+    }
+    query.first();
+    cout << "is active: " << query.isActive() << endl;
+    while(query.next())
+    {
+        CScientist temp;
+        sciQuery(temp, query);
+        sci.push_back(temp);
+    }
+}
+
+void Data::sciQuery(CScientist& sci, QSqlQuery query)
+{
+    CScientist temp;
+    unsigned int qId = query.value("ID").toUInt();
+    cout << qId << endl;
+    string qName = query.value("Name").toString().toStdString();
+    cout << qName << endl;
+    string qGender = query.value("Gender").toString().toStdString();
+    cout << qGender << endl;
+    string qDob = query.value("Dob").toString().toStdString();
+    cout << qDob << endl;
+    string qDod = query.value("Dod").toString().toStdString();
+    cout << qDod << endl;
+    bool qIsActive = query.value("IsActive").toBool();
+    cout << qIsActive << endl;
 }

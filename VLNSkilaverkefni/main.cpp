@@ -1,5 +1,5 @@
 #include "presentation.h"
-#include "database.h"
+#include "data.h"
 
 int main()
 {
@@ -7,7 +7,9 @@ int main()
     //Interface.mainPage();
     Data d1;
     QSqlDatabase db=d1.addDatabase();
-    d1.addQuery(db);
+    db.open();
+    vector <CScientist> sci;
+    d1.addQuery(db, "SELECT * FROM Computerscientists", sci);
 
     return 0;
 }
