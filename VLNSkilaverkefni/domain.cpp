@@ -75,6 +75,22 @@ string Domain::createSelectQuery(CScientist cSci, string tableName)
     return sql;
 }
 
+int Domain::findLongestName(vector<CScientist> cSciList)
+{
+    int length = 0;
+    for(int i = 0; i < cSciList.size(); i++)
+    {
+        if(i+1 > cSciList)
+            break;
+
+        if(length > cSciList[i].getName().length())
+        {
+           length = cSciList[i].getName().length();
+        }
+    }
+    return length;
+}
+
 string Domain::createInsertQuery(CScientist cSci, string tableName)
 {
     string insertValues = " (name, gender, dob, dod) ";

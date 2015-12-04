@@ -28,6 +28,8 @@ public:
 
     void sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice);
 
+    int findLongestName(vector<CScientist> cSciList);
+
     /*
      * Name: addToFile
      * Parameter/s: vector<CScientist> &cSciList
