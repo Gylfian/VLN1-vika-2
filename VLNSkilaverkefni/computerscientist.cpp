@@ -3,20 +3,28 @@
 
 CScientist::CScientist()
 {
+    id = 0;
     name = "";
     gender ="";
     dateBorn = "";
     dateDeath = "";
+    isActive = false;
 }
 
-CScientist::CScientist(string cName, string cGender, string date1, string date2)
+CScientist::CScientist(int cId, string cName, string cGender, string date1, string date2, bool cIsActive)
 {
+    id = cId;
     name = cName;
     gender = cGender;
     dateBorn = date1;
     dateDeath = date2;
+    isActive = cIsActive;
 }
 
+int CScientist::getId() const
+{
+    return id;
+}
 
 string CScientist::getName() const
 {
@@ -38,6 +46,16 @@ string CScientist::getDod() const
    return dateDeath;
 }
 
+bool CScientist::getIsActive() const
+{
+   return isActive;
+}
+
+void CScientist::setId(int idToSet)
+{
+    id=idToSet;
+}
+
 void CScientist::setName(string nameToSet)
 {
     name=nameToSet;
@@ -53,7 +71,12 @@ void CScientist::setDob(string dateToSet)
     dateBorn=dateToSet;
 }
 
-void CScientist::SetDod(string dateToSet)
+void CScientist::setDod(string dateToSet)
 {
     dateDeath=dateToSet;
+}
+
+void CScientist::setIsActive(bool isActiveToSet)
+{
+    isActive=isActiveToSet;
 }

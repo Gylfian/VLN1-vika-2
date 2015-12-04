@@ -60,7 +60,7 @@ void Presentation::scientistData(CScientist& cSci)
     cSci.setName(name);
     cSci.setGender(gender);
     cSci.setDob(Dob);
-    cSci.SetDod(Dod);
+    cSci.setDod(Dod);
 }
 
 string Presentation::getInputGender()

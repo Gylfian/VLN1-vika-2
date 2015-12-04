@@ -22,7 +22,7 @@ vector<CScientist> Data::readFromFile(string docName)
         getline(inStream, gender, '/');
         getline(inStream, dob, '/');
         getline(inStream, dod);
-        CScientist scientist(name, gender, dob, dod);
+        CScientist scientist(6, name, gender, dob, dod, false);
         scientists.push_back(scientist);
 
     }
@@ -102,17 +102,23 @@ void Data::sciQuery(CScientist& sci, QSqlQuery query)
 {
     CScientist temp;
     unsigned int qId = query.value("ID").toUInt();
-    cout << qId << endl;
+    temp.setId(qId);
+    cout << temp.getId() << endl;
     string qName = query.value("Name").toString().toStdString();
-    cout << qName << endl;
+    temp.setName(qName);
+    cout << temp.getName() << endl;
     string qGender = query.value("Gender").toString().toStdString();
-    cout << qGender << endl;
+    temp.setGender(qGender);
+    cout << temp.getName() << endl;
     string qDob = query.value("Dob").toString().toStdString();
-    cout << qDob << endl;
+    temp.setDob(qDob);
+    cout << temp.getDob() << endl;
     string qDod = query.value("Dod").toString().toStdString();
-    cout << qDod << endl;
+    temp.setDob(qDob);
+    cout << temp.getDob() << endl;
     bool qIsActive = query.value("IsActive").toBool();
-    cout << qIsActive << endl;
+    temp.setIsActive(qIsActive);
+    cout << temp.getIsActive() << endl;
 }
 
 void Data::comQuery(Computer & comp, QSqlQuery query)
