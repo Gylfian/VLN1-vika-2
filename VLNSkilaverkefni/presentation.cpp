@@ -246,20 +246,20 @@ void Presentation::searchOptions()
         case ('1'):
         {
             search = getNameSearch();
-            searchValue = d1.search(scientist,ans, search );
+
 
         }break;
         case ('2'):
         {
             search = getGenderSearch();
-            searchValue = d1.search(scientist,ans, search );
+
 
         }break;
         case ('3'):
         case ('4'):
         {
             search = getYearSearch();
-            searchValue = d1.search(scientist,ans, search );
+
 
 
         }break;
@@ -288,7 +288,6 @@ void Presentation::deleteFromList()
     vector <CScientist> searchValue, scientist = d1.readFile();
     cout << "Enter the name of the scientist you wish to delete: ";
     getline(cin, name);
-    searchValue = d1.search(scientist, '1', name);
     printList(searchValue);
     int number = 1;
     if(searchValue.empty())
@@ -310,7 +309,7 @@ void Presentation::deleteFromList()
         {
             case ('Y'):
             case ('y'):
-                d1.deleteScientist(searchValue[number-1], scientist);
+
                 break;
             default:
                 printListText();
