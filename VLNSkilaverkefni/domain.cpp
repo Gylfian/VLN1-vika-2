@@ -159,15 +159,3 @@ bool Domain::normalizeName(string &name)
 }
 
 
-void Domain::addToFile(vector<CScientist> &cSciList)
-{
-    Data data;
-    data.writeToFile("scientists.txt", cSciList, false);
-}
-
-vector<CScientist> Domain::readFile()
-{
-    Data data;
-    vector<CScientist> vec = data.readFromFile("scientists.txt");
-    return vec;
-}

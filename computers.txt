@@ -1,0 +1,10 @@
+Name/Yearbuilt/Type/builtOrNot/other
+
+Sinclair ZX81/1981/HomeComputer/built/
+the TRS-80/1977/HomeComputer/built/ 
+Analytical Engine/1837/modernComputer(mechanical)/notBuilt/Charles Babbage & Ada Lovelace
+The Z3/1941/electromechanical/built/Alan Turing
+Manchester Baby/1948/electronic digital/built/
+Pilot ABC/1950/small scale programmable computer
+The Abacus/NULL/calculating machine/built/
+Pascal's adding machine/calculating/built
