@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include "computerscientist.h"
+#include "computer.h"
 #include <iostream>
 #include <string>
 #include <QVariant>
@@ -41,10 +42,11 @@ public:
      * (void)Output/Return: The text file scientists.txt is filled with data from the vector cSciList
      */
     void writeToFile(string docName, vector <CScientist>& scientists, bool overwrite);
-    database();
-    void addQuery(QSqlDatabase db);
-    QSqlDatabase addDatabase();
     Data();
+    void addQuery(QSqlDatabase db, const QString& command, vector <CScientist>& sci);
+    void addQuery(QSqlDatabase db, const QString& command, vector <Computer>& sci);
+    void sciQuery(CScientist& sci, QSqlQuery query);
+    QSqlDatabase addDatabase();
 
 };
 
