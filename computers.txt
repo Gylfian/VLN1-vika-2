@@ -8,3 +8,13 @@ Manchester Baby/1948/electronic digital/built/
 Pilot ABC/1950/small scale programmable computer
 The Abacus/NULL/calculating machine/built/
 Pascal's adding machine/calculating/built
+Atanasoff-Berry Computer(ABC)/1939–42/electronic digital/built/
+BINAC/1949/electronic computer/built/
+EDVAC/1944/electronic computer/built/
+UNIVAC I/1950/commercial computer/built/
+LEO/1951/commercial computer/built/
+ENIAC/1946/electronic general-purpose computer/built/
+Colossus/1943-45/Special-purpose electronic digital programmable computer/built/
+K-202/1971-73/minicomputer/built/
+MESM/1950/universally programmable electronic computer/built/
+Sterla/1953/mainframe computer/built/
