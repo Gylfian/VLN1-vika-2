@@ -4,8 +4,10 @@ void Presentation::mainPage()
 {
     cout << " ________________MAIN_MENU_______________" << endl;
     cout << "|---------What do you want to do?--------|" << endl;
-    cout << "|-1) Add computer scientists to the list-|" << endl;
-    cout << "|-2) See the list of computer scientists-|" << endl;
+    cout << "|-1) Display lists-----------------------|" << endl;
+    cout << "|-2) ------------------------------------|" << endl;
+    cout << "|-3) Add computer scientists to the list-|" << endl;
+    cout << "|-4) See the list of computer scientists-|" << endl;
     cout << "|-------Press any other key to quit------|" << endl;
     cout << "|________________________________________|" << endl;
     options();
@@ -216,13 +218,19 @@ void Presentation::whichOrder(char pChoice)
 void Presentation::printList(vector<CScientist> scientists)
 {
     system("CLS");
-    for (size_t i = 0; i < scientists.size(); i++)
+    Domain d1;
+    int longest = d1.findLongestName(scientists);
+    cout << longest << endl;
+    cout << "Computer scientists" << endl;
+    cout << setfill('-') << setw(longest + 36) << '-' << endl;
+    cout << setfill(' ') << left << setw(longest +6) << "ID | Name" << "|Gender |Birth Year" << "|Death Year" << endl;
+    cout << setfill('-') << setw(longest + 36) << '-' << endl;
+    for(int i = 0; i < scientists.size(); i++)
     {
-        cout << "#" << i+1 << endl;
-        cout << "Name: " << scientists[i].getName()  << endl;
-        cout << "Gender: " << scientists[i].getGender() << endl;
-        cout << "Year of birth: " << scientists[i].getDob() << endl;
-        cout << "Year of death: " << scientists[i].getDod() << endl << endl;
+        cout << setfill(' ') << right << setw(3) << i+1 << "| " << left << setw(longest+2)
+        << scientists[i].getName() << setw(8) << scientists[i].getGender() << setw(11) << scientists[i].getDob()
+        << scientists[i].getDod() << endl;
+        cout << setfill('-') << setw(longest + 36) << '-' << endl;
     }
 }
 

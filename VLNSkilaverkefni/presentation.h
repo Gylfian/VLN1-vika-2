@@ -3,6 +3,7 @@
 #include <iostream>
 #include <conio.h>
 #include <cstdlib>
+#include <iomanip>
 #include "domain.h"
 
 class Presentation
