@@ -118,7 +118,6 @@ void Data::sciQuery(CScientist& temp, QSqlQuery query)
     bool qIsActive = query.value("IsActive").toBool();
     temp.setIsActive(qIsActive);
     cout << temp.getIsActive() << endl;
-
 }
 
 void Data::comQuery(Computer & comp, QSqlQuery query)
@@ -132,4 +131,84 @@ void Data::comQuery(Computer & comp, QSqlQuery query)
     cout << qType << endl;
     string qBuilt = query.value("Built").toString().toStdString();
     cout << qBuilt << endl;
+}
+
+QString Data::createSelectQuery(CScientist cSci)
+{
+    QString qsql;
+    string sql = "SELECT *";
+    sql += " FROM Computerscientists WHERE ";
+    if(!cSci.getName().empty())
+    {
+        sql += "name LIKE '%" + cSci.getName() + "%' AND ";
+    }
+
+    if(!cSci.getGender().empty())
+    {
+        if(cSci.getGender() == "Male")
+            sql += "gender='Male' AND ";
+        else
+            sql += "gender='Female' AND ";
+    }
+
+    if(!cSci.getDob().empty())
+    {
+        sql += "dob='" + cSci.getDob() + "' AND ";
+    }
+
+    if(!cSci.getDod().empty())
+    {
+        sql += "dod='" + cSci.getDod() + "' AND ";
+    }
+    if (sql.size () > 0)  sql.resize (sql.size () - 5);
+    sql += ";";
+    qsql = QString::fromStdString(sql);
+    return qsql;
+}
+
+QString Data::createInsertQuery(CScientist cSci)
+{
+    QString qsql;
+    string insertValues = " (name, gender, dob, dod) ";
+    string sql = "INSERT INTO Computerscientists name, yearbuilt, type, built VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    qsql = QString::fromStdString(sql);
+    return qsql;
+}
+
+QString Data::createDeleteQuery(CScientist cSci)
+{
+    QString qsql;
+    //
+    return qsql;
+}
+
+QString Data::createSelectQuery(Computer comp)
+{
+    QString qsql;
+    string sql = "SELECT *";
+    sql += " FROM Computers WHERE ";
+    if(!comp.getName().empty())
+    {
+        sql += "name LIKE '%" + comp.getName() + "%' AND ";
+    }
+
+    if (sql.size () > 0)  sql.resize (sql.size () - 5);
+    sql += ";";
+    qsql = QString::fromStdString(sql);
+    return qsql;
+}
+
+QString Data::createInsertQuery(Computer comp)
+{
+    QString qsql;
+    string sql = "INSERT INTO computers (name, yearbuilt, type, built) VALUES ('"+ comp.getName() +"','"+ comp.getYear() +"','"+ comp.getType() + "')";
+    qsql = QString::fromStdString(sql);
+    return qsql;
+}
+
+QString Data::createDeleteQuery(Computer comp)
+{
+    QString qsql;
+    //
+    return qsql;
 }

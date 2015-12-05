@@ -54,12 +54,10 @@ public:
     bool normalizeName(string &name);
 
 private:
-
-    QString createSelectQuery(CScientist cSci, string tableName);
-
-    QString createDeleteQuery(CScientist cSci, string tableName);
-
-    QString createInsertQuery(CScientist cSci, string tableName);
+    QString createSelectQuery(CScientist cSci);
+    QString createDeleteQuery(CScientist cSci);
+    QString createInsertQuery(CScientist cSci);
+    Data data;
 
 
 };

@@ -44,62 +44,11 @@ void Domain::sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice)
     }
 }
 
-QString Domain::createSelectQuery(CScientist cSci, string tableName)
-{
-    QString qsql;
-    string sql = "SELECT *";
-    sql += " FROM " + tableName + " WHERE ";
-    if(!cSci.getName().empty())
-    {
-        sql += "name LIKE '%" + cSci.getName() + "%' AND ";
-    }
-
-    if(!cSci.getGender().empty())
-    {
-        if(cSci.getGender() == "Male")
-            sql += "gender='Male' AND ";
-        else
-            sql += "gender='Female' AND ";
-    }
-
-    if(!cSci.getDob().empty())
-    {
-        sql += "dob='" + cSci.getDob() + "' AND ";
-    }
-
-    if(!cSci.getDod().empty())
-    {
-        sql += "dod='" + cSci.getDod() + "' AND ";
-    }
-    if (sql.size () > 0)  sql.resize (sql.size () - 5);
-    sql += ";";
-    qsql = QString::fromStdString(sql);
-    return qsql;
-}
-
-QString Domain::createInsertQuery(CScientist cSci, string tableName)
-{
-    QString qsql;
-    string insertValues = " (name, gender, dob, dod) ";
-    if(tableName == "computers")
-        insertValues = " (name, yearbuilt, type, built) ";
-
-    string sql = "INSERT INTO " + tableName + insertValues + "VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
-    qsql = QString::fromStdString(sql);
-    return qsql;
-}
-
-QString Domain::createDeleteQuery(CScientist cSci, string tableName)
-{
-    QString qsql;
-    //
-    return qsql;
-}
 
 vector<CScientist> Domain::search(CScientist cSci, string tableName)
 {
     vector<CScientist> searchResults;
-    QString searchQuery = createSelectQuery(cSci, tableName);
+    QString searchQuery = data.createSelectQuery(cSci);
     //Data data;
     //searchResults = data.executeQuery(search);
     return searchResults;
@@ -107,22 +56,21 @@ vector<CScientist> Domain::search(CScientist cSci, string tableName)
 
 void Domain::addScientist(CScientist cSci, string tableName)
 {
-    QString insertQuery = createInsertQuery(cSci, tableName);
+    QString insertQuery = data.createInsertQuery(cSci);
     //Data data;
     //insertQuery = data.executeQuery(search);
 }
 
 void Domain::deleteScientist(CScientist cSci, string tableName)
 {
-    QString deleteQuery = createDeleteQuery(cSci, tableName);
+    QString deleteQuery = data.createDeleteQuery(cSci);
     //Data data;
     //deleteQuery = data.executeQuery(search);
 }
 
 void Domain::requestSciSql(QSqlDatabase db, QString sql, vector<CScientist> &cSciList)
 {
-    Data d1;
-    d1.addQuery(db, sql, cSciList);
+    data.addQuery(db, sql, cSciList);
 }
 
 void Domain::requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList)

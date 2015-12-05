@@ -48,6 +48,12 @@ public:
     void sciQuery(CScientist& sci, QSqlQuery query);
     void comQuery(Computer & comp, QSqlQuery query);
     QSqlDatabase addDatabase();
+    QString createSelectQuery(CScientist cSci);
+    QString createDeleteQuery(CScientist cSci);
+    QString createInsertQuery(CScientist cSci);
+    QString createSelectQuery(Computer comp);
+    QString createDeleteQuery(Computer comp);
+    QString createInsertQuery(Computer comp);
 
 };
 
