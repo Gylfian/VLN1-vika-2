@@ -175,7 +175,7 @@ QString Data::createInsertQuery(CScientist cSci)
 {
     QString qsql;
     string insertValues = " (name, gender, dob, dod) ";
-    string sql = "INSERT INTO Computerscientists name, yearbuilt, type, built VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob , Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
     qsql = QString::fromStdString(sql);
     return qsql;
 }
@@ -183,7 +183,9 @@ QString Data::createInsertQuery(CScientist cSci)
 QString Data::createDeleteQuery(CScientist cSci)
 {
     QString qsql;
-    //
+    int id = cSci.getId();
+    string sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
+    qsql = QString::fromStdString(sql);
     return qsql;
 }
 
@@ -214,7 +216,9 @@ QString Data::createInsertQuery(Computer comp)
 QString Data::createDeleteQuery(Computer comp)
 {
     QString qsql;
-    //
+    int id = comp.getId();
+    string sql = "UPDATE Computer SET isActive=0 WHERE ID = " +id;
+    qsql = QString::fromStdString(sql);
     return qsql;
 }
 
