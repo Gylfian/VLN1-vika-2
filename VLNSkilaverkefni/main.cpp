@@ -9,8 +9,8 @@ int main()
     Data d1;
     QSqlDatabase db=d1.addDatabase();
     db.open();
-    vector <CScientist> sci;
-    d1.addQuery(db, "SELECT * FROM Computerscientists", sci);
+    CScientist sci;
+    d1.addQuery(db, sci);
 
     return 0;
 }

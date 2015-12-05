@@ -5,7 +5,10 @@
 
 Data::Data()
 {
-
+    CScientist temp;
+    Computer temp2;
+    sci.push_back(temp);
+    com.push_back(temp2);
 }
 
 vector<CScientist> Data::readFromFile(string docName)
@@ -63,41 +66,38 @@ QSqlDatabase Data::addDatabase()
 
 }
 
-void Data::addQuery(QSqlDatabase db, const QString& command, vector<Computer>& sci)
+void Data::addQuery(QSqlDatabase db, Computer temp)
 {
     QSqlQuery query(db);
-    if (!query.exec(command)) {
+    if (!query.exec("SELECT * FROM Computerscientists")) {
         cout << "exec returns false: " << endl;
         qDebug() << query.lastError().text();
     }
-    Computer temp;
     query.first();
     comQuery(temp,query);
-    sci.push_back(temp);
+    com.push_back(temp);
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
         comQuery(temp,query);
-        sci.push_back(temp);
+        com.push_back(temp);
     }
 }
 
-void Data::addQuery(QSqlDatabase db, const QString& command, vector<CScientist>& sci)
+void Data::addQuery(QSqlDatabase db, CScientist temp)
 {
     QSqlQuery query(db);
-    if (!query.exec(command))
+    if (!query.exec("SELECT * FROM Computerscientists"))
     {
         cout << "exec returns false: " << endl;
         qDebug() << query.lastError().text();
     }
-    CScientist temp;
     query.first();
     sciQuery(temp,query);
     sci.push_back(temp);
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
-        CScientist temp;
         sciQuery(temp, query);
         sci.push_back(temp);
     }
@@ -125,16 +125,22 @@ void Data::sciQuery(CScientist& temp, QSqlQuery query)
     cout << temp.getIsActive() << endl;
 }
 
-void Data::comQuery(Computer & comp, QSqlQuery query)
+void Data::comQuery(Computer& temp, QSqlQuery query)
 {
-    Computer temp;
-    unsigned int qID = query.value("ID").toUInt();
-    cout << qID << endl;
+    int qId = query.value("ID").toUInt();
+    temp.setId(qId);
+    cout << qId << endl;
     string qName = query.value("Name").toString().toStdString();
+    temp.setName(qName);
     cout << qName << endl;
     string qType = query.value("Type").toString().toStdString();
+    temp.setType(qType);
     cout << qType << endl;
-    string qBuilt = query.value("Built").toString().toStdString();
+    bool qBuilt = query.value("Built").toBool();
+    temp.setBuilt(qBuilt);
+    cout << qBuilt << endl;
+    bool qIsActive = query.value("isActive").toBool();
+    temp.setIsActive(qIsActive);
     cout << qBuilt << endl;
 }
 

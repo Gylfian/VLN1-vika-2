@@ -68,16 +68,16 @@ void Domain::deleteScientist(CScientist cSci, string tableName)
     //deleteQuery = data.executeQuery(search);
 }
 
-void Domain::requestSciSql(QSqlDatabase db, QString sql, vector<CScientist> &cSciList)
-{
-    data.addQuery(db, sql, cSciList);
-}
+//void Domain::requestSciSql(QSqlDatabase db, QString sql, vector<CScientist> &cSciList)
+//{
+  //  data.addQuery(db, sql, cSciList);
+//}
 
-void Domain::requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList)
-{
-    Data d1;
-    d1.addQuery(db, sql, cComList);
-}
+//void Domain::requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList)
+//{
+  //  Data d1;
+    //d1.addQuery(db, sql, cComList);
+//}
 
 
 int Domain::findLongestName(vector<CScientist> cSciList)
