@@ -2,18 +2,25 @@
 
 Computer::Computer()
 {
+    id = 0;
     name = "";
     yearBuilt = "";
     type = "";
     built = false;
 }
 
-Computer::Computer(string cName, string cYear, string cType, bool cBuilt)
+Computer::Computer(int cId,string cName, string cYear, string cType, bool cBuilt)
 {
+    id = cId;
     name = cName;
     yearBuilt = cYear;
     type = cType;
     built = cBuilt;
+}
+
+int Computer::getId() const
+{
+    return id;
 }
 
 string Computer::getName() const

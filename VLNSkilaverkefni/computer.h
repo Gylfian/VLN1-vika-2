@@ -7,7 +7,8 @@ class Computer
 {
 public:
     Computer();
-    Computer(string cName, string cYear, string cType, bool cBuilt);
+    Computer(int cId,string cName, string cYear, string cType, bool cBuilt);
+    int getId() const;
     string getName() const;
     string getYear() const;
     string getType() const;
