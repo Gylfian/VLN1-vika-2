@@ -286,8 +286,8 @@ string Presentation::getInputGender()
     string gender;
     cout << "Is the scientist [m]ale or [f]emale ? " << endl;
     char ans = getch();
-        switch (ans)
-        {
+    switch (ans)
+    {
         case ('M'):
         case ('m'):
         {
@@ -300,13 +300,14 @@ string Presentation::getInputGender()
         gender = "Female";
         cout << gender << " selected" << endl;
         }break;
-        default:{
-        cout << "Please select either male or female"<<endl;
-        gender = getInputGender();
+        default:
+        {
+            cout << "Please select either male or female"<<endl;
+            gender = getInputGender();
+        }
+
+
     }
-
-
-}
     return gender;
 }
 
@@ -413,7 +414,6 @@ bool Presentation::another(string word)
 {
     anotherText(word);
     char ans = getch();
-
     switch (ans)
     {
         case ('Y'):
@@ -541,17 +541,16 @@ void Presentation::deleteFromList()
 
     cout << "Are you sure you wish to delete this person?(y/n) ";
     char ans = getch();
-        switch (ans)
-        {
-            case ('Y'):
-            case ('y'):
-
-                break;
-            default:
-                printListText();
-                printListOptions();
-                break;
-        }
+    switch (ans)
+    {
+        case ('Y'):
+        case ('y'):
+            break;
+        default:
+            printListText();
+            printListOptions();
+            break;
+    }
     system("CLS");
     mainPage();
 }
