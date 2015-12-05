@@ -220,9 +220,9 @@ void Data::deleteComputer(Computer comp)
     qsql = QString::fromStdString(sql);
 }
 
-bool Data::executequery(QSqlQuery query)
+bool Data::executequery(QSqlQuery query,QString command)
 {
-    if (!query.exec())
+    if (!query.exec(command))
     {
         return false;
     }
