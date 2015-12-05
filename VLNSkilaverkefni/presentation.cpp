@@ -1,15 +1,18 @@
 #include "presentation.h"
 
+string const COMPUTER = "Computer";
+string const PERSON = "--Person";
+
 void Presentation::mainPage()
 {
-    cout << " ________________MAIN_MENU_______________" << endl;
-    cout << "|---------What do you want to do?--------|" << endl;
-    cout << "|-1) Display lists-----------------------|" << endl;
-    cout << "|-2) ------------------------------------|" << endl;
-    cout << "|-3) Add computer scientists to the list-|" << endl;
-    cout << "|-4) See the list of computer scientists-|" << endl;
-    cout << "|-------Press any other key to quit------|" << endl;
-    cout << "|________________________________________|" << endl;
+    cout << " ___________MAIN_MENU_________" << endl;
+    cout << "|---What do you want to do?---|" << endl;
+    cout << "|-1) Display lists------------|" << endl;
+    cout << "|-2) Search lists-------------|" << endl;
+    cout << "|-3) Add to lists-------------|" << endl;
+    cout << "|-4) Delete from lists--------|" << endl;
+    cout << "|-Press any other key to quit-|" << endl;
+    cout << "|_____________________________|" << endl;
     options();
 }
 
@@ -22,15 +25,215 @@ void Presentation::options()
     {
         case ('1'):
         {
-            addScientist();
+            sciOrComText(ans);
+            printSciOrCom();
+        }break;
+        case ('2'):
+        {
+            sciOrComText(ans);
+            searchSciOrCom();
+        }break;
+        case ('3'):
+        {
+            sciOrComText(ans);
+            addSciOrCom();
+        }break;
+        case ('4'):
+        {
+            sciOrComText(ans);
+            deleteSciOrCom();
+        }break;
+        default:
+            exit (1);
+    }
+}
+
+void Presentation::printSciOrCom()
+{
+    char ans = getch();
+    system("CLS");
+
+    switch (ans)
+    {
+        case ('1'):
+        {
+            listOptions();
         }break;
         case ('2'):
         {
             listOptions();
         }break;
         default:
-            exit (1);
+            mainPage();
     }
+}
+
+void Presentation::addSciOrCom()
+{
+    char ans = getch();
+    system("CLS");
+
+    switch (ans)
+    {
+        case('1'):
+        {
+            addScientist();
+        }break;
+        case('2'):
+        {
+            addComputer();
+        }break;
+        case('3'):
+        {
+
+        }break;
+        default:
+            mainPage();
+    }
+}
+
+void Presentation::searchSciOrCom()
+{
+    char ans = getch();
+
+    switch(ans)
+    {
+        case('1'):
+        {
+            searchSci();
+        }break;
+        case('2'):
+        {
+            searchCom();
+        }break;
+        default:
+            mainPage();
+    }
+
+}
+
+void Presentation::searchSci()
+{
+    system("CLS");
+    string name, gender, Dob, Dod;
+    int id = getSearchId();
+
+    gender = getSearchGender();
+    cout << "Enter year of birth: ";
+    getline(cin, Dob);
+    cout << "Enter year of death: ";
+    getline(cin, Dod);
+
+    CScientist cSci(id, name, gender, Dob, Dod, 1);
+}
+
+string Presentation::getSearchName()
+{
+    string name;
+    cout << "Enter name: ";
+    getline(cin, name);
+    return name;
+}
+
+string Presentation::getSearchGender()
+{
+    string gender;
+    cout << "Is the scientist [m]ale or [f]emale or [u]nknown " << endl;
+    char ans = getch();
+        switch (ans)
+        {
+        case ('M'):
+        case ('m'):
+        {
+            gender = "Male";
+            cout << gender << " selected" << endl;
+        }break;
+        case ('F'):
+        case ('f'):
+        {
+        gender = "Female";
+        cout << gender << " selected" << endl;
+        }break;
+        case ('U'):
+        case ('u'):
+        {
+            gender = "";
+            cout << "Unknown selected" << endl;
+        }break;
+        default:
+            cout << "Please select a valid option!" << endl;
+            gender = getSearchGender();
+        }
+        return gender;
+}
+
+int Presentation::getSearchId()
+{
+    string id;
+    cout << "Enter ID: ";
+    getline(cin,id);
+    int ans = 0;
+
+    return ans;
+}
+
+void Presentation::searchCom()
+{
+    system("CLS");
+    string name, type, year;
+    int id = getSearchId();
+    name = getSearchName();
+    cout << "Enter type: ";
+    getline(cin,type);
+    bool built = getSearchBuilt();
+    if (built)
+    {
+        cout << "Enter the year the computer was built: ";
+        getline(cin, name);
+    }
+    else
+    {
+        year = "";
+    }
+
+    Computer com(id, name, year, type, built);
+}
+
+bool Presentation::getSearchBuilt()
+{
+    bool built;
+    cout << "Was the computer built? [y]es, [n]o, [d]on't know" << endl;
+    char ans = getch();
+
+    switch (ans)
+    {
+        case('Y'):
+        case('y'):
+        {
+            built = true;
+        }break;
+        case('N'):
+        case('n'):
+        {
+            built = false;
+        }break;
+        case('D'):
+        case('d'):
+        {
+            built = true;
+        }break;
+        default:
+            cout << "Please enter a valid option!";
+            built = getComBuilt();
+    }
+
+    return built;
+}
+
+
+void Presentation::deleteSciOrCom()
+{
+
 }
 
 void Presentation::addScientist()
@@ -41,15 +244,31 @@ void Presentation::addScientist()
     do
     {
         system("CLS");
-        scientistData(cSci);
+        cSci = getScientistData();
         scientists.push_back(cSci);
 
-    }while(another());
+    }while(another(PERSON));
     system("CLS");
     mainPage();
 }
 
-void Presentation::scientistData(CScientist& cSci)
+void Presentation::addComputer()
+{
+    Computer com;
+    vector<Computer> coms;
+
+    do
+    {
+        system("CLS");
+        com = getComputerData();
+        coms.push_back(com);
+
+    }while(another(COMPUTER));
+    system("CLS");
+    mainPage();
+}
+
+CScientist Presentation::getScientistData()
 {
     string name, gender, Dob, Dod;
     name = getInputName();
@@ -57,10 +276,9 @@ void Presentation::scientistData(CScientist& cSci)
     Dob = getInputDob();
     Dod = getInputDod();
 
-    cSci.setName(name);
-    cSci.setGender(gender);
-    cSci.setDob(Dob);
-    cSci.setDod(Dod);
+
+    CScientist cSci(0,name, gender, Dob, Dod, 1);
+    return cSci;
 }
 
 string Presentation::getInputGender()
@@ -68,26 +286,28 @@ string Presentation::getInputGender()
     string gender;
     cout << "Is the scientist [m]ale or [f]emale ? " << endl;
     char ans = getch();
-        switch (ans)
+    switch (ans)
+    {
+        case ('M'):
+        case ('m'):
         {
-            case ('M'):
-            case ('m'):
-            {
-                gender = "Male";
-                cout << gender<<" selected"<< endl;
-            }break;
-            case ('F'):
-            case ('f'):
-            {
-                gender = "Female";
-                cout << gender<<" selected"<< endl;
-            }break;
-            default:
-            {
-                cout << "Please select either male or female"<<endl;
-                gender = getInputGender();
-            }
+            gender = "Male";
+            cout << gender << " selected" << endl;
+        }break;
+        case ('F'):
+        case ('f'):
+        {
+        gender = "Female";
+        cout << gender << " selected" << endl;
+        }break;
+        default:
+        {
+            cout << "Please select either male or female"<<endl;
+            gender = getInputGender();
         }
+
+
+    }
     return gender;
 }
 
@@ -121,9 +341,78 @@ string Presentation::getInputDod()
     return Dod;
 }
 
-bool Presentation::another()
+Computer Presentation::getComputerData()
 {
-    anotherText();
+    string name = getComName();
+    string type = getComType();
+    bool built = getComBuilt();
+    string year;
+    if(built)
+    {
+        year = getComYear();
+    }
+    else
+    {
+        year = "";
+    }
+
+    Computer com(0, name, year, type, built);
+    return com;
+}
+
+string Presentation::getComName()
+{
+    string name;
+    cout << "Enter the name of the computer: ";
+    cin >> name;
+    return name;
+}
+
+string Presentation::getComType()
+{
+    string type;
+    cout << "Enter the type of computer: ";
+    cin >> type;
+    return type;
+}
+
+bool Presentation::getComBuilt()
+{
+    bool built;
+    cout << "Was the computer built? (y/n)" << endl;
+    char ans = getch();
+
+    switch (ans)
+    {
+        case('y'):
+        case('Y'):
+        {
+            built = true;
+        }break;
+        case('n'):
+        case('N'):
+        {
+            built = false;
+        }break;
+        default:
+            cout << "Please enter a valid option!";
+            built = getComBuilt();
+    }
+
+    return built;
+}
+
+string Presentation::getComYear()
+{
+    string year;
+    cout << "Enter the year the computer was built: ";
+    cin >> year;
+    return year;
+}
+
+bool Presentation::another(string word)
+{
+    anotherText(word);
     char ans = getch();
     switch (ans)
     {
@@ -161,7 +450,10 @@ void Presentation::listOptions()
             printListOptions();
         }break;
         default:
-            mainPage();
+            sciOrComText('1');
+            printSciOrCom();
+
+
 
     }
 }
@@ -215,6 +507,7 @@ void Presentation::printList(vector<CScientist> scientists)
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
     cout << setfill(' ') << left << setw(longest +6) << "ID | Name" << "|Gender |Birth Year" << "|Death Year" << endl;
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
+
     for(unsigned int i = 0; i < scientists.size(); i++)
     {
         cout << setfill(' ') << right << setw(3) << i+1 << "| " << left << setw(longest+2)
@@ -223,61 +516,6 @@ void Presentation::printList(vector<CScientist> scientists)
         cout << setfill('-') << setw(longest + 36) << '-' << endl;
     }
 }
-
-void Presentation::searchOptions()
-{
-    cout << " ______________________________________ " << endl;
-    cout << "|-How do you want to search the list ?-|" << endl;
-    cout << "|-1) By name---------------------------|" << endl;
-    cout << "|-2) By gender-------------------------|" << endl;
-    cout << "|-3) By birth year---------------------|" << endl;
-    cout << "|-4) By death year---------------------|" << endl;
-    cout << "|______________________________________|" << endl;
-
-    char ans = getch();
-    Domain d1;
-    vector <CScientist> searchValue;
-    string search;
-
-    switch(ans)
-    {
-        case ('1'):
-        {
-            search = getNameSearch();
-
-
-        }break;
-        case ('2'):
-        {
-            search = getGenderSearch();
-
-
-        }break;
-        case ('3'):
-        case ('4'):
-        {
-            search = getYearSearch();
-
-
-
-        }break;
-        default:
-            mainPage();
-    }
-    if(searchValue.empty())
-    {
-        system("CLS");
-        cout << "That entry does not exist!" << endl;
-    }
-    else
-    {
-        d1.sortBy(searchValue,'1','1');
-        printList(searchValue);
-    }
-    printListText();
-    printListOptions();
-}
-
 
 void Presentation::deleteFromList()
 {
@@ -317,48 +555,6 @@ void Presentation::deleteFromList()
     mainPage();
 }
 
-string Presentation::getNameSearch()
-{
-    string name;
-    cout << "Enter the name you wish to search for: ";
-    getline(cin, name);
-    return name;
-}
-
-string Presentation::getGenderSearch()
-{
-    cout << " __________________" << endl;
-    cout << "|-1) Male search---|" << endl;
-    cout << "|-2) Female search-|" << endl;
-    cout << "|__________________|" << endl;
-
-    char ans = getch();
-    system("CLS");
-
-    switch (ans)
-    {
-        case ('1'):
-        {
-            return "Male";
-        }break;
-        case ('2'):
-        {
-            return "Female";
-        }break;
-        default:
-            cout << "Please select a valid option!" << endl;
-            return getGenderSearch();
-    }
-}
-
-string Presentation::getYearSearch()
-{
-    string search;
-    cout << "Enter the year you wish to find: ";
-    cin >> search;
-    return search;
-}
-
 void Presentation::printListOptions()
 {
     char ans = getch();
@@ -368,7 +564,7 @@ void Presentation::printListOptions()
     {
         case ('1'):
         {
-            searchOptions();
+
         }break;
         case ('2'):
         {
@@ -388,10 +584,11 @@ void Presentation::printListText()
     cout << "|-Press any other key to go to the main menu-|" << endl;
     cout << "|____________________________________________|" << endl;
 }
-void Presentation::anotherText()
+
+void Presentation::anotherText(string word)
 {
-    cout << "-------------Person added--------------" << endl;
-    cout << "Do you wish to add another person (y/n)" << endl;
+    cout << "---------" << word << " added-----------" << endl;
+    cout << "Do you wish to add another ? (y/n)" << endl;
 }
 
 void Presentation::listOptionsText()
@@ -434,4 +631,43 @@ void Presentation::yearBornText()
     cout << "|-2) Oldest first---------------------|" << endl;
     cout << "|-Press any other key to go back------|" << endl;
     cout << "|_____________________________________|" << endl;
+}
+
+void Presentation::sciOrComText(char which)
+{
+
+    cout << " ________________________________________"  << endl;
+    switch (which)
+    {
+        case ('1'):
+        {
+            cout << "|-Which list do you wish to display?-----|" << endl;
+        }break;
+        case ('2'):
+        {
+            cout << "|-Which list fo you wish to search from?-|" << endl;
+        }break;
+        case ('3'):
+        {
+            cout << "|-Which list do you wish to add to?------|" << endl;
+        }break;
+        case ('4'):
+        {
+            cout << "|-Which list do you wish to delete from?-|" << endl;
+        }break;
+
+    }
+    cout << "|-1) Computer Scientists-----------------|" << endl;
+    cout << "|-2) Computers---------------------------|" << endl;
+    if (which == '3')
+    {
+        cout << "|-3) Add a connection--------------------|" << endl;
+        cout << "|-Press any other key to go back---------|" << endl;
+        cout << "|________________________________________|" << endl;
+    }else
+    {
+        cout << "|-Press any other key to go back---------|" << endl;
+        cout << "|________________________________________|" << endl;
+    }
+
 }

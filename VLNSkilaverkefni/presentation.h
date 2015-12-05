@@ -46,7 +46,7 @@ private:
      * Usage: while(another());
      * (bool)Output/Return: true or false depending on user choice
      */
-     bool another();
+     bool another(string word);
 
     /*
      * Name: listOptions
@@ -87,12 +87,12 @@ private:
 
      /*
       * Name: scientistData
-      * Parameter/s: Cscientist& cSci
+      * Parameter/s: none
       * Description: Calls functions that get user input and calls functions that put that input into member variables of the Scientist variable
       * Usage: scientistData(c1);
       * Output/Return: Returns the scientist variable with changed member variables
       */
-      void scientistData(CScientist& cSci);
+      CScientist getScientistData();
 
      /*
       * Name: getInputGender
@@ -190,7 +190,7 @@ private:
       * Usage: anotherText();
       * Output/Return: none
       */
-      void anotherText();
+      void anotherText(string word);
 
      /*
       * Name: listOptionsText
@@ -227,6 +227,24 @@ private:
       * Output/Return: none
       */
       void ascendingDecendingText();
+      void sciOrCom();
+      void addComputer();
+      Computer getComputerData();
+      string getComName();
+      string getComYear();
+      string getComType();
+      bool getComBuilt();
+      void sciOrComText(char which);
+      void addSciOrCom();
+      void printSciOrCom();
+      void deleteSciOrCom();
+      void searchSciOrCom();
+      void searchSci();
+      void searchCom();
+      int getSearchId();
+      string getSearchGender();
+      string getSearchName();
+      bool getSearchBuilt();
 };
 
 #endif // PRESENTATION_H
