@@ -40,7 +40,6 @@ void Domain::sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice)
 
             }
             break;
-
     }
 }
 
@@ -48,7 +47,7 @@ void Domain::sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice)
 vector<CScientist> Domain::search(CScientist cSci, string tableName)
 {
     vector<CScientist> searchResults;
-    QString searchQuery = data.createSelectQuery(cSci);
+    data.selectScientist(cSci);
     //Data data;
     //searchResults = data.executeQuery(search);
     return searchResults;
@@ -56,14 +55,14 @@ vector<CScientist> Domain::search(CScientist cSci, string tableName)
 
 void Domain::addScientist(CScientist cSci, string tableName)
 {
-    QString insertQuery = data.createInsertQuery(cSci);
+    data.insertScientist(cSci);
     //Data data;
     //insertQuery = data.executeQuery(search);
 }
 
 void Domain::deleteScientist(CScientist cSci, string tableName)
 {
-    QString deleteQuery = data.createDeleteQuery(cSci);
+    data.deleteScientist(cSci);
     //Data data;
     //deleteQuery = data.executeQuery(search);
 }

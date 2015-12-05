@@ -43,22 +43,25 @@ public:
      */
     void writeToFile(string docName, vector <CScientist>& scientists, bool overwrite);
     Data();
-    void addQuery(QSqlDatabase db, CScientist sci);
-    void addQuery(QSqlDatabase db, Computer com);
+    bool fillVector(QSqlDatabase db, CScientist sci, QString command);
+    bool fillVector(QSqlDatabase db, Computer com, QString command);
+    QSqlDatabase getDatabase();
     void sciQuery(CScientist& sci, QSqlQuery query);
     void comQuery(Computer & comp, QSqlQuery query);
     bool editDatabase(QSqlDatabase db, const QString& command);
-    QSqlDatabase addDatabase();
-    QString createSelectQuery(CScientist cSci);
-    QString createDeleteQuery(CScientist cSci);
-    QString createInsertQuery(CScientist cSci);
-    QString createSelectQuery(Computer comp);
-    QString createDeleteQuery(Computer comp);
-    QString createInsertQuery(Computer comp);
+    void setDatabase();
+    void selectScientist(CScientist cSci);
+    void deleteScientist(CScientist cSci);
+    void insertScientist(CScientist cSci);
+    void selectComputer(Computer comp);
+    void deleteComputer(Computer comp);
+    void insertComputer(Computer comp);
 
 private:
    vector<CScientist> sci;
    vector<Computer> com;
+   QSqlDatabase database;
+
 };
 
 #endif // DATA_H

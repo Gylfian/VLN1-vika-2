@@ -27,7 +27,6 @@ vector<CScientist> Data::readFromFile(string docName)
         getline(inStream, dod);
         CScientist scientist(6, name, gender, dob, dod, false);
         scientists.push_back(scientist);
-
     }
     inStream.close();
     return scientists;
@@ -55,26 +54,27 @@ void Data::writeToFile(string docName, vector <CScientist>& scientists, bool ove
     }
 }
 
-QSqlDatabase Data::addDatabase()
+QSqlDatabase Data::getDatabase()
 {
-    cout << "Add database function" << endl;
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "VLN1.sqlite";
-    db.setDatabaseName(dbName);
-    return db;
-
+    return database;
 }
 
-void Data::addQuery(QSqlDatabase db, Computer temp)
+void Data::setDatabase()
+{
+    cout << "Add database function" << endl;
+    //QSqlDatabase db;
+    database = QSqlDatabase::addDatabase("QSQLITE");
+    QString dbName = "VLN1.sqlite";
+    database.setDatabaseName(dbName);
+    database.open();
+}
+
+bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {
     QSqlQuery query(db);
-    if (!query.exec("SELECT * FROM Computerscientists")) {
-        cout << "exec returns false: " << endl;
-        qDebug() << query.lastError().text();
-    }
+    //if(!executecommand, query));
     query.first();
-    comQuery(temp,query);
+    comQuery(temp, query);
     com.push_back(temp);
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
@@ -82,25 +82,22 @@ void Data::addQuery(QSqlDatabase db, Computer temp)
         comQuery(temp,query);
         com.push_back(temp);
     }
+    return true;
 }
 
-void Data::addQuery(QSqlDatabase db, CScientist temp)
+bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
     QSqlQuery query(db);
-    if (!query.exec("SELECT * FROM Computerscientists"))
-    {
-        cout << "exec returns false: " << endl;
-        qDebug() << query.lastError().text();
-    }
+    //if(!executecommand, query));
     query.first();
     sciQuery(temp,query);
     sci.push_back(temp);
-    cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
         sciQuery(temp, query);
         sci.push_back(temp);
     }
+    return true;
 }
 
 void Data::sciQuery(CScientist& temp, QSqlQuery query)
@@ -144,7 +141,7 @@ void Data::comQuery(Computer& temp, QSqlQuery query)
     cout << qBuilt << endl;
 }
 
-QString Data::createSelectQuery(CScientist cSci)
+void Data::selectScientist(CScientist cSci)
 {
     QString qsql;
     string sql = "SELECT *";
@@ -174,28 +171,26 @@ QString Data::createSelectQuery(CScientist cSci)
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
-    return qsql;
 }
 
-QString Data::createInsertQuery(CScientist cSci)
+void Data::insertScientist(CScientist cSci)
 {
     QString qsql;
     string insertValues = " (name, gender, dob, dod) ";
     string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob , Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
     qsql = QString::fromStdString(sql);
-    return qsql;
 }
 
-QString Data::createDeleteQuery(CScientist cSci)
+void Data::deleteScientist(CScientist cSci)
 {
     QString qsql;
     int id = cSci.getId();
     string sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
     qsql = QString::fromStdString(sql);
-    return qsql;
+
 }
 
-QString Data::createSelectQuery(Computer comp)
+void Data::selectComputer(Computer comp)
 {
     QString qsql;
     string sql = "SELECT *";
@@ -208,23 +203,21 @@ QString Data::createSelectQuery(Computer comp)
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
-    return qsql;
 }
 
-QString Data::createInsertQuery(Computer comp)
+void Data::insertComputer(Computer comp)
 {
     QString qsql;
     string sql = "INSERT INTO computers (name, yearbuilt, type, built) VALUES ('"+ comp.getName() +"','"+ comp.getYear() +"','"+ comp.getType() + "')";
     qsql = QString::fromStdString(sql);
-    return qsql;
 }
 
-QString Data::createDeleteQuery(Computer comp)
+void Data::deleteComputer(Computer comp)
 {
     QString qsql;
     int id = comp.getId();
     string sql = "UPDATE Computer SET isActive=0 WHERE ID = " +id;
     qsql = QString::fromStdString(sql);
-    return qsql;
 }
+
 
