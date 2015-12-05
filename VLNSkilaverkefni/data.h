@@ -56,6 +56,8 @@ public:
     void selectComputer(Computer comp);
     void deleteComputer(Computer comp);
     void insertComputer(Computer comp);
+    bool executequery(QSqlQuery query);
+
 
 private:
    vector<CScientist> sci;
