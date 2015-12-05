@@ -47,6 +47,7 @@ public:
     void addQuery(QSqlDatabase db, const QString& command, vector <Computer>& sci);
     void sciQuery(CScientist& sci, QSqlQuery query);
     void comQuery(Computer & comp, QSqlQuery query);
+    bool editDatabase(QSqlDatabase db, const QString& command);
     QSqlDatabase addDatabase();
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
@@ -55,6 +56,9 @@ public:
     QString createDeleteQuery(Computer comp);
     QString createInsertQuery(Computer comp);
 
+private:
+   vector<CScientist> Sci;
+   vector<Computer> Com;
 };
 
 #endif // DATA_H

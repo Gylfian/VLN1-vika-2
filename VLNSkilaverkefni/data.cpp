@@ -70,11 +70,13 @@ void Data::addQuery(QSqlDatabase db, const QString& command, vector<Computer>& s
         cout << "exec returns false: " << endl;
         qDebug() << query.lastError().text();
     }
+    Computer temp;
     query.first();
+    comQuery(temp,query);
+    sci.push_back(temp);
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
-        Computer temp;
         comQuery(temp,query);
         sci.push_back(temp);
     }
@@ -88,7 +90,10 @@ void Data::addQuery(QSqlDatabase db, const QString& command, vector<CScientist>&
         cout << "exec returns false: " << endl;
         qDebug() << query.lastError().text();
     }
+    CScientist temp;
     query.first();
+    sciQuery(temp,query);
+    sci.push_back(temp);
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
@@ -212,3 +217,4 @@ QString Data::createDeleteQuery(Computer comp)
     //
     return qsql;
 }
+
