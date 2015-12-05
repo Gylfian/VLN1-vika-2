@@ -34,6 +34,8 @@ public:
 
     int findLongestName(vector<CScientist> cSciList);
 
+    int checkStrInput(string str);
+
     /*
      * Name: deleteScientist
      * Parameter/s: CScientist cSci

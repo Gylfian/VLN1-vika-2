@@ -95,6 +95,17 @@ int Domain::findLongestName(vector<CScientist> cSciList)
     return length;
 }
 
+int Domain::checkStrInput(string str)
+{
+    int n = 0;
+    if(str == "")
+        return -1;
+
+    istringstream buffer(str);
+    buffer >> n;
+    return n;
+}
+
 bool Domain::normalizeName(string &name)
 {
     if(name.length() <= 0)
