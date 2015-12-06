@@ -56,6 +56,8 @@ public:
     void selectComputer(Computer comp);
     void deleteComputer(Computer comp);
     void insertComputer(Computer comp);
+    void updateComputer(Computer comp);
+    void updateComputerScientits(CScientist cSci);
     bool executequery(QSqlQuery query, QString command);
 
 

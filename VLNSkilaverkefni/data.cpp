@@ -176,8 +176,7 @@ void Data::selectScientist(CScientist cSci)
 void Data::insertScientist(CScientist cSci)
 {
     QString qsql;
-    string insertValues = " (name, gender, dob, dod) ";
-    string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob , Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob, Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
     qsql = QString::fromStdString(sql);
 }
 
@@ -187,7 +186,6 @@ void Data::deleteScientist(CScientist cSci)
     int id = cSci.getId();
     string sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
     qsql = QString::fromStdString(sql);
-
 }
 
 void Data::selectComputer(Computer comp)
@@ -200,6 +198,21 @@ void Data::selectComputer(Computer comp)
         sql += "name LIKE '%" + comp.getName() + "%' AND ";
     }
 
+    if(!comp.getYear().empty())
+    {
+        sql += "year=" + comp.getYear() + "$' AND ";
+
+    }
+
+    if(!comp.getType().empty())
+    {
+        sql += "type='" + comp.getType() + "' AND ";
+    }
+
+    if(!comp.getBuilt().empty())
+    {
+        sql += "built='" + comp.getBuilt() + "' AND ";
+    }
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
@@ -217,6 +230,63 @@ void Data::deleteComputer(Computer comp)
     QString qsql;
     int id = comp.getId();
     string sql = "UPDATE Computer SET isActive=0 WHERE ID = " +id;
+    qsql = QString::fromStdString(sql);
+}
+
+void Data::updateComputerScientits(CScientist cSci)
+{
+    QString qsql;
+    string sql = "UPDATE Computers SET ";
+    if(!cSci.getName().empty())
+    {
+        sql += "name ='" + cSci.getName() + "%' AND ";
+    }
+
+    if(!cSci.getGender().empty())
+    {
+        sql += "gender='" + cSci.getGender() + "%' AND ";;
+    }
+
+    if(!cSci.getDob().empty())
+    {
+        sql += "dob='" + cSci.getDob() + "' AND ";
+    }
+
+    if(!cSci.getDod().empty())
+    {
+        sql += "dod='" + cSci.getDod() + "' AND ";
+    }
+    if (sql.size () > 0)  sql.resize (sql.size () - 5);
+    sql += ";";
+    qsql = QString::fromStdString(sql);
+}
+
+void Data::updateComputer(Computer comp)
+{
+    QString qsql;
+    string sql = "UPDATE Computers SET ";
+    if(!comp.getName().empty())
+    {
+        sql += "name ='" + comp.getName() + "%' AND ";
+    }
+
+    if(!comp.getYear().empty())
+    {
+        sql += "year='" + comp.getYear() + "$' AND ";
+
+    }
+
+    if(!comp.getType().empty())
+    {
+        sql += "type='" + comp.getType() + "' AND ";
+    }
+
+    if(!comp.getBuilt().empty())
+    {
+        sql += "built='" + comp.getBuilt() + "' AND ";
+    }
+    if (sql.size () > 0)  sql.resize (sql.size () - 5);
+    sql += ";";
     qsql = QString::fromStdString(sql);
 }
 
