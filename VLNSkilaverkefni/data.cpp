@@ -72,7 +72,7 @@ void Data::setDatabase()
 bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {
     QSqlQuery query(db);
-    if(!executequery(command, query));
+    if(!executequery(query, command))
     query.first();
     comQuery(temp, query);
     com.push_back(temp);
@@ -88,7 +88,7 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
     QSqlQuery query(db);
-    if(!executequery(command, query));
+    if(!executequery(query, command))
     query.first();
     sciQuery(temp,query);
     sci.push_back(temp);
@@ -228,5 +228,3 @@ bool Data::executequery(QSqlQuery query,QString command)
     }
     return true;
 }
-
-
