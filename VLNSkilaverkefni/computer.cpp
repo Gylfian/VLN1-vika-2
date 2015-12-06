@@ -37,6 +37,11 @@ string Computer::getType() const
 {
     return type;
 }
+string Computer::getBuilt() const
+{
+    return built;
+}
+
 
 void Computer::setName(string nameToSet)
 {

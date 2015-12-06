@@ -298,3 +298,13 @@ bool Data::executequery(QSqlQuery query,QString command)
     }
     return true;
 }
+
+void Data::setRelations(Computer comp, CScientist cSci,QSqlDatabase db)
+{
+    QString qsql;
+    string sql = "INSERT INTO Relation (ScientistID, ComputerID) VALUES ("+comp.getId();+","+cSci.getId();+" )";
+    qsql = QString::fromStdString(sql);
+    QSqlQuery query;
+
+    //execute query
+}
