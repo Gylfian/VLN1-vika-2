@@ -30,14 +30,13 @@ public:
 
     void requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList);
 
-    void sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice);
+    void sortBy(char parent, char child, char child2);
 
     int findLongestName(vector<CScientist> cSciList);
 
     int checkStrInput(string str);
 
     bool normalizeYear(string born, string death);
-
 
     /*
      * Name: deleteScientist
@@ -64,7 +63,7 @@ private:
     QString createInsertQuery(CScientist cSci);
     int convertToInt(string str);
     Data data;
-
+    void getName(char child);
 
 };
 

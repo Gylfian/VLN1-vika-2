@@ -5,44 +5,39 @@ Domain::Domain()
 
 }
 
-void Domain::sortBy(vector<CScientist> &cSciList, char pChoice, char cChoice)
+void Domain::sortBy(char parent, char child, char child2)
 {
-    switch(pChoice)
+    switch(parent)
     {
-        case('1'): //alphabet
-            if(cChoice == '1') //ascend
+        case('1'): //scientist
+        {
+            if(child == '1') //sort by name
             {
-
+                getName(child2);
             }
-            else
+            else if(child == '2')
             {
-
+                //getGender();
             }
+        }
             break;
-        case('2')://gender
-            if(cChoice == '1')//male first
+        case('2')://computer
+            if(child == '1')//male first
             {
 
             }
             else
             {
-
-            }
-            break;
-        case('3')://year
-            if(cChoice == '1')
-            {
-
-            }
-            else
-            {
-
 
             }
             break;
     }
 }
 
+void Domain::getName(char child)
+{
+
+}
 
 vector<CScientist> Domain::search(CScientist cSci, string tableName)
 {
