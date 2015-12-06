@@ -118,6 +118,7 @@ void Presentation::searchSci()
     string name, gender, Dob, Dod;
     int id = getSearchId();
 
+    name = getSearchName();
     gender = getSearchGender();
     cout << "Enter year of birth: ";
     getline(cin, Dob);
@@ -169,10 +170,11 @@ string Presentation::getSearchGender()
 
 int Presentation::getSearchId()
 {
+    Domain d1;
     string id;
     cout << "Enter ID: ";
     getline(cin,id);
-    int ans = 0;
+    int ans = d1.checkStrInput(id);
 
     return ans;
 }
@@ -181,21 +183,30 @@ void Presentation::searchCom()
 {
     system("CLS");
     string name, type, year;
+    bool built;
     int id = getSearchId();
-    name = getSearchName();
-    cout << "Enter type: ";
-    getline(cin,type);
-    bool built = getSearchBuilt();
-    if (built)
+    if (id != -1)
     {
-        cout << "Enter the year the computer was built: ";
-        getline(cin, name);
+        name = getSearchName();
+        cout << "Enter type: ";
+        getline(cin,type);
+        built = getSearchBuilt();
+        if (built)
+        {
+            cout << "Enter the year the computer was built: ";
+            getline(cin, name);
+        }
+        else
+        {
+            year = "";
+        }
     }
     else
     {
-        year = "";
+        name = "";
+        type = "";
+        built = true;
     }
-
     Computer com(id, name, year, type, built);
 }
 
@@ -305,8 +316,6 @@ string Presentation::getInputGender()
             cout << "Please select either male or female"<<endl;
             gender = getInputGender();
         }
-
-
     }
     return gender;
 }
@@ -452,9 +461,6 @@ void Presentation::listOptions()
         default:
             sciOrComText('1');
             printSciOrCom();
-
-
-
     }
 }
 
