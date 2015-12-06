@@ -36,6 +36,9 @@ public:
 
     int checkStrInput(string str);
 
+    bool normalizeYear(string born, string death);
+
+
     /*
      * Name: deleteScientist
      * Parameter/s: CScientist cSci
@@ -59,6 +62,7 @@ private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
     QString createInsertQuery(CScientist cSci);
+    int convertToInt(string str);
     Data data;
 
 

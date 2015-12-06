@@ -95,15 +95,31 @@ int Domain::findLongestName(vector<CScientist> cSciList)
     return length;
 }
 
+int Domain::convertToInt(string str)
+{
+    int n = 0;
+    istringstream buffer(str);
+    buffer >> n;
+    return n;
+}
+
 int Domain::checkStrInput(string str)
 {
     int n = 0;
     if(str == "")
         return -1;
 
-    istringstream buffer(str);
-    buffer >> n;
+    convertToInt(str);
     return n;
+}
+
+bool Domain::normalizeYear(string born, string death)
+{
+    int yearBorn = convertToInt(born);
+    int yearDeath = convertToInt(death);
+    if(yearBorn < yearDeath)
+        return true;
+    return false;
 }
 
 bool Domain::normalizeName(string &name)
