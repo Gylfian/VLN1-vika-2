@@ -133,7 +133,7 @@ void Data::comQuery(Computer& temp, QSqlQuery query)
     string qType = query.value("Type").toString().toStdString();
     temp.setType(qType);
     cout << qType << endl;
-    bool qBuilt = query.value("Built").toBool();
+    string qBuilt = query.value("Built").toString().toStdString();
     temp.setBuilt(qBuilt);
     cout << qBuilt << endl;
     bool qIsActive = query.value("isActive").toBool();

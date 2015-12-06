@@ -185,7 +185,7 @@ void Presentation::searchCom()
     name = getSearchName();
     cout << "Enter type: ";
     getline(cin,type);
-    bool built = getSearchBuilt();
+    string built = getSearchBuilt();
     if (built)
     {
         cout << "Enter the year the computer was built: ";
