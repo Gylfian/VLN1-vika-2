@@ -64,6 +64,7 @@ public:
 private:
    vector<CScientist> sci;
    vector<Computer> com;
+   vector<string> relations;
    QSqlDatabase database;
 
 };

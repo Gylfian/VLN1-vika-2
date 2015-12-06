@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     domain.cpp \
     presentation.cpp \
     computerscientist.cpp \
-    computer.cpp
+    computer.cpp \
+    relation.cpp
 
 HEADERS += \
     data.h \
@@ -21,5 +22,6 @@ HEADERS += \
     presentation.h \
     computerscientist.h \
     computer.h \
+    relation.h
 
 

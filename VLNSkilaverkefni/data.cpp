@@ -171,6 +171,7 @@ void Data::selectScientist(CScientist cSci)
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
+    fillVector(database, cSci, qsql);
 }
 
 void Data::insertScientist(CScientist cSci)
@@ -178,6 +179,7 @@ void Data::insertScientist(CScientist cSci)
     QString qsql;
     string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob, Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
     qsql = QString::fromStdString(sql);
+    fillVector(database, cSci, qsql);
 }
 
 void Data::deleteScientist(CScientist cSci)
@@ -186,6 +188,7 @@ void Data::deleteScientist(CScientist cSci)
     int id = cSci.getId();
     string sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
     qsql = QString::fromStdString(sql);
+    fillVector(database, cSci, qsql);
 }
 
 void Data::selectComputer(Computer comp)
@@ -216,6 +219,7 @@ void Data::selectComputer(Computer comp)
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
+    fillVector(database, comp, qsql);
 }
 
 void Data::insertComputer(Computer comp)
@@ -223,6 +227,7 @@ void Data::insertComputer(Computer comp)
     QString qsql;
     string sql = "INSERT INTO computers (name, yearbuilt, type, built) VALUES ('"+ comp.getName() +"','"+ comp.getYear() +"','"+ comp.getType() + "')";
     qsql = QString::fromStdString(sql);
+    fillVector(database, comp, qsql);
 }
 
 void Data::deleteComputer(Computer comp)
@@ -231,6 +236,7 @@ void Data::deleteComputer(Computer comp)
     int id = comp.getId();
     string sql = "UPDATE Computer SET isActive=0 WHERE ID = " +id;
     qsql = QString::fromStdString(sql);
+    fillVector(database, comp, qsql);
 }
 
 void Data::updateComputerScientits(CScientist cSci)
@@ -259,6 +265,7 @@ void Data::updateComputerScientits(CScientist cSci)
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
+    fillVector(database, cSci, qsql);
 }
 
 void Data::updateComputer(Computer comp)
@@ -288,6 +295,7 @@ void Data::updateComputer(Computer comp)
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
+    fillVector(database, comp, qsql);
 }
 
 bool Data::executequery(QSqlQuery query,QString command)
@@ -305,6 +313,6 @@ void Data::setRelations(Computer comp, CScientist cSci,QSqlDatabase db)
     string sql = "INSERT INTO Relation (ScientistID, ComputerID) VALUES ("+comp.getId();+","+cSci.getId();+" )";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
-
+    fillVector(database, cSci, qsql);
     //execute query
 }
