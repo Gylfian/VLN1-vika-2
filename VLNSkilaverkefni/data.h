@@ -62,7 +62,7 @@ public:
     void updateComputer(Computer comp);
     void updateComputerScientits(CScientist cSci);
     bool executequery(QSqlQuery query, QString command);
-    void setRelations(Computer comp, CScientist cSci,QSqlDatabase db);
+    void setRelations(Computer comp, CScientist cSci);
 
 private:
    vector<CScientist> sci;
