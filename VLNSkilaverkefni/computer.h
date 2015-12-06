@@ -7,17 +7,17 @@ class Computer
 {
 public:
     Computer();
-    Computer(int cId,string cName, string cYear, string cType, bool cBuilt);
+    Computer(int cId,string cName, string cYear, string cType, string cBuilt);
     int getId() const;
     string getName() const;
     string getYear() const;
     string getType() const;
-    bool getBuilt() const;
+    string getBuilt() const;
     void setId(int idToSet);
     void setName(string nameToSet);
     void setYear(string yearToSet);
     void setType(string typeToSet);
-    void setBuilt(bool cBuilt);
+    void setBuilt(string cBuilt);
     void setIsActive(bool cisActive);
 
 private:
