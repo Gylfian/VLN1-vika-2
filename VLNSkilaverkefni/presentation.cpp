@@ -1,8 +1,5 @@
 #include "presentation.h"
 
-string const COMPUTER = "Computer";
-string const PERSON = "--Person";
-
 void Presentation::mainPage()
 {
     cout << " ___________MAIN_MENU_________" << endl;
@@ -118,13 +115,22 @@ void Presentation::searchSci()
     string name, gender, Dob, Dod;
     int id = getSearchId();
 
-    name = getSearchName();
-    gender = getSearchGender();
-    cout << "Enter year of birth: ";
-    getline(cin, Dob);
-    cout << "Enter year of death: ";
-    getline(cin, Dod);
-
+    if (id == -1)
+    {
+        name = getSearchName();
+        gender = getSearchGender();
+        cout << "Enter year of birth: ";
+        getline(cin, Dob);
+        cout << "Enter year of death: ";
+        getline(cin, Dod);
+    }
+    else
+    {
+        name = "";
+        gender = "";
+        Dob = "";
+        Dod = "";
+    }
     CScientist cSci(id, name, gender, Dob, Dod, 1);
 }
 
@@ -257,7 +263,7 @@ void Presentation::addScientist()
         cSci = getScientistData();
         scientists.push_back(cSci);
 
-    }while(another(PERSON));
+    }while(another("--Person"));
     system("CLS");
     mainPage();
 }
@@ -273,7 +279,7 @@ void Presentation::addComputer()
         com = getComputerData();
         coms.push_back(com);
 
-    }while(another(COMPUTER));
+    }while(another("Computer"));
     system("CLS");
     mainPage();
 }
