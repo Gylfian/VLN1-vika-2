@@ -13,15 +13,27 @@ void Domain::sortBy(char parent, char child, char child2)
         {
             if(child == '1') //sort by name
             {
-                getName(child2);
+                bool ascending = checkAscend(child2);
+                getName(ascending);
             }
             else if(child == '2')
             {
-                //getGender();
+                bool male = checkGender(child2);
+                getGender(male);
             }
-        }
-            break;
+            else if(child == '3')
+            {
+                bool youngest = checkYear(child2);
+                getYear(youngest);
+            }
+            else
+            {
+                //getById();
+            }
+        }break;
+
         case('2')://computer
+        {
             if(child == '1')//male first
             {
 
@@ -30,13 +42,68 @@ void Domain::sortBy(char parent, char child, char child2)
             {
 
             }
-            break;
+        }break;
     }
 }
 
-void Domain::getName(char child)
+bool Domain::checkAscend(char child)
 {
+    if(child == '1')
+        return true;
 
+    return false;
+}
+
+bool Domain::checkYear(char child)
+{
+    if(child == '1')
+        return true;
+
+    return false;
+}
+
+bool Domain::checkGender(char child)
+{
+    if(child == '1')
+        return true;
+
+    return false;
+}
+
+void Domain::getName(bool ascending)
+{
+    if(ascending)
+    {
+
+    }
+    else
+    {
+
+    }
+}
+
+void Domain::getGender(bool male)
+{
+    if(male)
+    {
+
+    }
+    else
+    {
+
+    }
+}
+
+void Domain::getYear(bool youngest)
+{
+    if(youngest)
+    {
+
+    }
+    else
+    {
+
+    }
 }
 
 vector<CScientist> Domain::search(CScientist cSci, string tableName)
@@ -61,17 +128,6 @@ void Domain::deleteScientist(CScientist cSci, string tableName)
     //Data data;
     //deleteQuery = data.executeQuery(search);
 }
-
-//void Domain::requestSciSql(QSqlDatabase db, QString sql, vector<CScientist> &cSciList)
-//{
-  //  data.addQuery(db, sql, cSciList);
-//}
-
-//void Domain::requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList)
-//{
-  //  Data d1;
-    //d1.addQuery(db, sql, cComList);
-//}
 
 
 int Domain::findLongestName(vector<CScientist> cSciList)

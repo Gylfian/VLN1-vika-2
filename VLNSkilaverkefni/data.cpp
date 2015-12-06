@@ -336,7 +336,7 @@ bool Data::executequery(QSqlQuery query,QString command)
 void Data::setRelations(Computer comp, CScientist cSci)
 {
     QString qsql;
-    string sql = "INSERT INTO Relation (ScientistID, ComputerID) VALUES ("+comp.getId();+","+cSci.getId();+" )";
+    string sql; //= "INSERT INTO Relation (ScientistID, ComputerID) VALUES (" + comp.getId() + "," + cSci.getId() + " )";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
     executequery(query,qsql);

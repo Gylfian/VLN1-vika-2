@@ -63,7 +63,13 @@ private:
     QString createInsertQuery(CScientist cSci);
     int convertToInt(string str);
     Data data;
-    void getName(char child);
+    void getName(bool ascending);
+    void getGender(bool male);
+    void getYear(bool youngest);
+
+    bool checkAscend(char child);
+    bool checkYear(char child);
+    bool checkGender(char child);
 
 };
 
