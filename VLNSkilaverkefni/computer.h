@@ -25,7 +25,7 @@ private:
     string name;
     string yearBuilt;
     string type;
-    bool built;
+    string built;
     bool isActive;
 };
 
