@@ -233,7 +233,7 @@ private:
       string getComName();
       string getComYear();
       string getComType();
-      bool getComBuilt();
+      string getComBuilt();
       void sciOrComText(char which);
       void addSciOrCom();
       void printSciOrCom();
@@ -244,7 +244,7 @@ private:
       int getSearchId();
       string getSearchGender();
       string getSearchName();
-      bool getSearchBuilt();
+      string getSearchBuilt();
 };
 
 #endif // PRESENTATION_H

@@ -6,10 +6,10 @@ Computer::Computer()
     name = "";
     yearBuilt = "";
     type = "";
-    built = false;
+    built = "";
 }
 
-Computer::Computer(int cId,string cName, string cYear, string cType, bool cBuilt)
+Computer::Computer(int cId,string cName, string cYear, string cType, string cBuilt)
 {
     id = cId;
     name = cName;
@@ -53,7 +53,7 @@ void Computer::setType(string typeToSet)
     type = typeToSet;
 }
 
-void Computer::setBuilt(bool cBuilt)
+void Computer::setBuilt(string cBuilt)
 {
     built = cBuilt;
 }
