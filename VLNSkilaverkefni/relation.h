@@ -16,6 +16,8 @@ public:
     CScientist getScientist();
     void setComputer(Computer computerToSet);
     void setScientist(CScientist scientistToSet);
+    void setComputerId(unsigned int computerIdToSet);
+    void setScientistId(unsigned int scientistIdToSet);
 
 private:
     Computer computer;

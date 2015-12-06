@@ -100,6 +100,22 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
     return true;
 }
 
+bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
+{
+    QSqlQuery query(db);
+    if(!executequery(query, command))
+    query.first();
+    releQuery(temp, query);
+    rele.push_back(temp);
+    cout << "is active: " << query.isActive() << endl;
+    while(query.next())
+    {
+        releQuery(temp,query);
+        rele.push_back(temp);
+    }
+    return true;
+}
+
 void Data::sciQuery(CScientist& temp, QSqlQuery query)
 {
     unsigned int qId = query.value("ID").toUInt();
@@ -139,6 +155,16 @@ void Data::comQuery(Computer& temp, QSqlQuery query)
     bool qIsActive = query.value("isActive").toBool();
     temp.setIsActive(qIsActive);
     cout << qBuilt << endl;
+}
+
+void Data::releQuery(Relation& temp, QSqlQuery query)
+{
+    int qComp = query.value("ScientistID").toUInt();
+    temp.setComputerId(qComp);
+    cout << qComp << endl;
+    int qSci = query.value("ComputerID").toUInt();
+    temp.setScientistId(qSci);
+    cout << qSci << endl;
 }
 
 void Data::selectScientist(CScientist cSci)

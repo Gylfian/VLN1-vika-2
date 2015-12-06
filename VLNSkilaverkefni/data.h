@@ -4,6 +4,7 @@
 #include <vector>
 #include "computerscientist.h"
 #include "computer.h"
+#include "relation.h"
 #include <iostream>
 #include <string>
 #include <QVariant>
@@ -45,9 +46,11 @@ public:
     Data();
     bool fillVector(QSqlDatabase db, CScientist sci, QString command);
     bool fillVector(QSqlDatabase db, Computer com, QString command);
+    bool fillVector(QSqlDatabase db, Relation rele, QString command);
     QSqlDatabase getDatabase();
     void sciQuery(CScientist& sci, QSqlQuery query);
     void comQuery(Computer & comp, QSqlQuery query);
+    void releQuery(Relation & comp, QSqlQuery query);
     bool editDatabase(QSqlDatabase db, const QString& command);
     void setDatabase();
     void selectScientist(CScientist cSci);
@@ -64,7 +67,7 @@ public:
 private:
    vector<CScientist> sci;
    vector<Computer> com;
-   vector<string> relations;
+   vector<Relation> rele;
    QSqlDatabase database;
 
 };

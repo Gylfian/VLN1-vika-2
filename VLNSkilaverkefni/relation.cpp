@@ -2,32 +2,41 @@
 
 Relation::Relation()
 {
-    computer = "";
-    scientist = "";
+
 }
 
-Relation(Computer computerToSet, CScientist scientistToSet)
+Relation::Relation(Computer computerToSet, CScientist scientistToSet)
 {
     computer = computerToSet;
     scientist = scientistToSet;
 }
 
-Computer getComputer()
+Computer Relation::getComputer()
 {
     return computer;
 }
 
-CScientist getScientist()
+CScientist Relation::getScientist()
 {
     return scientist;
 }
 
-void setComputer(Computer computerToSet)
+void Relation::setComputer(Computer computerToSet)
 {
-    computer = computerToSet
+    computer = computerToSet;
 }
 
-void setScientist(CScientist scientistToSet)
+void Relation::setScientist(CScientist scientistToSet)
 {
     scientist = scientistToSet;
+}
+
+void Relation::setComputerId(unsigned int computerToSet)
+{
+    computer.setId(computerToSet);
+}
+
+void Relation::setScientistId(unsigned int scientistToSet)
+{
+    scientist.setId(scientistToSet);
 }
