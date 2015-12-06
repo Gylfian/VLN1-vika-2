@@ -67,9 +67,13 @@ private:
     void getGender(bool male);
     void getYear(bool youngest);
 
-    bool checkAscend(char child);
-    bool checkYear(char child);
-    bool checkGender(char child);
+    void getComName(bool ascending);
+    void getComYear(bool youngest);
+    void getComType(bool ascending);
+    void getComBuilt(bool built);
+
+    bool checkOption(char child);
+
 
 };
 

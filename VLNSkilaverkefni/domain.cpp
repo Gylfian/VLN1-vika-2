@@ -13,17 +13,17 @@ void Domain::sortBy(char parent, char child, char child2)
         {
             if(child == '1') //sort by name
             {
-                bool ascending = checkAscend(child2);
+                bool ascending = checkOption(child2);
                 getName(ascending);
             }
             else if(child == '2')
             {
-                bool male = checkGender(child2);
+                bool male = checkOption(child2);
                 getGender(male);
             }
             else if(child == '3')
             {
-                bool youngest = checkYear(child2);
+                bool youngest = checkOption(child2);
                 getYear(youngest);
             }
             else
@@ -34,40 +34,81 @@ void Domain::sortBy(char parent, char child, char child2)
 
         case('2')://computer
         {
-            if(child == '1')//male first
+        //name, yearbuilt, type, built
+            if(child == '1') //sort by name
             {
-
+                bool ascending = checkOption(child2);
+                getComName(ascending);
+            }
+            else if(child == '2')//yearbuilt
+            {
+                bool youngest = checkOption(child2);
+                getComYear(youngest);
+            }
+            else if(child == '3')//type
+            {
+                bool ascending = checkOption(child2);
+                getComType(ascending);
+            }
+            else if(child == '4')//built
+            {
+                bool built = checkOption(child2);
+                getComType(built);
             }
             else
             {
-
+                //getById();
             }
         }break;
     }
 }
 
-bool Domain::checkAscend(char child)
+void Domain::getComName(bool ascending)
 {
-    if(child == '1')
-        return true;
+    if(ascending)
+    {
 
-    return false;
+    }
+    else
+    {
+
+    }
 }
 
-bool Domain::checkYear(char child)
+void Domain::getComType(bool ascending)
 {
-    if(child == '1')
-        return true;
+    if(ascending)
+    {
 
-    return false;
+    }
+    else
+    {
+
+    }
 }
 
-bool Domain::checkGender(char child)
+void Domain::getComYear(bool youngest)
 {
-    if(child == '1')
-        return true;
+    if(youngest)
+    {
 
-    return false;
+    }
+    else
+    {
+
+    }
+}
+
+void Domain::getComBuilt(bool built)
+{
+    if(built)
+    {
+
+    }
+    else
+    {
+
+    }
 }
 
 void Domain::getName(bool ascending)
@@ -106,6 +147,7 @@ void Domain::getYear(bool youngest)
     }
 }
 
+
 vector<CScientist> Domain::search(CScientist cSci, string tableName)
 {
     vector<CScientist> searchResults;
@@ -127,6 +169,15 @@ void Domain::deleteScientist(CScientist cSci, string tableName)
     data.deleteScientist(cSci);
     //Data data;
     //deleteQuery = data.executeQuery(search);
+}
+
+
+bool Domain::checkOption(char child)
+{
+    if(child == '1')
+        return true;
+
+    return false;
 }
 
 
