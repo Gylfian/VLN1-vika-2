@@ -1,8 +1,5 @@
 #include "presentation.h"
 
-string const COMPUTER = "Computer";
-string const PERSON = "--Person";
-
 void Presentation::mainPage()
 {
     cout << " ___________MAIN_MENU_________" << endl;
@@ -118,12 +115,22 @@ void Presentation::searchSci()
     string name, gender, Dob, Dod;
     int id = getSearchId();
 
-    gender = getSearchGender();
-    cout << "Enter year of birth: ";
-    getline(cin, Dob);
-    cout << "Enter year of death: ";
-    getline(cin, Dod);
-
+    if (id == -1)
+    {
+        name = getSearchName();
+        gender = getSearchGender();
+        cout << "Enter year of birth: ";
+        getline(cin, Dob);
+        cout << "Enter year of death: ";
+        getline(cin, Dod);
+    }
+    else
+    {
+        name = "";
+        gender = "";
+        Dob = "";
+        Dod = "";
+    }
     CScientist cSci(id, name, gender, Dob, Dod, 1);
 }
 
@@ -169,10 +176,11 @@ string Presentation::getSearchGender()
 
 int Presentation::getSearchId()
 {
+    Domain d1;
     string id;
     cout << "Enter ID: ";
     getline(cin,id);
-    int ans = 0;
+    int ans = d1.checkStrInput(id);
 
     return ans;
 }
@@ -180,28 +188,36 @@ int Presentation::getSearchId()
 void Presentation::searchCom()
 {
     system("CLS");
-    string name, type, year;
+    string name, type, year, built;
     int id = getSearchId();
-    name = getSearchName();
-    cout << "Enter type: ";
-    getline(cin,type);
-    string built = getSearchBuilt();
-    if (built)
+    if (id == -1)
     {
-        cout << "Enter the year the computer was built: ";
-        getline(cin, name);
+        name = getSearchName();
+        cout << "Enter type: ";
+        getline(cin,type);
+        built = getSearchBuilt();
+        if (built == "Yes")
+        {
+            cout << "Enter the year the computer was built: ";
+            getline(cin, name);
+        }
+        else
+        {
+            year = "";
+        }
     }
     else
     {
-        year = "";
+        name = "";
+        type = "";
+        built = "";
     }
-
     Computer com(id, name, year, type, built);
 }
 
-bool Presentation::getSearchBuilt()
+string Presentation::getSearchBuilt()
 {
-    bool built;
+    string built;
     cout << "Was the computer built? [y]es, [n]o, [d]on't know" << endl;
     char ans = getch();
 
@@ -210,21 +226,21 @@ bool Presentation::getSearchBuilt()
         case('Y'):
         case('y'):
         {
-            built = true;
+            built = "Yes";
         }break;
         case('N'):
         case('n'):
         {
-            built = false;
+            built = "No";
         }break;
         case('D'):
         case('d'):
         {
-            built = true;
+            built = "";
         }break;
         default:
-            cout << "Please enter a valid option!";
-            built = getComBuilt();
+            cout << "Please enter a valid option!" << endl;
+            built = getSearchBuilt();
     }
 
     return built;
@@ -247,7 +263,7 @@ void Presentation::addScientist()
         cSci = getScientistData();
         scientists.push_back(cSci);
 
-    }while(another(PERSON));
+    }while(another("--Person"));
     system("CLS");
     mainPage();
 }
@@ -263,7 +279,7 @@ void Presentation::addComputer()
         com = getComputerData();
         coms.push_back(com);
 
-    }while(another(COMPUTER));
+    }while(another("Computer"));
     system("CLS");
     mainPage();
 }
@@ -305,8 +321,6 @@ string Presentation::getInputGender()
             cout << "Please select either male or female"<<endl;
             gender = getInputGender();
         }
-
-
     }
     return gender;
 }
@@ -345,9 +359,9 @@ Computer Presentation::getComputerData()
 {
     string name = getComName();
     string type = getComType();
-    bool built = getComBuilt();
+    string built = getComBuilt();
     string year;
-    if(built)
+    if(built == "Yes")
     {
         year = getComYear();
     }
@@ -376,9 +390,9 @@ string Presentation::getComType()
     return type;
 }
 
-bool Presentation::getComBuilt()
+string Presentation::getComBuilt()
 {
-    bool built;
+    string built;
     cout << "Was the computer built? (y/n)" << endl;
     char ans = getch();
 
@@ -387,12 +401,12 @@ bool Presentation::getComBuilt()
         case('y'):
         case('Y'):
         {
-            built = true;
+            built = "Yes";
         }break;
         case('n'):
         case('N'):
         {
-            built = false;
+            built = "No";
         }break;
         default:
             cout << "Please enter a valid option!";
@@ -452,9 +466,6 @@ void Presentation::listOptions()
         default:
             sciOrComText('1');
             printSciOrCom();
-
-
-
     }
 }
 

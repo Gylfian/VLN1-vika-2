@@ -6,7 +6,7 @@ Computer::Computer()
     name = "";
     yearBuilt = "";
     type = "";
-    built = false;
+    built = "";
 }
 
 Computer::Computer(int cId,string cName, string cYear, string cType, string cBuilt)
