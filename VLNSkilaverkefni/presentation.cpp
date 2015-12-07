@@ -41,7 +41,7 @@ void Presentation::options()
             deleteSciOrCom();
         }break;
         default:
-            exit (1);
+           exit(1);
     }
 }
 
@@ -54,11 +54,11 @@ void Presentation::printSciOrCom()
     {
         case ('1'):
         {
-            listOptions();
+            listOptions(ans);
         }break;
         case ('2'):
         {
-            listOptions();
+            listOptions(ans);
         }break;
         default:
             mainPage();
@@ -92,6 +92,7 @@ void Presentation::addSciOrCom()
 void Presentation::searchSciOrCom()
 {
     char ans = getch();
+    system("CLS");
 
     switch(ans)
     {
@@ -176,11 +177,10 @@ string Presentation::getSearchGender()
 
 int Presentation::getSearchId()
 {
-    Domain d1;
     string id;
     cout << "Enter ID: ";
     getline(cin,id);
-    int ans = d1.checkStrInput(id);
+    int ans = dom.checkStrInput(id);
 
     return ans;
 }
@@ -246,7 +246,6 @@ string Presentation::getSearchBuilt()
     return built;
 }
 
-
 void Presentation::deleteSciOrCom()
 {
 
@@ -290,8 +289,15 @@ CScientist Presentation::getScientistData()
     name = getInputName();
     gender = getInputGender();
     Dob = getInputDob();
-    Dod = getInputDod();
-
+    bool alive = getInputAlive();
+    if(!alive)
+    {
+        Dod = getInputDod(Dob);
+    }
+    else
+    {
+        Dod = "";
+    }
 
     CScientist cSci(0,name, gender, Dob, Dod, 1);
     return cSci;
@@ -328,13 +334,12 @@ string Presentation::getInputGender()
 string Presentation::getInputName()
 {
     string name;
-    Domain d1;
     bool namecheck = false;
     cout << "Enter name: ";
     while(namecheck==false)
     {
         getline(cin,name);
-        namecheck = d1.normalizeName(name);
+        namecheck = dom.normalizeName(name);
     }
     return name;
 }
@@ -347,12 +352,44 @@ string Presentation::getInputDob()
     return Dob;
 }
 
-string Presentation::getInputDod()
+string Presentation::getInputDod(string Dob)
 {
     string Dod;
-    cout << "Enter year of death, if the person is alive type \"none\": ";
+    cout << "Enter year of death: ";
     cin >> Dod;
+    bool valid = dom.normalizeYear(Dob, Dod);
+    if(!valid)
+    {
+        cout << "Please select a valid death year!" << endl;
+        Dod = getInputDod(Dob);
+    }
     return Dod;
+}
+
+bool Presentation::getInputAlive()
+{
+    char ans;
+    bool alive;
+    cout << "Is the person alive? (y/n)" << endl;
+    ans = getch();
+
+    switch (ans)
+    {
+        case ('Y'):
+        case ('y'):
+        {
+            alive = true;
+        }break;
+        case ('N'):
+        case ('n'):
+        {
+            alive = false;
+        }break;
+        default:
+            cout << "Please select a valid option!" << endl;
+            alive = getInputAlive();
+    }
+    return alive;
 }
 
 Computer Presentation::getComputerData()
@@ -443,9 +480,9 @@ bool Presentation::another(string word)
     }
 }
 
-void Presentation::listOptions()
+void Presentation::listOptions(char which)
 {
-    listOptionsText();
+    listOptionsText(which);
 
     char ans = getch();
     system("CLS");
@@ -455,26 +492,32 @@ void Presentation::listOptions()
         case ('1'):
         case ('2'):
         case ('3'):
-        {
-            whichOrder(ans);
-        }break;
         case ('4'):
+        case ('5'):
         {
-            printListText();
-            printListOptions();
+            if (which == '1')
+            {
+                whichOrderSci(which, ans);
+            }
+            else
+            {
+                whichOrderCom(which, ans);
+            }
         }break;
         default:
             sciOrComText('1');
             printSciOrCom();
+
     }
 }
 
-void Presentation::whichOrder(char pChoice)
+void Presentation::whichOrderSci(char which, char pChoice)
 {
 
     switch (pChoice)
     {
         case ('1'):
+        case ('5'):
         {
             ascendingDecendingText();
         }break;
@@ -486,8 +529,10 @@ void Presentation::whichOrder(char pChoice)
         {
             yearBornText();
         }break;
-        default:
-            listOptions();
+        case ('4'):
+        {
+            yearDeathText();
+        }break;
     }
 
     char ans = getch();
@@ -499,20 +544,51 @@ void Presentation::whichOrder(char pChoice)
         case ('2'):
         {
 
-            printListText();
-            printListOptions();
+        }break;
+        default:
+            listOptions(which);
+    }
+}
+
+void Presentation::whichOrderCom(char which, char pChoice)
+{
+    switch(pChoice)
+    {
+        case ('1'):
+        case ('2'):
+        case ('5'):
+        {
+            ascendingDecendingText();
+        }break;
+        case ('3'):
+        {
+            ifBuiltText();
+        }break;
+        case('4'):
+        {
+            buildYearText();
+        }break;
+    }
+
+    char ans = getch();
+    system("CLS");
+
+    switch (ans)
+    {
+        case ('1'):
+        case ('2'):
+        {
 
         }break;
         default:
-            listOptions();
+            listOptions(which);
     }
 }
 
 void Presentation::printList(vector<CScientist> scientists)
 {
     system("CLS");
-    Domain d1;
-    int longest = d1.findLongestName(scientists);
+    int longest = dom.findLongestName(scientists);
     cout << longest << endl;
     cout << "Computer scientists" << endl;
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
@@ -531,7 +607,6 @@ void Presentation::printList(vector<CScientist> scientists)
 void Presentation::deleteFromList()
 {
     string name;
-    Domain d1;
     vector <CScientist> searchValue;
     cout << "Enter the name of the scientist you wish to delete: ";
     getline(cin, name);
@@ -602,16 +677,32 @@ void Presentation::anotherText(string word)
     cout << "Do you wish to add another ? (y/n)" << endl;
 }
 
-void Presentation::listOptionsText()
+void Presentation::listOptionsText(char which)
 {
-    cout << " _____________________________________" << endl;
-    cout << "|-How do you want the list displayed?-|" << endl;
-    cout << "|-1) Alphabetically-------------------|" << endl;
-    cout << "|-2) By gender------------------------|" << endl;
-    cout << "|-3) By year of birth-----------------|" << endl;
-    cout << "|-4) Unchanged------------------------|" << endl;
-    cout << "|-Press any other key to go back------|" << endl;
-    cout << "|_____________________________________|" << endl;
+    if (which == '1')
+    {
+        cout << " _____________________________________" << endl;
+        cout << "|-How do you want the list displayed?-|" << endl;
+        cout << "|-1) Alphabetically-------------------|" << endl;
+        cout << "|-2) By gender------------------------|" << endl;
+        cout << "|-3) By year of birth-----------------|" << endl;
+        cout << "|-4) By year of death-----------------|" << endl;
+        cout << "|-5) By ID----------------------------|" << endl;
+        cout << "|-Press any other key to go back------|" << endl;
+        cout << "|_____________________________________|" << endl;
+    }
+    else
+    {
+        cout << " _____________________________________" << endl;
+        cout << "|-How do you want the list displayed?-|" << endl;
+        cout << "|-1) Alphabetically-------------------|" << endl;
+        cout << "|-2) By type--------------------------|" << endl;
+        cout << "|-3) If built-------------------------|" << endl;
+        cout << "|-4) By build year--------------------|" << endl;
+        cout << "|-5) By ID----------------------------|" << endl;
+        cout << "|-Press any other key to go back------|" << endl;
+        cout << "|_____________________________________|" << endl;
+    }
 }
 
 void Presentation::ascendingDecendingText()
@@ -640,6 +731,36 @@ void Presentation::yearBornText()
     cout << "|-In what order do you want the list?-|" << endl;
     cout << "|-1) Youngest first-------------------|" << endl;
     cout << "|-2) Oldest first---------------------|" << endl;
+    cout << "|-Press any other key to go back------|" << endl;
+    cout << "|_____________________________________|" << endl;
+}
+
+void Presentation::yearDeathText()
+{
+    cout << " _____________________________________" << endl;
+    cout << "|-In what order do you want the list?-|" << endl;
+    cout << "|-1) First death----------------------|" << endl;
+    cout << "|-2) Latest death---------------------|" << endl;
+    cout << "|-Press any other key to go back------|" << endl;
+    cout << "|_____________________________________|" << endl;
+}
+
+void Presentation::ifBuiltText()
+{
+    cout << " _____________________________________" << endl;
+    cout << "|-In what order do you want the list?-|" << endl;
+    cout << "|-1) Those built first----------------|" << endl;
+    cout << "|-2) Those not built first------------|" << endl;
+    cout << "|-Press any other key to go back------|" << endl;
+    cout << "|_____________________________________|" << endl;
+}
+
+void Presentation::buildYearText()
+{
+    cout << " _____________________________________" << endl;
+    cout << "|-In what order do you want the list?-|" << endl;
+    cout << "|-1) Built first----------------------|" << endl;
+    cout << "|-2) Built latest---------------------|" << endl;
     cout << "|-Press any other key to go back------|" << endl;
     cout << "|_____________________________________|" << endl;
 }
