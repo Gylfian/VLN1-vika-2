@@ -155,31 +155,30 @@ void Data::select(CScientist cSci,int index1,int index2)
 {
     QString qsql;
     string sql = "SELECT *";
-    sql += " FROM Computerscientists WHERE ";
-    if(!cSci.getName().empty())
-    {
-        sql += "name LIKE '%" + cSci.getName() + "%' AND ";
-    }
+    sql += " FROM Computerscientists ";
+
+        sql += "WHERE name LIKE '%" + cSci.getName(); + "%'";
+
 
     if(!cSci.getGender().empty())
     {
         if(cSci.getGender() == "Male")
-            sql += "gender='Male' AND ";
+            sql += " AND gender='Male'";
         else
-            sql += "gender='Female' AND ";
+            sql += " AND gender='Female'";
     }
 
     if(!cSci.getDob().empty())
     {
-        sql += "dob='" + cSci.getDob() + "' AND ";
+        sql += " AND dob='" + cSci.getDob() + "'";
     }
 
     if(!cSci.getDod().empty())
     {
-        sql += "dod='" + cSci.getDod() + "' AND ";
+        sql += " AND dod='" + cSci.getDod() + "'";
     }
     sortQuerySci(sql,index1,index2);
-    sql += "isActive=1";
+    sql += " AND isActive=1";
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
