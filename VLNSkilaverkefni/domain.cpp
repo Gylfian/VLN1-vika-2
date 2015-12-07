@@ -149,7 +149,7 @@ int Domain::findLongestType(vector<Computer> cComList)
         if(i+1 > cComList.size())
             break;
 
-        if(length > cComList[i].getType().length())
+        if(length < cComList[i].getType().length())
         {
            length = cComList[i].getType().length();
         }
@@ -165,7 +165,7 @@ int Domain::findLongestName(vector<CScientist> cSciList)
         if(i+1 > cSciList.size())
             break;
 
-        if(length > cSciList[i].getName().length())
+        if(length < cSciList[i].getName().length())
         {
            length = cSciList[i].getName().length();
         }
@@ -181,7 +181,7 @@ int Domain::findLongestName(vector<Computer> cComList)
         if(i+1 > cComList.size())
             break;
 
-        if(length > cComList[i].getName().length())
+        if(length < cComList[i].getName().length())
         {
            length = cComList[i].getName().length();
         }
