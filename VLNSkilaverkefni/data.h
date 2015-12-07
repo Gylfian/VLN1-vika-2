@@ -21,12 +21,6 @@ public:
     QSqlDatabase getDatabase();
     void setDatabase();
     bool editDatabase(QSqlDatabase db, const QString& command);
-    bool fillVector(QSqlDatabase db, CScientist sci, QString command);
-    bool fillVector(QSqlDatabase db, Computer com, QString command);
-    bool fillVector(QSqlDatabase db, Relation rel, QString command);
-    void makeQuery(CScientist& sci, QSqlQuery query);
-    void makeQuery(Computer & comp, QSqlQuery query);
-    void makeQuery(Relation & rel, QSqlQuery query);
     void select(CScientist cSci, int index1, int index2);
     void select(Computer comp, int index1, int index2);
     void deleteEntry(CScientist cSci);
@@ -35,18 +29,24 @@ public:
     void insert(Computer comp);
     void update(CScientist cSci);
     void update(Computer comp);
-    void sortQuerySci(string & sql,int index1, int index2);
-    void sortQueryCom(string & sql,int index1, int index2);
-    bool executeQuery(QSqlQuery query, QString command);
-    void setRelations(Computer comp, CScientist cSci);
     vector<CScientist> getSciVector();
     vector<Computer> getComVector();
+
 private:
    vector<CScientist> sci;
    vector<Computer> com;
    vector<Relation> rel;
    QSqlDatabase database;
-
+   bool fillVector(QSqlDatabase db, CScientist sci, QString command);
+   bool fillVector(QSqlDatabase db, Computer com, QString command);
+   bool fillVector(QSqlDatabase db, Relation rel, QString command);
+   void makeQuery(CScientist& sci, QSqlQuery query);
+   void makeQuery(Computer & comp, QSqlQuery query);
+   void makeQuery(Relation & rel, QSqlQuery query);
+   void sortQuerySci(string & sql,int index1, int index2);
+   void sortQueryCom(string & sql,int index1, int index2);
+   bool executeQuery(QSqlQuery query, QString command);
+   void setRelations(Computer comp, CScientist cSci);
 
 };
 
