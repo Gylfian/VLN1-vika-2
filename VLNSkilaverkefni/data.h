@@ -27,8 +27,8 @@ public:
     void makeQuery(CScientist& sci, QSqlQuery query);
     void makeQuery(Computer & comp, QSqlQuery query);
     void makeQuery(Relation & rel, QSqlQuery query);
-    void select(CScientist cSci);
-    void select(Computer comp);
+    void select(CScientist cSci, int index1, int index2);
+    void select(Computer comp, int index1, int index2);
     void deleteEntry(CScientist cSci);
     void deleteEntry(Computer comp);
     void insert(CScientist cSci);

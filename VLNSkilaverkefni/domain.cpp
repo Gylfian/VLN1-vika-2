@@ -144,12 +144,12 @@ void Domain::getYear(bool youngest)
 
 void Domain::search(CScientist cSci)
 {
-    data.select(cSci);
+   // data.select(cSci);
 }
 
 void Domain::search(Computer cCom)
 {
-    data.select(cCom);
+    //data.select(cCom);
 }
 
 void Domain::addScientist(CScientist cSci)
