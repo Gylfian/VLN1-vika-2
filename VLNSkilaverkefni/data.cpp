@@ -23,6 +23,14 @@ void Data::setDatabase()
     database.setDatabaseName(dbName);
     database.open();
 }
+vector<CScientist> Data::getSciVector()
+{
+    return sci;
+}
+vector<Computer> Data::getComVector()
+{
+    return  com;
+}
 
 bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {

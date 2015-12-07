@@ -24,13 +24,17 @@ public:
      * Output/Return: list = allScientists
      */
 
-    vector<CScientist> search(CScientist cSci, string tableName);
+    void search(CScientist cSci);
+
+    void search(Computer cCom);
 
     void requestSciSql(QSqlDatabase db, QString sql, vector<CScientist> &cSciList);
 
     void requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList);
 
-    void sortBy(char parent, char child, char child2);
+    void sortBy(vector<CScientist> &cSciList, char child, char child2);
+
+    void sortBy(vector<Computer> &cComList, char child, char child2);
 
     int findLongestName(vector<CScientist> cSciList);
 
@@ -47,9 +51,9 @@ public:
      * Usage: deleteScientist(cSci);
      * (vector<CScientist>)Output/Return: element deleted from database.
      */
-    void deleteScientist(CScientist cSci, string tableName);
+    void deleteScientist(CScientist cSci);
 
-    void addScientist(CScientist, string tableName);
+    void addScientist(CScientist cSci);
 
     /*
      * Name: normalizeName
@@ -75,8 +79,6 @@ private:
     void getComBuilt(bool built);
 
     bool checkOption(char child);
-
-
 };
 
 #endif // DOMAIN_H

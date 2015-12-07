@@ -5,61 +5,55 @@ Domain::Domain()
 
 }
 
-void Domain::sortBy(char parent, char child, char child2)
+void Domain::sortBy(vector<CScientist> &cSciList, char child, char child2)
 {
-    switch(parent)
-    {
-        case('1'): //scientist
-        {
-            if(child == '1') //sort by name
-            {
-                bool ascending = checkOption(child2);
-                getName(ascending);
-            }
-            else if(child == '2')
-            {
-                bool male = checkOption(child2);
-                getGender(male);
-            }
-            else if(child == '3')
-            {
-                bool youngest = checkOption(child2);
-                getYear(youngest);
-            }
-            else
-            {
-                //getById();
-            }
-        }break;
 
-        case('2')://computer
-        {
-        //name, yearbuilt, type, built
-            if(child == '1') //sort by name
-            {
-                bool ascending = checkOption(child2);
-                getComName(ascending);
-            }
-            else if(child == '2')//yearbuilt
-            {
-                bool youngest = checkOption(child2);
-                getComYear(youngest);
-            }
-            else if(child == '3')//type
-            {
-                bool ascending = checkOption(child2);
-                getComType(ascending);
-            }
-            else if(child == '4')//built
-            {
-                bool built = checkOption(child2);
-                getComType(built);
-            }
-            else
-            {
-                //getById();
-            }
-        }break;
+    if(child == '1') //sort by name
+    {
+        bool ascending = checkOption(child2);
+        getName(ascending);
+    }
+    else if(child == '2')
+    {
+        bool male = checkOption(child2);
+        getGender(male);
+    }
+    else if(child == '3')
+    {
+        bool youngest = checkOption(child2);
+        getYear(youngest);
+    }
+    else
+    {
+        //getById();
+    }
+
+}
+void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
+{
+    if(child == '1') //sort by name
+    {
+        bool ascending = checkOption(child2);
+        getComName(ascending);
+    }
+    else if(child == '2')//yearbuilt
+    {
+        bool youngest = checkOption(child2);
+        getComYear(youngest);
+    }
+    else if(child == '3')//type
+    {
+        bool ascending = checkOption(child2);
+        getComType(ascending);
+    }
+    else if(child == '4')//built
+    {
+        bool built = checkOption(child2);
+        getComType(built);
+    }
+    else
+    {
+        //getById();
     }
 }
 
@@ -148,23 +142,24 @@ void Domain::getYear(bool youngest)
 }
 
 
-vector<CScientist> Domain::search(CScientist cSci, string tableName)
+void Domain::search(CScientist cSci)
 {
-    vector<CScientist> searchResults;
     data.select(cSci);
-    //Data data;
-    //searchResults = data.executeQuery(search);
-    return searchResults;
 }
 
-void Domain::addScientist(CScientist cSci, string tableName)
+void Domain::search(Computer cCom)
+{
+    data.select(cCom);
+}
+
+void Domain::addScientist(CScientist cSci)
 {
     data.insert(cSci);
     //Data data;
     //insertQuery = data.executeQuery(search);
 }
 
-void Domain::deleteScientist(CScientist cSci, string tableName)
+void Domain::deleteScientist(CScientist cSci)
 {
     data.deleteEntry(cSci);
     //Data data;
