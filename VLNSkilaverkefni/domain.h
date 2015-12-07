@@ -52,7 +52,7 @@ public:
      * Name: deleteScientist
      * Parameter/s: CScientist cSci
      * Description: Deletes a specific scientist from the list
-     * Usage: deleteScientist(cSci);
+     * Usage: deleteScFFFFFFFFFFFFientist(cSci);
      * (vector<CScientist>)Output/Return: element deleted from database.
      */
     void deleteScientist(CScientist cSci);
@@ -71,16 +71,17 @@ private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
     QString createInsertQuery(CScientist cSci);
+    int charToInt(char chr);
     int convertToInt(string str);
     Data data;
-    void getName(vector<CScientist> &cSciList, int child2);
-    void getGender(vector<CScientist> &cSciList, int child2);
-    void getYear(vector<CScientist> &cSciList, int child2);
+    void getName(vector<CScientist> &cSciList, char child2);
+    void getGender(vector<CScientist> &cSciList, char child2);
+    void getYear(vector<CScientist> &cSciList, char child2);
 
-    void getComName(vector<Computer> &cComList, int child2);
-    void getComYear(vector<Computer> &cComList, int child2);
-    void getComType(vector<Computer> &cComList, int child2);
-    void getComBuilt(vector<Computer> &cComList, int child2);
+    void getComName(vector<Computer> &cComList, char child2);
+    void getComYear(vector<Computer> &cComList, char child2);
+    void getComType(vector<Computer> &cComList, char child2);
+    void getComBuilt(vector<Computer> &cComList, char child2);
 
     bool checkOption(char child);
 };
