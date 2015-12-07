@@ -229,7 +229,7 @@ void Presentation::searchCom()
 string Presentation::getSearchBuilt()
 {
     string built;
-    cout << "Was the computer built? [y]es, [n]o, [d]on't know" << endl;
+    cout << "Was the computer built? [y]es, [n]o, [u]nknown" << endl;
     char ans = getch();
 
     switch (ans)
@@ -244,8 +244,8 @@ string Presentation::getSearchBuilt()
         {
             built = "No";
         }break;
-        case('D'):
-        case('d'):
+        case('U'):
+        case('u'):
         {
             built = "";
         }break;
@@ -620,7 +620,6 @@ void Presentation::whichOrderCom(char which, char pChoice)
 
 void Presentation::printSciList(vector<CScientist> scientists)
 {
-    system("CLS");
     int longest = dom.findLongestName(scientists);
     cout << "Computer scientists" << endl;
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
@@ -639,7 +638,20 @@ void Presentation::printSciList(vector<CScientist> scientists)
 
 void Presentation::printComList(vector<Computer> computers)
 {
-    system("CLS");
+
+    int longest = dom.findLongestName(computers);
+    int longestType = dom.findLongestType(computers);
+    cout << "Computers" << endl;
+    cout << setfill('-') << setw(longest + longestType + 33) << '-' << endl;
+    cout << setfill(' ') << left << setw(longest + 6) << "ID | Name" << setw(longestType + 3) << "|Type " << "|Built |Year Built" << endl;
+    cout << setfill('-') << setw(longest + longestType + 33) << '-' << endl;
+    for(unsigned int i = 0; i < computers.size(); i++)
+    {
+        cout << setfill(' ') << right << setw(3) << computers[i].getId() << "| " << left << setw(longest + 2)
+        << computers[i].getName() << setw(longestType + 3) << computers[i].getType ()
+        << setw(7) << computers[i].getBuilt() << computers[i].getYear() << endl;
+        cout << setfill('-') << setw(longest + longestType + 33) << '-' << endl;
+    }
 }
 
 void Presentation::deleteFromList()
@@ -681,6 +693,8 @@ void Presentation::deleteFromList()
 
 void Presentation::printListOptions()
 {
+    printListText();
+
     char ans = getch();
     system("CLS");
 
@@ -827,7 +841,7 @@ void Presentation::sciOrComText(char which)
         }break;
         case ('5'):
         {
-            cout << "|-Which list fo you wish to edtit?-------|" << endl;
+            cout << "|-Which list fo you wish to edit?--------|" << endl;
         }break;
 
     }

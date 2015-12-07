@@ -165,29 +165,26 @@ void Data::select(CScientist cSci,int index1,int index2)
     if(!cSci.getGender().empty())
     {
         if(cSci.getGender() == "Male")
-            sql += " AND gender='Male' AND ";
+            sql += " AND gender='Male'";
         else
-            sql += "gender='Female' AND ";
+            sql += " AND gender='Female'";
     }
 
     if(!cSci.getDob().empty())
     {
-        sql += "dob='" + cSci.getDob() + "' AND ";
+        sql += " AND dob='" + cSci.getDob() + "'";
     }
 
     if(!cSci.getDod().empty())
     {
-        sql += "dod='" + cSci.getDod() + "' AND ";
+        sql += " AND dod='" + cSci.getDod() + "'";
     }
+    //sql += " AND isActive=1 ";
+    sortQuerySci(sql,index1,index2);
+    sql += ";";
     cout << sql << endl;
-    cout << "length of string: " << sql.length() << endl;
-    //sql.resize(32);
-    cout << sql;
     int x;
     cin >> x;
-    //sortQuerySci(sql,index1,index2);
-    //sql += "isActive=1";
-    sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
