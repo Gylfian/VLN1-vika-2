@@ -178,7 +178,14 @@ void Data::select(CScientist cSci,int index1,int index2)
     {
         sql += "dod='" + cSci.getDod() + "' AND ";
     }
-        sql += "isActive=1";
+    sortQuerySci(sql,index1,index2);
+    sql += "isActive=1";
+    sql += ";";
+    qsql = QString::fromStdString(sql);
+    fillVector(database, cSci, qsql);
+}
+void Data::sortQuerySci(string & sql,int index1, int index2)
+{
     if(index1 == 1)
     {
         sql += " ORDER BY Name";
@@ -207,9 +214,6 @@ void Data::select(CScientist cSci,int index1,int index2)
     {
         sql += " DESC";
     }
-    sql += ";";
-    qsql = QString::fromStdString(sql);
-    fillVector(database, cSci, qsql);
 }
 
 void Data::select(Computer comp,int index1,int index2)
@@ -239,7 +243,13 @@ void Data::select(Computer comp,int index1,int index2)
     }
 
     sql += "isActive=1";
-
+    sortQueryCom(sql,index1,index2);
+    sql += ";";
+    qsql = QString::fromStdString(sql);
+    fillVector(database, comp, qsql);
+}
+void Data::sortQueryCom(string & sql,int index1, int index2)
+{
     if(index1 == 1)
     {
         sql += " ORDER BY Name";
@@ -268,10 +278,8 @@ void Data::select(Computer comp,int index1,int index2)
     {
         sql += " DESC";
     }
-    sql += ";";
-    qsql = QString::fromStdString(sql);
-    fillVector(database, comp, qsql);
 }
+
 
 void Data::deleteEntry(CScientist cSci)
 {

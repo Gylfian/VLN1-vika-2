@@ -35,6 +35,8 @@ public:
     void insert(Computer comp);
     void update(CScientist cSci);
     void update(Computer comp);
+    void sortQuerySci(string & sql,int index1, int index2);
+    void sortQueryCom(string & sql,int index1, int index2);
     bool executeQuery(QSqlQuery query, QString command);
     void setRelations(Computer comp, CScientist cSci);
     vector<CScientist> getSciVector();
