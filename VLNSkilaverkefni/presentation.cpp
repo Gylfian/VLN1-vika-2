@@ -361,6 +361,9 @@ string Presentation::getInputDob()
     cout << "Enter year of birth: ";
     cin >> Dob;
 
+    return Dob;
+
+
     /*if(dom.verifyBirthyear(Dob))
     {
         return Dob;
@@ -371,6 +374,8 @@ string Presentation::getInputDob()
         Dob = getInputDob();
     }
     */
+
+
 }
 
 string Presentation::getInputDod(string Dob)
@@ -634,7 +639,7 @@ void Presentation::printSciList(vector<CScientist> scientists)
 
 void Presentation::printComList(vector<Computer> computers)
 {
-
+    system("CLS");
 }
 
 void Presentation::deleteFromList()
