@@ -72,14 +72,14 @@ void Data::setDatabase()
 bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {
     QSqlQuery query(db);
-    if(!executequery(query, command))
+    if(!executeQuery(query, command))
     query.first();
-    comQuery(temp, query);
+    makeQuery(temp, query);
     com.push_back(temp);
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
-        comQuery(temp,query);
+        makeQuery(temp,query);
         com.push_back(temp);
     }
     return true;
@@ -88,13 +88,13 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
     QSqlQuery query(db);
-    if(!executequery(query, command))
+    if(!executeQuery(query, command))
     query.first();
-    sciQuery(temp,query);
+    makeQuery(temp,query);
     sci.push_back(temp);
     while(query.next())
     {
-        sciQuery(temp, query);
+        makeQuery(temp, query);
         sci.push_back(temp);
     }
     return true;
@@ -103,20 +103,20 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
 {
     QSqlQuery query(db);
-    if(!executequery(query, command))
+    if(!executeQuery(query, command))
     query.first();
-    releQuery(temp, query);
+    makeQuery(temp, query);
     rele.push_back(temp);
     cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
-        releQuery(temp,query);
+        makeQuery(temp,query);
         rele.push_back(temp);
     }
     return true;
 }
 
-void Data::sciQuery(CScientist& temp, QSqlQuery query)
+void Data::makeQuery(CScientist& temp, QSqlQuery query)
 {
     unsigned int qId = query.value("ID").toUInt();
     temp.setId(qId);
@@ -138,7 +138,7 @@ void Data::sciQuery(CScientist& temp, QSqlQuery query)
     cout << temp.getIsActive() << endl;
 }
 
-void Data::comQuery(Computer& temp, QSqlQuery query)
+void Data::makeQuery(Computer& temp, QSqlQuery query)
 {
     int qId = query.value("ID").toUInt();
     temp.setId(qId);
@@ -157,7 +157,7 @@ void Data::comQuery(Computer& temp, QSqlQuery query)
     cout << qBuilt << endl;
 }
 
-void Data::releQuery(Relation& temp, QSqlQuery query)
+void Data::makeQuery(Relation& temp, QSqlQuery query)
 {
     int qComp = query.value("ScientistID").toUInt();
     temp.setComputerId(qComp);
@@ -167,7 +167,7 @@ void Data::releQuery(Relation& temp, QSqlQuery query)
     cout << qSci << endl;
 }
 
-void Data::selectScientist(CScientist cSci)
+void Data::select(CScientist cSci)
 {
     QString qsql;
     string sql = "SELECT *";
@@ -200,24 +200,7 @@ void Data::selectScientist(CScientist cSci)
     fillVector(database, cSci, qsql);
 }
 
-void Data::insertScientist(CScientist cSci)
-{
-    QString qsql;
-    string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob, Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
-    qsql = QString::fromStdString(sql);
-    fillVector(database, cSci, qsql);
-}
-
-void Data::deleteScientist(CScientist cSci)
-{
-    QString qsql;
-    int id = cSci.getId();
-    string sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
-    qsql = QString::fromStdString(sql);
-    fillVector(database, cSci, qsql);
-}
-
-void Data::selectComputer(Computer comp)
+void Data::select(Computer comp)
 {
     QString qsql;
     string sql = "SELECT *";
@@ -248,15 +231,16 @@ void Data::selectComputer(Computer comp)
     fillVector(database, comp, qsql);
 }
 
-void Data::insertComputer(Computer comp)
+void Data::deleteEntry(CScientist cSci)
 {
     QString qsql;
-    string sql = "INSERT INTO computers (name, yearbuilt, type, built) VALUES ('"+ comp.getName() +"','"+ comp.getYear() +"','"+ comp.getType() + "')";
+    int id = cSci.getId();
+    string sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
     qsql = QString::fromStdString(sql);
-    fillVector(database, comp, qsql);
+    fillVector(database, cSci, qsql);
 }
 
-void Data::deleteComputer(Computer comp)
+void Data::deleteEntry(Computer comp)
 {
     QString qsql;
     int id = comp.getId();
@@ -265,7 +249,23 @@ void Data::deleteComputer(Computer comp)
     fillVector(database, comp, qsql);
 }
 
-void Data::updateComputerScientits(CScientist cSci)
+void Data::insert(CScientist cSci)
+{
+    QString qsql;
+    string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob, Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    qsql = QString::fromStdString(sql);
+    fillVector(database, cSci, qsql);
+}
+
+void Data::insert(Computer comp)
+{
+    QString qsql;
+    string sql = "INSERT INTO computers (name, yearbuilt, type, built) VALUES ('"+ comp.getName() +"','"+ comp.getYear() +"','"+ comp.getType() + "')";
+    qsql = QString::fromStdString(sql);
+    fillVector(database, comp, qsql);
+}
+
+void Data::update(CScientist cSci)
 {
     QString qsql;
     string sql = "UPDATE Computers SET ";
@@ -294,7 +294,7 @@ void Data::updateComputerScientits(CScientist cSci)
     fillVector(database, cSci, qsql);
 }
 
-void Data::updateComputer(Computer comp)
+void Data::update(Computer comp)
 {
     QString qsql;
     string sql = "UPDATE Computers SET ";
@@ -324,7 +324,7 @@ void Data::updateComputer(Computer comp)
     fillVector(database, comp, qsql);
 }
 
-bool Data::executequery(QSqlQuery query,QString command)
+bool Data::executeQuery(QSqlQuery query,QString command)
 {
     if (!query.exec(command))
     {
@@ -339,7 +339,6 @@ void Data::setRelations(Computer comp, CScientist cSci)
     string sql; //= "INSERT INTO Relation (ScientistID, ComputerID) VALUES (" + comp.getId() + "," + cSci.getId() + " )";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
-    executequery(query,qsql);
+    executeQuery(query,qsql);
     fillVector(database, cSci, qsql);
-
 }

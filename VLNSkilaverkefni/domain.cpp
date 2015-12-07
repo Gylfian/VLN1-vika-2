@@ -151,7 +151,7 @@ void Domain::getYear(bool youngest)
 vector<CScientist> Domain::search(CScientist cSci, string tableName)
 {
     vector<CScientist> searchResults;
-    data.selectScientist(cSci);
+    data.select(cSci);
     //Data data;
     //searchResults = data.executeQuery(search);
     return searchResults;
@@ -159,14 +159,14 @@ vector<CScientist> Domain::search(CScientist cSci, string tableName)
 
 void Domain::addScientist(CScientist cSci, string tableName)
 {
-    data.insertScientist(cSci);
+    data.insert(cSci);
     //Data data;
     //insertQuery = data.executeQuery(search);
 }
 
 void Domain::deleteScientist(CScientist cSci, string tableName)
 {
-    data.deleteScientist(cSci);
+    data.deleteEntry(cSci);
     //Data data;
     //deleteQuery = data.executeQuery(search);
 }
