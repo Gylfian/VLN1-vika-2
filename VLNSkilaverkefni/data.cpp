@@ -34,28 +34,6 @@ vector<Computer> Data::getComVector()
     return  com;
 }
 
-bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
-{
-    if(!db.isOpen())
-    {
-        setDatabase();
-    }
-    QSqlQuery query(database);
-    if(!query.exec(command))
-    {
-        //eitthvad exit
-    }
-    query.first();
-    makeQuery(temp, query);
-    com.push_back(temp);
-    while(query.next())
-    {
-        makeQuery(temp,query);
-        com.push_back(temp);
-    }
-    return true;
-}
-
 bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
     if(!db.isOpen())
@@ -74,6 +52,28 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
     {
         makeQuery(temp, query);
         sci.push_back(temp);
+    }
+    return true;
+}
+
+bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
+{
+    if(!db.isOpen())
+    {
+        setDatabase();
+    }
+    QSqlQuery query(database);
+    if(!query.exec(command))
+    {
+        //eitthvad exit
+    }
+    query.first();
+    makeQuery(temp, query);
+    com.push_back(temp);
+    while(query.next())
+    {
+        makeQuery(temp,query);
+        com.push_back(temp);
     }
     return true;
 }
@@ -169,6 +169,35 @@ void Data::select(CScientist cSci,int index1,int index2)
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
+
+void Data::select(Computer comp,int index1,int index2)
+{
+    QString qsql;
+    string sql = "SELECT *";
+    sql += " FROM Computers WHERE ";
+    sql += "Name LIKE '%" + comp.getName() + "%'";
+
+    if(!comp.getYear().empty())
+    {
+        sql += " AND year=" + comp.getYear() + "$' AND ";
+    }
+
+    if(!comp.getType().empty())
+    {
+        sql += "type='" + comp.getType() + "' AND ";
+    }
+
+    if(!comp.getBuilt().empty())
+    {
+        sql += "built='" + comp.getBuilt() + "' AND ";
+    }
+    sql += " AND isActive=1 ";
+    sortQueryCom(sql,index1,index2);
+    sql += ";";
+    qsql = QString::fromStdString(sql);
+    fillVector(database, comp, qsql);
+}
+
 void Data::sortQuerySci(string & sql,int index1, int index2)
 {
     if(index1 == 1)
@@ -201,33 +230,7 @@ void Data::sortQuerySci(string & sql,int index1, int index2)
     }
 }
 
-void Data::select(Computer comp,int index1,int index2)
-{
-    QString qsql;
-    string sql = "SELECT *";
-    sql += " FROM Computers WHERE ";
-    sql += "Name LIKE '%" + comp.getName() + "%'";
 
-    if(!comp.getYear().empty())
-    {
-        sql += " AND year=" + comp.getYear() + "$' AND ";
-    }
-
-    if(!comp.getType().empty())
-    {
-        sql += "type='" + comp.getType() + "' AND ";
-    }
-
-    if(!comp.getBuilt().empty())
-    {
-        sql += "built='" + comp.getBuilt() + "' AND ";
-    }
-    sql += " AND isActive=1 ";
-    sortQueryCom(sql,index1,index2);
-    sql += ";";
-    qsql = QString::fromStdString(sql);
-    fillVector(database, comp, qsql);
-}
 void Data::sortQueryCom(string & sql,int index1, int index2)
 {
     if(index1 == 1)
@@ -258,11 +261,7 @@ void Data::sortQueryCom(string & sql,int index1, int index2)
     {
         sql += " DESC";
     }
-    cout << endl;
-    cout << "index 2:" << index2 << endl;
-    cout << sql << endl;
 }
-
 
 void Data::deleteEntry(CScientist cSci)
 {
@@ -277,7 +276,7 @@ void Data::deleteEntry(Computer comp)
 {
     QString qsql;
     int id = comp.getId();
-    string sql = "UPDATE Computer SET isActive=0 WHERE ID = " +id;
+    string sql = "UPDATE Computers SET isActive=0 WHERE ID = " +id;
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
@@ -293,7 +292,7 @@ void Data::insert(CScientist cSci)
 void Data::insert(Computer comp)
 {
     QString qsql;
-    string sql = "INSERT INTO computers (Name, Type, Built, Year) VALUES ('"+ comp.getName() +"','"+ comp.getType() +"','"+ comp.getBuilt() + "','"+ comp.getYear() + "')";
+    string sql = "INSERT INTO Computers (Name, Type, Built, Year) VALUES ('"+ comp.getName() +"','"+ comp.getType() +"','"+ comp.getBuilt() + "','"+ comp.getYear() + "')";
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
