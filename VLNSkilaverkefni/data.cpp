@@ -102,7 +102,7 @@ void Data::makeQuery(CScientist& temp, QSqlQuery query)
     string qDob = query.value("Dob").toString().toStdString();
     temp.setDob(qDob);
     string qDod = query.value("Dod").toString().toStdString();
-    temp.setDob(qDob);
+    temp.setDod(qDod);
     bool qIsActive = query.value("IsActive").toBool();
     temp.setIsActive(qIsActive);
 }
