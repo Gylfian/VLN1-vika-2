@@ -37,7 +37,8 @@ public:
     void update(Computer comp);
     bool executeQuery(QSqlQuery query, QString command);
     void setRelations(Computer comp, CScientist cSci);
-
+    vector<CScientist> getSciVector();
+    vector<Computer> getComVector();
 private:
    vector<CScientist> sci;
    vector<Computer> com;
