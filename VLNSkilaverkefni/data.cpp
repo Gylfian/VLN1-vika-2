@@ -151,7 +151,7 @@ void Data::makeQuery(Relation& temp, QSqlQuery query)
     cout << qSci << endl;
 }
 
-void Data::select(CScientist cSci)
+void Data::select(CScientist cSci,int index1,int index2)
 {
     QString qsql;
     string sql = "SELECT *";
@@ -179,12 +179,40 @@ void Data::select(CScientist cSci)
         sql += "dod='" + cSci.getDod() + "' AND ";
     }
         sql += "isActive=1";
+    if(index1 == 1)
+    {
+        sql += " ORDER BY Name";
+    }
+    if(index1 == 2)
+    {
+        sql += " ORDER BY Gender";
+    }
+    if(index1 == 3)
+    {
+        sql += " ORDER BY Dob";
+    }
+    if(index1 == 4)
+    {
+        sql += " ORDER BY Dod";
+    }
+    if(index1 == 5)
+    {
+        sql += " ORDER BY ID";
+    }
+    if(index2 ==1)
+    {
+        sql += " ASC";
+    }
+    if(index2 ==2)
+    {
+        sql += " DESC";
+    }
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
 
-void Data::select(Computer comp)
+void Data::select(Computer comp,int index1,int index2)
 {
     QString qsql;
     string sql = "SELECT *";
@@ -209,7 +237,37 @@ void Data::select(Computer comp)
     {
         sql += "built='" + comp.getBuilt() + "' AND ";
     }
+
     sql += "isActive=1";
+
+    if(index1 == 1)
+    {
+        sql += " ORDER BY Name";
+    }
+    if(index1 == 2)
+    {
+        sql += " ORDER BY Type";
+    }
+    if(index1 == 3)
+    {
+        sql += " ORDER BY Built";
+    }
+    if(index1 == 4)
+    {
+        sql += " ORDER BY year";
+    }
+    if(index1 == 5)
+    {
+        sql += " ORDER BY ID";
+    }
+    if(index2 ==1)
+    {
+        sql += " ASC";
+    }
+    if(index2 ==2)
+    {
+        sql += " DESC";
+    }
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
