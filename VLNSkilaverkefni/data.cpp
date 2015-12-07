@@ -36,6 +36,7 @@ vector<Computer> Data::getComVector()
 
 bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
+    sci.clear();
     if(!db.isOpen())
     {
         setDatabase();
@@ -55,6 +56,7 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 
 bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {
+    com.clear();
     if(!db.isOpen())
     {
         setDatabase();
@@ -74,6 +76,7 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 
 bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
 {
+    rel.clear();
     if(!db.isOpen())
     {
         setDatabase();
