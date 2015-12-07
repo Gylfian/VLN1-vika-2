@@ -150,23 +150,23 @@ void Data::select(CScientist cSci,int index1,int index2)
     QString qsql;
     string sql = "SELECT *";
     sql += " FROM Computerscientists";
-    sql += " WHERE name LIKE '%" + cSci.getName() + "%'";
+    sql += " WHERE Name LIKE '%" + cSci.getName() + "%'";
     if(!cSci.getGender().empty())
     {
         if(cSci.getGender() == "Male")
-            sql += " AND gender='Male'";
+            sql += " AND Gender='Male'";
         else
-            sql += " AND gender='Female'";
+            sql += " AND Gender='Female'";
     }
 
     if(!cSci.getDob().empty())
     {
-        sql += " AND dob='" + cSci.getDob() + "'";
+        sql += " AND Dob='" + cSci.getDob() + "'";
     }
 
     if(!cSci.getDod().empty())
     {
-        sql += " AND dod='" + cSci.getDod() + "'";
+        sql += " AND Dod='" + cSci.getDod() + "'";
     }
     sql += " AND isActive=1 ";
     sortQuerySci(sql,index1,index2);
