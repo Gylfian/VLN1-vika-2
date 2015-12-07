@@ -12,19 +12,22 @@ void Domain::sortBy(vector<CScientist> &cSciList, char child, char child2)
     {
         getName(cSciList, child2);
     }
-    else if(child == '2')
+    else if(child == '2') //gender
     {
         getGender(cSciList, child2);
     }
-    else if(child == '3')
+    else if(child == '3') //year
     {
         getYear(cSciList, child2);
     }
+    else if(child == '4') //yeardeath
+    {
+        getYearDeath(cSciList, child2);
+    }
     else
     {
-        //getById();
+        getId(cSciList, child2);
     }
-
 }
 void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
 {
@@ -46,7 +49,7 @@ void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
     }
     else
     {
-        //getById();
+        getComId(cComList, child2);
     }
 }
 
@@ -78,6 +81,13 @@ void Domain::getComBuilt(vector<Computer> &cComList, char child2)
     cComList = data.getComVector();
 }
 
+void Domain::getComId(vector<Computer> &cComList, char child2)
+{
+    Computer com;
+    data.select(com, 5, charToInt(child2));
+    cComList = data.getComVector();
+}
+
 void Domain::getName(vector<CScientist> &cSciList, char child2)
 {
     CScientist scientist;
@@ -89,6 +99,20 @@ void Domain::getGender(vector<CScientist> &cSciList, char child2)
 {
     CScientist scientist;
     data.select(scientist, 2, charToInt(child2));
+    cSciList = data.getSciVector();
+}
+
+void Domain::getId(vector<CScientist> &cSciList, char child2)
+{
+    CScientist scientist;
+    data.select(scientist, 5, charToInt(child2));
+    cSciList = data.getSciVector();
+}
+
+void Domain::getYearDeath(vector<CScientist> &cSciList, char child2)
+{
+    CScientist scientist;
+    data.select(scientist, 4, charToInt(child2));
     cSciList = data.getSciVector();
 }
 
