@@ -50,52 +50,52 @@ void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
     }
 }
 
-void Domain::getComName(vector<Computer> &cComList, int child2)
+void Domain::getComName(vector<Computer> &cComList, char child2)
 {
     Computer com;
-    data.select(com, 1, child2);
+    data.select(com, 1, charToInt(child2));
     cComList = data.getComVector();
 }
 
-void Domain::getComType(vector<Computer> &cComList, int child2)
+void Domain::getComType(vector<Computer> &cComList, char child2)
 {
     Computer com;
-    data.select(com, 2, child2);
+    data.select(com, 2, charToInt(child2));
     cComList = data.getComVector();
 }
 
-void Domain::getComYear(vector<Computer> &cComList, int child2)
+void Domain::getComYear(vector<Computer> &cComList, char child2)
 {
     Computer com;
-    data.select(com, 4, child2);
+    data.select(com, 4, charToInt(child2));
     cComList = data.getComVector();
 }
 
-void Domain::getComBuilt(vector<Computer> &cComList, int child2)
+void Domain::getComBuilt(vector<Computer> &cComList, char child2)
 {
     Computer com;
-    data.select(com, 3, child2);
+    data.select(com, 3, charToInt(child2));
     cComList = data.getComVector();
 }
 
-void Domain::getName(vector<CScientist> &cSciList, int child2)
+void Domain::getName(vector<CScientist> &cSciList, char child2)
 {
     CScientist scientist;
-    data.select(scientist, 1, child2);
+    data.select(scientist, 1, charToInt(child2));
     cSciList = data.getSciVector();
 }
 
-void Domain::getGender(vector<CScientist> &cSciList, int child2)
+void Domain::getGender(vector<CScientist> &cSciList, char child2)
 {
     CScientist scientist;
-    data.select(scientist, 2, child2);
+    data.select(scientist, 2, charToInt(child2));
     cSciList = data.getSciVector();
 }
 
-void Domain::getYear(vector<CScientist> &cSciList, int child2)
+void Domain::getYear(vector<CScientist> &cSciList, char child2)
 {
     CScientist scientist;
-    data.select(scientist, 3, child2);
+    data.select(scientist, 3, charToInt(child2));
     cSciList = data.getSciVector();
 }
 
@@ -148,6 +148,12 @@ int Domain::findLongestType(vector<Computer> cComList)
         }
     }
     return length;
+}
+
+int Domain::charToInt(char chr)
+{
+    return (int)chr - 48;
+
 }
 
 int Domain::findLongestName(vector<CScientist> cSciList)
