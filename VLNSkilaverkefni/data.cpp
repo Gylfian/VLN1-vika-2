@@ -9,6 +9,7 @@ Data::Data()
     Computer temp2;
     sci.push_back(temp);
     com.push_back(temp2);
+    setDatabase();
 }
 
 QSqlDatabase Data::getDatabase()
@@ -22,6 +23,7 @@ void Data::setDatabase()
     QString dbName = "VLN1.sqlite";
     database.setDatabaseName(dbName);
     database.open();
+    cout << "inni sb" << database.isOpen() << endl;
 }
 vector<CScientist> Data::getSciVector()
 {
@@ -38,8 +40,9 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
     {
         setDatabase();
     }
-    QSqlQuery query(db);
-    if(!executeQuery(query, command))
+    QSqlQuery query(database);
+    query.exec(command);
+    //if(!executeQuery(query, command))
     {
         //eitthvad exit
     }
@@ -61,8 +64,9 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
     {
         setDatabase();
     }
-    QSqlQuery query(db);
-    if(!executeQuery(query, command))
+    QSqlQuery query(database);
+    query.exec(command);
+    //if(!executeQuery(query, command))
     {
         //eitthvad exit
     }
@@ -84,7 +88,8 @@ bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
         setDatabase();
     }
     QSqlQuery query(db);
-    if(!executeQuery(query, command))
+    query.exec(command);
+    //if(!executeQuery(query, command))
     {
         //eitthvad exit
     }
@@ -155,16 +160,12 @@ void Data::select(CScientist cSci,int index1,int index2)
 {
     QString qsql;
     string sql = "SELECT *";
-    sql += " FROM Computerscientists WHERE ";
-    if(!cSci.getName().empty())
-    {
-        sql += "name LIKE '%" + cSci.getName() + "%' AND ";
-    }
-
+    sql += " FROM Computerscientists";
+    sql += " WHERE name LIKE '%" + cSci.getName() + "%'";
     if(!cSci.getGender().empty())
     {
         if(cSci.getGender() == "Male")
-            sql += "gender='Male' AND ";
+            sql += " AND gender='Male' AND ";
         else
             sql += "gender='Female' AND ";
     }
@@ -178,10 +179,15 @@ void Data::select(CScientist cSci,int index1,int index2)
     {
         sql += "dod='" + cSci.getDod() + "' AND ";
     }
-    sortQuerySci(sql,index1,index2);
-    sql += "isActive=1";
-    sql += ";";
+    cout << sql << endl;
+    cout << "length of string: " << sql.length() << endl;
+    //sql.resize(32);
     cout << sql;
+    int x;
+    cin >> x;
+    //sortQuerySci(sql,index1,index2);
+    //sql += "isActive=1";
+    sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
@@ -244,9 +250,9 @@ void Data::select(Computer comp,int index1,int index2)
     }
 
     sql += "isActive=1";
+    cout << sql;
     sortQueryCom(sql,index1,index2);
     sql += ";";
-    cout << sql;
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
@@ -376,21 +382,12 @@ void Data::update(Computer comp)
     fillVector(database, comp, qsql);
 }
 
-bool Data::executeQuery(QSqlQuery query,QString command)
-{
-    if (!query.exec(command))
-    {
-        return false;
-    }
-    return true;
-}
-
 void Data::setRelations(Computer comp, CScientist cSci)
 {
     QString qsql;
     string sql; //= "INSERT INTO Relation (ScientistID, ComputerID) VALUES (" + comp.getId() + "," + cSci.getId() + " )";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
-    executeQuery(query,qsql);
+    //executeQuery(query,qsql);
     fillVector(database, cSci, qsql);
 }
