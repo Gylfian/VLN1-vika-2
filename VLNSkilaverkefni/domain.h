@@ -69,14 +69,14 @@ private:
     QString createInsertQuery(CScientist cSci);
     int convertToInt(string str);
     Data data;
-    void getName(bool ascending);
-    void getGender(bool male);
-    void getYear(bool youngest);
+    void getName(vector<CScientist> &cSciList, int child2);
+    void getGender(vector<CScientist> &cSciList, int child2);
+    void getYear(vector<CScientist> &cSciList, int child2);
 
-    void getComName(bool ascending);
-    void getComYear(bool youngest);
-    void getComType(bool ascending);
-    void getComBuilt(bool built);
+    void getComName(vector<Computer> &cComList, int child2);
+    void getComYear(vector<Computer> &cComList, int child2);
+    void getComType(vector<Computer> &cComList, int child2);
+    void getComBuilt(vector<Computer> &cComList, int child2);
 
     bool checkOption(char child);
 };
