@@ -57,12 +57,12 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {
     if(!db.isOpen())
     {
-        return false;
+        setDatabase();
     }
     QSqlQuery query(database);
     if(!query.exec(command))
     {
-        //eitthvad exit
+        return false;
     }
     while(query.next())
     {
@@ -81,7 +81,7 @@ bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
     QSqlQuery query(db);
     if(!query.exec(command))
     {
-        //eitthvad exit
+        return false;
     }
     while(query.next())
     {
