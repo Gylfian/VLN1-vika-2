@@ -66,6 +66,10 @@ void Presentation::printSciOrCom()
         {
             listOptions(ans);
         }break;
+        case ('3'):
+        {
+
+        }break;
         default:
             mainPage();
     }
@@ -139,6 +143,7 @@ void Presentation::searchSci()
         Dod = "";
     }
     CScientist cSci(id, name, gender, Dob, Dod, 1);
+
 }
 
 void Presentation::editSciOrCom()
@@ -361,31 +366,21 @@ string Presentation::getInputDob()
     cout << "Enter year of birth: ";
     cin >> Dob;
 
-    return Dob;
-
-
-
-    /*if(dom.verifyBirthyear(Dob))
+    if(dom.verifyBirthyear(Dob))
     {
         return Dob;
     }
     else
-    {
         cout << "Please enter a valid birth year!" << endl;
         Dob = getInputDob();
-    }
-    */
-
-
 }
 
 string Presentation::getInputDod(string Dob)
 {
     string Dod;
     cout << "Enter year of death: ";
-    cin >> Dod;
-    bool valid = dom.normalizeYear(Dob, Dod);
-    if(!valid)
+    cin >> Dod; 
+    if(!dom.normalizeYear(Dob, Dod))
     {
         cout << "Please select a valid death year!" << endl;
         Dod = getInputDod(Dob);
@@ -643,15 +638,15 @@ void Presentation::printComList(vector<Computer> computers)
     int longest = dom.findLongestName(computers);
     int longestType = dom.findLongestType(computers);
     cout << "Computers" << endl;
-    cout << setfill('-') << setw(longest + longestType + 33) << '-' << endl;
+    cout << setfill('-') << setw(longest + longestType + 27) << '-' << endl;
     cout << setfill(' ') << left << setw(longest + 6) << "ID | Name" << setw(longestType + 3) << "|Type " << "|Built |Year Built" << endl;
-    cout << setfill('-') << setw(longest + longestType + 33) << '-' << endl;
+    cout << setfill('-') << setw(longest + longestType + 27) << '-' << endl;
     for(unsigned int i = 0; i < computers.size(); i++)
     {
         cout << setfill(' ') << right << setw(3) << computers[i].getId() << "| " << left << setw(longest + 2)
         << computers[i].getName() << setw(longestType + 3) << computers[i].getType ()
         << setw(7) << computers[i].getBuilt() << computers[i].getYear() << endl;
-        cout << setfill('-') << setw(longest + longestType + 33) << '-' << endl;
+        cout << setfill('-') << setw(longest + longestType + 27) << '-' << endl;
     }
 }
 
