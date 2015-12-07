@@ -23,10 +23,10 @@ public:
     bool editDatabase(QSqlDatabase db, const QString& command);
     bool fillVector(QSqlDatabase db, CScientist sci, QString command);
     bool fillVector(QSqlDatabase db, Computer com, QString command);
-    bool fillVector(QSqlDatabase db, Relation rele, QString command);
+    bool fillVector(QSqlDatabase db, Relation rel, QString command);
     void makeQuery(CScientist& sci, QSqlQuery query);
     void makeQuery(Computer & comp, QSqlQuery query);
-    void makeQuery(Relation & comp, QSqlQuery query);
+    void makeQuery(Relation & rel, QSqlQuery query);
     void select(CScientist cSci);
     void select(Computer comp);
     void deleteEntry(CScientist cSci);
@@ -41,7 +41,7 @@ public:
 private:
    vector<CScientist> sci;
    vector<Computer> com;
-   vector<Relation> rele;
+   vector<Relation> rel;
    QSqlDatabase database;
 
 
