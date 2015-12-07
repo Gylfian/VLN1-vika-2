@@ -257,7 +257,7 @@ bool Domain::normalizeYear(string born, string death)
 }
 
 bool Domain::normalizeName(string &name)
-{
+{F
     if(name.length() <= 0)
     {
         return false;
