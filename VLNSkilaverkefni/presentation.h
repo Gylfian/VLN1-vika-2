@@ -1,8 +1,6 @@
 #ifndef PRESENTATION_H
 #define PRESENTATION_H
-#include <iostream>
 #include <conio.h>
-#include <cstdlib>
 #include <iomanip>
 #include "domain.h"
 
@@ -24,7 +22,6 @@ private:
     string getInputName();
     string getInputDob();
     string getInputDod(string Dob);
-    void printList(vector <CScientist> scientists);
     void printListOptions();
     void searchOptions();
     string getNameSearch();
@@ -59,6 +56,9 @@ private:
     void yearDeathText();
     void ifBuiltText();
     void buildYearText();
+    void editSciOrCom();
+    void printSciList(vector <CScientist> scientists);
+    void printComList(vector <Computer> computers);
 };
 
 #endif // PRESENTATION_H

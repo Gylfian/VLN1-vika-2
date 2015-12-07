@@ -8,6 +8,7 @@ void Presentation::mainPage()
     cout << "|-2) Search lists-------------|" << endl;
     cout << "|-3) Add to lists-------------|" << endl;
     cout << "|-4) Delete from lists--------|" << endl;
+    cout << "|-5) Edit the lists-----------|" << endl;
     cout << "|-Press any other key to quit-|" << endl;
     cout << "|_____________________________|" << endl;
     options();
@@ -39,6 +40,11 @@ void Presentation::options()
         {
             sciOrComText(ans);
             deleteSciOrCom();
+        }break;
+        case ('5'):
+        {
+            sciOrComText(ans);
+            editSciOrCom();
         }break;
         default:
            exit(1);
@@ -133,6 +139,11 @@ void Presentation::searchSci()
         Dod = "";
     }
     CScientist cSci(id, name, gender, Dob, Dod, 1);
+}
+
+void Presentation::editSciOrCom()
+{
+
 }
 
 string Presentation::getSearchName()
@@ -349,7 +360,17 @@ string Presentation::getInputDob()
     string Dob;
     cout << "Enter year of birth: ";
     cin >> Dob;
-    return Dob;
+
+    /*if(dom.verifyBirthyear(Dob))
+    {
+        return Dob;
+    }
+    else
+    {
+        cout << "Please enter a valid birth year!" << endl;
+        Dob = getInputDob();
+    }
+    */
 }
 
 string Presentation::getInputDod(string Dob)
@@ -538,16 +559,20 @@ void Presentation::whichOrderSci(char which, char pChoice)
     char ans = getch();
     system("CLS");
 
+    vector<CScientist> scientists;
+
     switch (ans)
     {
         case ('1'):
         case ('2'):
         {
-
+            dom.sortBy(scientists, pChoice, ans);
         }break;
         default:
             listOptions(which);
     }
+
+    printSciList(scientists);
 }
 
 void Presentation::whichOrderCom(char which, char pChoice)
@@ -573,35 +598,43 @@ void Presentation::whichOrderCom(char which, char pChoice)
     char ans = getch();
     system("CLS");
 
+    vector <Computer> computers;
     switch (ans)
     {
         case ('1'):
         case ('2'):
         {
-
+            dom.sortBy(computers , pChoice, ans);
         }break;
         default:
             listOptions(which);
     }
+
+    printComList(computers);
 }
 
-void Presentation::printList(vector<CScientist> scientists)
+void Presentation::printSciList(vector<CScientist> scientists)
 {
     system("CLS");
     int longest = dom.findLongestName(scientists);
-    cout << longest << endl;
     cout << "Computer scientists" << endl;
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
-    cout << setfill(' ') << left << setw(longest +6) << "ID | Name" << "|Gender |Birth Year" << "|Death Year" << endl;
+    cout << setfill(' ') << left << setw(longest +6) << "ID | Name"
+    << "|Gender |Birth Year" << "|Death Year" << endl;
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
 
     for(unsigned int i = 0; i < scientists.size(); i++)
     {
-        cout << setfill(' ') << right << setw(3) << i+1 << "| " << left << setw(longest+2)
+        cout << setfill(' ') << right << setw(3) << scientists[i].getId() << "| " << left << setw(longest+2)
         << scientists[i].getName() << setw(8) << scientists[i].getGender() << setw(11) << scientists[i].getDob()
         << scientists[i].getDod() << endl;
         cout << setfill('-') << setw(longest + 36) << '-' << endl;
     }
+}
+
+void Presentation::printComList(vector<Computer> computers)
+{
+
 }
 
 void Presentation::deleteFromList()
@@ -610,7 +643,7 @@ void Presentation::deleteFromList()
     vector <CScientist> searchValue;
     cout << "Enter the name of the scientist you wish to delete: ";
     getline(cin, name);
-    printList(searchValue);
+    //printList(searchValue);
     int number = 1;
     if(searchValue.empty())
     {
@@ -786,6 +819,10 @@ void Presentation::sciOrComText(char which)
         case ('4'):
         {
             cout << "|-Which list do you wish to delete from?-|" << endl;
+        }break;
+        case ('5'):
+        {
+            cout << "|-Which list fo you wish to edtit?-------|" << endl;
         }break;
 
     }
