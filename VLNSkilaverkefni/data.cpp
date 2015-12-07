@@ -203,7 +203,7 @@ void Data::select(Computer comp,int index1,int index2)
 {
     QString qsql;
     string sql = "SELECT *";
-    sql += " FROM Computer WHERE ";
+    sql += " FROM Computers WHERE ";
     sql += "Name LIKE '%" + comp.getName() + "%'";
 
     if(!comp.getYear().empty())
@@ -220,6 +220,7 @@ void Data::select(Computer comp,int index1,int index2)
     {
         sql += "built='" + comp.getBuilt() + "' AND ";
     }
+    sql += " AND isActive=1 ";
     sortQueryCom(sql,index1,index2);
     sql += ";";
     qsql = QString::fromStdString(sql);
@@ -255,6 +256,9 @@ void Data::sortQueryCom(string & sql,int index1, int index2)
     {
         sql += " DESC";
     }
+    cout << endl;
+    cout << "index 2:" << index2 << endl;
+    cout << sql << endl;
 }
 
 
