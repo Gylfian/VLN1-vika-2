@@ -10,18 +10,15 @@ void Domain::sortBy(vector<CScientist> &cSciList, char child, char child2)
 
     if(child == '1') //sort by name
     {
-        bool ascending = checkOption(child2);
-        getName(ascending);
+        getName(cSciList, child2);
     }
     else if(child == '2')
     {
-        bool male = checkOption(child2);
-        getGender(male);
+        getGender(cSciList, child2);
     }
     else if(child == '3')
     {
-        bool youngest = checkOption(child2);
-        getYear(youngest);
+        getYear(cSciList, child2);
     }
     else
     {
@@ -33,23 +30,19 @@ void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
 {
     if(child == '1') //sort by name
     {
-        bool ascending = checkOption(child2);
-        getComName(ascending);
+        getComName(cComList, child2);
     }
     else if(child == '2')//yearbuilt
     {
-        bool youngest = checkOption(child2);
-        getComYear(youngest);
+        getComYear(cComList, child2);
     }
     else if(child == '3')//type
     {
-        bool ascending = checkOption(child2);
-        getComType(ascending);
+        getComType(cComList, child2);
     }
     else if(child == '4')//built
     {
-        bool built = checkOption(child2);
-        getComType(built);
+        getComBuilt(cComList, child2);
     }
     else
     {
@@ -57,88 +50,53 @@ void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
     }
 }
 
-void Domain::getComName(bool ascending)
+void Domain::getComName(vector<Computer> &cComList, int child2)
 {
-    if(ascending)
-    {
-
-    }
-    else
-    {
-
-    }
+    Computer com;
+    data.select(com, 1, child2);
+    cComList = data.getComVector();
 }
 
-void Domain::getComType(bool ascending)
+void Domain::getComType(vector<Computer> &cComList, int child2)
 {
-    if(ascending)
-    {
-
-    }
-    else
-    {
-
-    }
+    Computer com;
+    data.select(com, 2, child2);
+    cComList = data.getComVector();
 }
 
-void Domain::getComYear(bool youngest)
+void Domain::getComYear(vector<Computer> &cComList, int child2)
 {
-    if(youngest)
-    {
-
-    }
-    else
-    {
-
-    }
+    Computer com;
+    data.select(com, 4, child2);
+    cComList = data.getComVector();
 }
 
-void Domain::getComBuilt(bool built)
+void Domain::getComBuilt(vector<Computer> &cComList, int child2)
 {
-    if(built)
-    {
-
-    }
-    else
-    {
-
-    }
+    Computer com;
+    data.select(com, 3, child2);
+    cComList = data.getComVector();
 }
 
-void Domain::getName(bool ascending)
+void Domain::getName(vector<CScientist> &cSciList, int child2)
 {
-    if(ascending)
-    {
-
-    }
-    else
-    {
-
-    }
+    CScientist scientist;
+    data.select(scientist, 1, child2);
+    cSciList = data.getSciVector();
 }
 
-void Domain::getGender(bool male)
+void Domain::getGender(vector<CScientist> &cSciList, int child2)
 {
-    if(male)
-    {
-
-    }
-    else
-    {
-
-    }
+    CScientist scientist;
+    data.select(scientist, 2, child2);
+    cSciList = data.getSciVector();
 }
 
-void Domain::getYear(bool youngest)
+void Domain::getYear(vector<CScientist> &cSciList, int child2)
 {
-    if(youngest)
-    {
-
-    }
-    else
-    {
-
-    }
+    CScientist scientist;
+    data.select(scientist, 3, child2);
+    cSciList = data.getSciVector();
 }
 
 

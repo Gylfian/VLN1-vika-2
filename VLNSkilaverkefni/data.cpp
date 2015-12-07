@@ -90,12 +90,12 @@ bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
     }
     query.first();
     makeQuery(temp, query);
-    rele.push_back(temp);
+    rel.push_back(temp);
     //cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
         makeQuery(temp,query);
-        rele.push_back(temp);
+        rel.push_back(temp);
     }
     return true;
 }
