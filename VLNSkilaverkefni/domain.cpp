@@ -83,13 +83,6 @@ void Domain::getName(vector<CScientist> &cSciList, int child2)
     CScientist scientist;
     data.select(scientist, 1, child2);
     cSciList = data.getSciVector();
-    for(int i = 0; i < cSciList.size(); i++)
-    {
-        cout << cSciList[i].getName();
-    }
-cout << "Status " << endl;
-int x;
-cin >> x;
 }
 
 void Domain::getGender(vector<CScientist> &cSciList, int child2)

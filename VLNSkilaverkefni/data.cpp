@@ -41,15 +41,13 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
         setDatabase();
     }
     QSqlQuery query(database);
-    query.exec(command);
-    //if(!executeQuery(query, command))
+    if(!query.exec(command))
     {
         //eitthvad exit
     }
     query.first();
     makeQuery(temp, query);
     com.push_back(temp);
-   // cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
         makeQuery(temp,query);
@@ -65,8 +63,7 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
         setDatabase();
     }
     QSqlQuery query(database);
-    query.exec(command);
-    //if(!executeQuery(query, command))
+    if(!query.exec(command))
     {
         //eitthvad exit
     }
@@ -88,15 +85,13 @@ bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
         setDatabase();
     }
     QSqlQuery query(db);
-    query.exec(command);
-    //if(!executeQuery(query, command))
+    if(!query.exec(command))
     {
         //eitthvad exit
     }
     query.first();
     makeQuery(temp, query);
     rel.push_back(temp);
-    //cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
         makeQuery(temp,query);
@@ -119,7 +114,6 @@ void Data::makeQuery(CScientist& temp, QSqlQuery query)
     temp.setDob(qDob);
     bool qIsActive = query.value("IsActive").toBool();
     temp.setIsActive(qIsActive);
-    cout << temp.getIsActive() << endl;
 }
 
 void Data::makeQuery(Computer& temp, QSqlQuery query)
@@ -134,7 +128,6 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
     temp.setBuilt(qBuilt);
     bool qIsActive = query.value("isActive").toBool();
     temp.setIsActive(qIsActive);
-    cout << qBuilt << endl;
 }
 
 void Data::makeQuery(Relation& temp, QSqlQuery query)
@@ -171,9 +164,6 @@ void Data::select(CScientist cSci,int index1,int index2)
     sql += " AND isActive=1 ";
     sortQuerySci(sql,index1,index2);
     sql += ";";
-    cout << sql << endl;
-    int x;
-    cin >> x;
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
@@ -213,16 +203,12 @@ void Data::select(Computer comp,int index1,int index2)
 {
     QString qsql;
     string sql = "SELECT *";
-    sql += " FROM Computers WHERE ";
-    if(!comp.getName().empty())
-    {
-        sql += "name LIKE '%" + comp.getName() + "%' AND ";
-    }
+    sql += " FROM Computer WHERE ";
+    sql += "Name LIKE '%" + comp.getName() + "%'";
 
     if(!comp.getYear().empty())
     {
-        sql += "year=" + comp.getYear() + "$' AND ";
-
+        sql += " AND year=" + comp.getYear() + "$' AND ";
     }
 
     if(!comp.getType().empty())
@@ -234,9 +220,6 @@ void Data::select(Computer comp,int index1,int index2)
     {
         sql += "built='" + comp.getBuilt() + "' AND ";
     }
-
-    sql += "isActive=1";
-    cout << sql;
     sortQueryCom(sql,index1,index2);
     sql += ";";
     qsql = QString::fromStdString(sql);
