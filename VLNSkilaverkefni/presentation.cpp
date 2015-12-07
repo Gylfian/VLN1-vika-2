@@ -143,7 +143,7 @@ void Presentation::searchSci()
         Dod = "";
     }
     CScientist cSci(id, name, gender, Dob, Dod, 1);
-
+    dom.search(cSci);
 }
 
 void Presentation::editSciOrCom()
@@ -229,6 +229,8 @@ void Presentation::searchCom()
         built = "";
     }
     Computer com(id, name, year, type, built);
+    dom.search(com);
+
 }
 
 string Presentation::getSearchBuilt()
@@ -380,7 +382,9 @@ string Presentation::getInputDod(string Dob)
     string Dod;
     cout << "Enter year of death: ";
     cin >> Dod; 
-    if(!dom.normalizeYear(Dob, Dod))
+    bool verify = dom.verifyBirthyear(Dod);
+    bool valid = dom.normalizeYear(Dob, Dod);
+    if(verify == true && valid == true)
     {
         cout << "Please select a valid death year!" << endl;
         Dod = getInputDod(Dob);
@@ -600,6 +604,7 @@ void Presentation::whichOrderCom(char which, char pChoice)
     system("CLS");
 
     vector <Computer> computers;
+    computers.clear();
     switch (ans)
     {
         case ('1'):
@@ -618,17 +623,17 @@ void Presentation::printSciList(vector<CScientist> scientists)
 {
     int longest = dom.findLongestName(scientists);
     cout << "Computer scientists" << endl;
-    cout << setfill('-') << setw(longest + 40) << '-' << endl;
+    cout << setfill('-') << setw(longest + 36) << '-' << endl;
     cout << setfill(' ') << left << setw(longest +6) << "ID | Name"
     << "|Gender |Birth Year" << "|Death Year" << endl;
-    cout << setfill('-') << setw(longest + 40) << '-' << endl;
+    cout << setfill('-') << setw(longest + 36) << '-' << endl;
 
     for(unsigned int i = 0; i < scientists.size(); i++)
     {
         cout << setfill(' ') << right << setw(3) << scientists[i].getId() << "| " << left << setw(longest+2)
         << scientists[i].getName() << setw(8) << scientists[i].getGender() << setw(11) << scientists[i].getDob()
         << scientists[i].getDod() << endl;
-        cout << setfill('-') << setw(longest + 40) << '-' << endl;
+        cout << setfill('-') << setw(longest + 36) << '-' << endl;
     }
     printListOptions();
 }
@@ -777,8 +782,8 @@ void Presentation::yearBornText()
 {
     cout << " _____________________________________" << endl;
     cout << "|-In what order do you want the list?-|" << endl;
-    cout << "|-1) Youngest first-------------------|" << endl;
-    cout << "|-2) Oldest first---------------------|" << endl;
+    cout << "|-1) Oldest first---------------------|" << endl;
+    cout << "|-2) Youngest first-------------------|" << endl;
     cout << "|-Press any other key to go back------|" << endl;
     cout << "|_____________________________________|" << endl;
 }
@@ -797,8 +802,8 @@ void Presentation::ifBuiltText()
 {
     cout << " _____________________________________" << endl;
     cout << "|-In what order do you want the list?-|" << endl;
-    cout << "|-1) Those built first----------------|" << endl;
-    cout << "|-2) Those not built first------------|" << endl;
+    cout << "|-1) Those not built first------------|" << endl;
+    cout << "|-2) Those built first----------------|" << endl;
     cout << "|-Press any other key to go back------|" << endl;
     cout << "|_____________________________________|" << endl;
 }
@@ -843,15 +848,18 @@ void Presentation::sciOrComText(char which)
     }
     cout << "|-1) Computer Scientists-----------------|" << endl;
     cout << "|-2) Computers---------------------------|" << endl;
-    if (which == '3')
-    {
-        cout << "|-3) Add a connection--------------------|" << endl;
-        cout << "|-Press any other key to go back---------|" << endl;
-        cout << "|________________________________________|" << endl;
-    }else
-    {
-        cout << "|-Press any other key to go back---------|" << endl;
-        cout << "|________________________________________|" << endl;
-    }
 
+    switch (which)
+    {
+        case ('1'):
+        {
+            cout << "|-3) Display connections-----------------|" << endl;
+        }break;
+        case ('3'):
+        {
+            cout << "|-3) Add a connection--------------------|" << endl;
+        }break;
+    }
+    cout << "|-Press any other key to go back---------|" << endl;
+    cout << "|________________________________________|" << endl;
 }
