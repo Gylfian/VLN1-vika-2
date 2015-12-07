@@ -23,12 +23,12 @@ void Data::setDatabase()
     QString dbName = "VLN1.sqlite";
     database.setDatabaseName(dbName);
     database.open();
-    cout << "inni sb" << database.isOpen() << endl;
 }
 vector<CScientist> Data::getSciVector()
 {
     return sci;
 }
+
 vector<Computer> Data::getComVector()
 {
     return  com;
@@ -109,19 +109,14 @@ void Data::makeQuery(CScientist& temp, QSqlQuery query)
 {
     unsigned int qId = query.value("ID").toUInt();
     temp.setId(qId);
-    cout << temp.getId() << endl;
     string qName = query.value("Name").toString().toStdString();
     temp.setName(qName);
-    cout << temp.getName() << endl;
     string qGender = query.value("Gender").toString().toStdString();
     temp.setGender(qGender);
-    cout << temp.getName() << endl;
     string qDob = query.value("Dob").toString().toStdString();
     temp.setDob(qDob);
-    cout << temp.getDob() << endl;
     string qDod = query.value("Dod").toString().toStdString();
     temp.setDob(qDob);
-    cout << temp.getDob() << endl;
     bool qIsActive = query.value("IsActive").toBool();
     temp.setIsActive(qIsActive);
     cout << temp.getIsActive() << endl;
@@ -131,16 +126,12 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
 {
     int qId = query.value("ID").toUInt();
     temp.setId(qId);
-    cout << qId << endl;
     string qName = query.value("Name").toString().toStdString();
     temp.setName(qName);
-    cout << qName << endl;
     string qType = query.value("Type").toString().toStdString();
     temp.setType(qType);
-    cout << qType << endl;
     string qBuilt = query.value("Built").toString().toStdString();
     temp.setBuilt(qBuilt);
-    cout << qBuilt << endl;
     bool qIsActive = query.value("isActive").toBool();
     temp.setIsActive(qIsActive);
     cout << qBuilt << endl;
@@ -150,10 +141,8 @@ void Data::makeQuery(Relation& temp, QSqlQuery query)
 {
     int qComp = query.value("ScientistID").toUInt();
     temp.setComputerId(qComp);
-    cout << qComp << endl;
     int qSci = query.value("ComputerID").toUInt();
     temp.setScientistId(qSci);
-    cout << qSci << endl;
 }
 
 void Data::select(CScientist cSci,int index1,int index2)
@@ -179,7 +168,7 @@ void Data::select(CScientist cSci,int index1,int index2)
     {
         sql += " AND dod='" + cSci.getDod() + "'";
     }
-    //sql += " AND isActive=1 ";
+    sql += " AND isActive=1 ";
     sortQuerySci(sql,index1,index2);
     sql += ";";
     cout << sql << endl;
