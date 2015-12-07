@@ -32,17 +32,17 @@ void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
     {
         getComName(cComList, child2);
     }
-    else if(child == '2')//yearbuilt
-    {
-        getComYear(cComList, child2);
-    }
-    else if(child == '3')//type
+    else if(child == '2')//type
     {
         getComType(cComList, child2);
     }
-    else if(child == '4')//built
+    else if(child == '3')//year
     {
         getComBuilt(cComList, child2);
+    }
+    else if(child == '4')//ya
+    {
+        getComYear(cComList, child2);
     }
     else
     {
