@@ -38,6 +38,10 @@ public:
 
     int findLongestName(vector<CScientist> cSciList);
 
+    int findLongestName(vector<Computer> cComList);
+
+    int findLongestType(vector<Computer> cComList);
+
     int checkStrInput(string str);
 
     bool normalizeYear(string born, string death);

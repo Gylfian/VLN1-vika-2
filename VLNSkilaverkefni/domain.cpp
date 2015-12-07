@@ -134,6 +134,22 @@ bool Domain::checkOption(char child)
 }
 
 
+int Domain::findLongestType(vector<Computer> cComList)
+{
+    unsigned int length = 0;
+    for(unsigned int i = 0; i < cComList.size(); i++)
+    {
+        if(i+1 > cComList.size())
+            break;
+
+        if(length > cComList[i].getType().length())
+        {
+           length = cComList[i].getType().length();
+        }
+    }
+    return length;
+}
+
 int Domain::findLongestName(vector<CScientist> cSciList)
 {
     unsigned int length = 0;
@@ -145,6 +161,22 @@ int Domain::findLongestName(vector<CScientist> cSciList)
         if(length > cSciList[i].getName().length())
         {
            length = cSciList[i].getName().length();
+        }
+    }
+    return length;
+}
+
+int Domain::findLongestName(vector<Computer> cComList)
+{
+    unsigned int length = 0;
+    for(unsigned int i = 0; i < cComList.size(); i++)
+    {
+        if(i+1 > cComList.size())
+            break;
+
+        if(length > cComList[i].getName().length())
+        {
+           length = cComList[i].getName().length();
         }
     }
     return length;
