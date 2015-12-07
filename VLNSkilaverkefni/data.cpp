@@ -181,6 +181,7 @@ void Data::select(CScientist cSci,int index1,int index2)
     sortQuerySci(sql,index1,index2);
     sql += "isActive=1";
     sql += ";";
+    cout << sql;
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
@@ -245,6 +246,7 @@ void Data::select(Computer comp,int index1,int index2)
     sql += "isActive=1";
     sortQueryCom(sql,index1,index2);
     sql += ";";
+    cout << sql;
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
