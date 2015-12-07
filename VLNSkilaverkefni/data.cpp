@@ -11,49 +11,6 @@ Data::Data()
     com.push_back(temp2);
 }
 
-vector<CScientist> Data::readFromFile(string docName)
-{
-    ifstream inStream;
-    vector <CScientist> scientists;
-    inStream.open(docName.c_str());
-    string name, gender, dob,dod;
-    while(!inStream.eof())
-    {
-        getline(inStream, name, '/');
-        if(name == "")
-            break;
-        getline(inStream, gender, '/');
-        getline(inStream, dob, '/');
-        getline(inStream, dod);
-        CScientist scientist(6, name, gender, dob, dod, false);
-        scientists.push_back(scientist);
-    }
-    inStream.close();
-    return scientists;
-}
-
-ostream& operator <<(ostream& stream, const CScientist& scientist)
-{
-    stream << scientist.getName() << "/";
-    stream << scientist.getGender() << "/";
-    stream << scientist.getDob() << "/";
-    stream << scientist.getDod() << endl;
-    return stream;
-}
-
-void Data::writeToFile(string docName, vector <CScientist>& scientists, bool overwrite)
-{
-    ofstream outStream;
-    if(overwrite)
-        outStream.open(docName.c_str());
-    else
-        outStream.open(docName.c_str(), ios::app);
-    for(unsigned int i = 0; i < scientists.size(); i++)
-    {
-        outStream << scientists[i];
-    }
-}
-
 QSqlDatabase Data::getDatabase()
 {
     return database;
@@ -61,8 +18,6 @@ QSqlDatabase Data::getDatabase()
 
 void Data::setDatabase()
 {
-    cout << "Add database function" << endl;
-    //QSqlDatabase db;
     database = QSqlDatabase::addDatabase("QSQLITE");
     QString dbName = "VLN1.sqlite";
     database.setDatabaseName(dbName);
@@ -71,12 +26,19 @@ void Data::setDatabase()
 
 bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {
+    if(!db.isOpen())
+    {
+        setDatabase();
+    }
     QSqlQuery query(db);
     if(!executeQuery(query, command))
+    {
+        //eitthvad exit
+    }
     query.first();
     makeQuery(temp, query);
     com.push_back(temp);
-    cout << "is active: " << query.isActive() << endl;
+   // cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
         makeQuery(temp,query);
@@ -87,8 +49,15 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 
 bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
+    if(!db.isOpen())
+    {
+        setDatabase();
+    }
     QSqlQuery query(db);
     if(!executeQuery(query, command))
+    {
+        //eitthvad exit
+    }
     query.first();
     makeQuery(temp,query);
     sci.push_back(temp);
@@ -102,12 +71,19 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 
 bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
 {
+    if(!db.isOpen())
+    {
+        setDatabase();
+    }
     QSqlQuery query(db);
     if(!executeQuery(query, command))
+    {
+        //eitthvad exit
+    }
     query.first();
     makeQuery(temp, query);
     rele.push_back(temp);
-    cout << "is active: " << query.isActive() << endl;
+    //cout << "is active: " << query.isActive() << endl;
     while(query.next())
     {
         makeQuery(temp,query);
