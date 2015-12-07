@@ -364,6 +364,7 @@ string Presentation::getInputDob()
     return Dob;
 
 
+
     /*if(dom.verifyBirthyear(Dob))
     {
         return Dob;
@@ -622,17 +623,17 @@ void Presentation::printSciList(vector<CScientist> scientists)
 {
     int longest = dom.findLongestName(scientists);
     cout << "Computer scientists" << endl;
-    cout << setfill('-') << setw(longest + 36) << '-' << endl;
+    cout << setfill('-') << setw(longest + 40) << '-' << endl;
     cout << setfill(' ') << left << setw(longest +6) << "ID | Name"
     << "|Gender |Birth Year" << "|Death Year" << endl;
-    cout << setfill('-') << setw(longest + 36) << '-' << endl;
+    cout << setfill('-') << setw(longest + 40) << '-' << endl;
 
     for(unsigned int i = 0; i < scientists.size(); i++)
     {
         cout << setfill(' ') << right << setw(3) << scientists[i].getId() << "| " << left << setw(longest+2)
         << scientists[i].getName() << setw(8) << scientists[i].getGender() << setw(11) << scientists[i].getDob()
         << scientists[i].getDod() << endl;
-        cout << setfill('-') << setw(longest + 36) << '-' << endl;
+        cout << setfill('-') << setw(longest + 40) << '-' << endl;
     }
 }
 

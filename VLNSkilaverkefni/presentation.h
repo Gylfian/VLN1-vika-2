@@ -2,6 +2,7 @@
 #define PRESENTATION_H
 #include <conio.h>
 #include <iomanip>
+#include <cstdlib>
 #include "domain.h"
 
 class Presentation
