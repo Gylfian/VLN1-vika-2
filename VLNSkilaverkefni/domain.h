@@ -46,7 +46,7 @@ public:
 
     bool normalizeYear(string born, string death);
 
-    bool verifyBirthyear(int year);
+    bool verifyBirthyear(string year);
 
     /*
      * Name: deleteScientist

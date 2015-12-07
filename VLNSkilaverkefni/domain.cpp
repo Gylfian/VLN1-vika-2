@@ -83,13 +83,6 @@ void Domain::getName(vector<CScientist> &cSciList, int child2)
     CScientist scientist;
     data.select(scientist, 1, child2);
     cSciList = data.getSciVector();
-    for(int i = 0; i < cSciList.size(); i++)
-    {
-        cout << cSciList[i].getName();
-    }
-cout << "Status " << endl;
-int x;
-cin >> x;
 }
 
 void Domain::getGender(vector<CScientist> &cSciList, int child2)
@@ -207,13 +200,21 @@ int Domain::checkStrInput(string str)
     return n;
 }
 
-bool Domain::verifyBirthyear(int year)
+bool Domain::verifyBirthyear(string year)
 {
-    if(year <= 3000 || year >= 0)
+    istringstream buffer(year);
+    int value;
+    buffer >> value;
+    for(unsigned int i = 0; i < year.length(); i++)
     {
-        return true;
+        if(!isdigit(year[i]))
+            return false;
     }
-    return false;
+    if(value < 0 || value > 3000)
+    {
+        return false;
+    }
+    return true;
 }
 
 bool Domain::normalizeYear(string born, string death)
