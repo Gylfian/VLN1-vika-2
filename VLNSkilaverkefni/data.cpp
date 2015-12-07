@@ -43,11 +43,8 @@ bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
     QSqlQuery query(database);
     if(!query.exec(command))
     {
-        //eitthvad exit
+        return false;
     }
-    query.first();
-    makeQuery(temp,query);
-    sci.push_back(temp);
     while(query.next())
     {
         makeQuery(temp, query);
@@ -60,16 +57,13 @@ bool Data::fillVector(QSqlDatabase db, Computer temp, QString command)
 {
     if(!db.isOpen())
     {
-        setDatabase();
+        return false;
     }
     QSqlQuery query(database);
     if(!query.exec(command))
     {
         //eitthvad exit
     }
-    query.first();
-    makeQuery(temp, query);
-    com.push_back(temp);
     while(query.next())
     {
         makeQuery(temp,query);
@@ -89,9 +83,6 @@ bool Data::fillVector(QSqlDatabase db, Relation temp, QString command)
     {
         //eitthvad exit
     }
-    query.first();
-    makeQuery(temp, query);
-    rel.push_back(temp);
     while(query.next())
     {
         makeQuery(temp,query);

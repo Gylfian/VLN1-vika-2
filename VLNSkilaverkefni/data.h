@@ -46,7 +46,6 @@ private:
    void sortQuerySci(string & sql,int index1, int index2);
    void sortQueryCom(string & sql,int index1, int index2);
    void setRelations(Computer comp, CScientist cSci);
-
 };
 
 #endif // DATA_H
