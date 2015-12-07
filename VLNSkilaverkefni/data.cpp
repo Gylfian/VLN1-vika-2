@@ -126,6 +126,8 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
     temp.setType(qType);
     string qBuilt = query.value("Built").toString().toStdString();
     temp.setBuilt(qBuilt);
+    string qYear = query.value("Year").toString().toStdString();
+    temp.setYear(qYear);
     bool qIsActive = query.value("isActive").toBool();
     temp.setIsActive(qIsActive);
 }
