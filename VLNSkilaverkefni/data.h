@@ -31,6 +31,9 @@ public:
     void update(Computer comp);
     vector<CScientist> getSciVector();
     vector<Computer> getComVector();
+    void selectDeletedSci();
+    void selectDeletedCom();
+    void selectDeletedRel();
 
 private:
    vector<CScientist> sci;

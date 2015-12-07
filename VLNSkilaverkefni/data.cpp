@@ -256,6 +256,30 @@ void Data::sortQueryCom(string & sql,int index1, int index2)
         sql += " DESC";
     }
 }
+void Data::selectDeletedSci()
+{
+    QString qsql;
+    string sql = "SELECT * FROM Computerscientists WHERE isActive ='0';";
+    qsql = QString::fromStdString(sql);
+    CScientist temp;
+    fillVector(database, temp, qsql);
+}
+void Data::selectDeletedCom()
+{
+    QString qsql;
+    string sql = "SELECT * FROM Computers WHERE isActive ='0';";
+    qsql = QString::fromStdString(sql);
+    Computer temp;
+    fillVector(database, temp, qsql);
+}
+void Data::selectDeletedRel()
+{
+    QString qsql;
+    string sql = "SELECT * FROM Relations WHERE isActive ='0';";
+    qsql = QString::fromStdString(sql);
+    Relation temp;
+    fillVector(database, temp, qsql);
+}
 
 void Data::deleteEntry(CScientist cSci)
 {
