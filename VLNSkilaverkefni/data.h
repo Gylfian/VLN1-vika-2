@@ -44,6 +44,7 @@ private:
    vector<Relation> rele;
    QSqlDatabase database;
 
+
 };
 
 #endif // DATA_H
