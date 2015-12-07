@@ -38,6 +38,8 @@ public:
 
     bool normalizeYear(string born, string death);
 
+    bool verifyBirthyear(int year);
+
     /*
      * Name: deleteScientist
      * Parameter/s: CScientist cSci

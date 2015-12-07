@@ -215,11 +215,20 @@ int Domain::checkStrInput(string str)
     return n;
 }
 
+bool Domain::verifyBirthyear(int year)
+{
+    if(year <= 3000 || year >= 0)
+    {
+        return true;
+    }
+    return false;
+}
+
 bool Domain::normalizeYear(string born, string death)
 {
     int yearBorn = convertToInt(born);
     int yearDeath = convertToInt(death);
-    if(yearBorn < yearDeath)
+    if(yearBorn <= yearDeath)
         return true;
     return false;
 }
