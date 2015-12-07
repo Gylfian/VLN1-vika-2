@@ -177,8 +177,8 @@ void Data::select(CScientist cSci,int index1,int index2)
     {
         sql += " AND dod='" + cSci.getDod() + "'";
     }
+    sql += " AND isActive=1 ";
     sortQuerySci(sql,index1,index2);
-    sql += " AND isActive=1";
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
