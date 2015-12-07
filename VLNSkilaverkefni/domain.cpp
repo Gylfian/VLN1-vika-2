@@ -200,13 +200,21 @@ int Domain::checkStrInput(string str)
     return n;
 }
 
-bool Domain::verifyBirthyear(int year)
+bool Domain::verifyBirthyear(string year)
 {
-    if(year <= 3000 || year >= 0)
+    istringstream buffer(year);
+    int value;
+    buffer >> value;
+    for(unsigned int i = 0; i < year.length(); i++)
     {
-        return true;
+        if(!isdigit(year[i]))
+            return false;
     }
-    return false;
+    if(value < 0 || value > 3000)
+    {
+        return false;
+    }
+    return true;
 }
 
 bool Domain::normalizeYear(string born, string death)
