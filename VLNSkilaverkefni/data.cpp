@@ -170,7 +170,7 @@ void Data::select(CScientist cSci)
     {
         sql += "dod='" + cSci.getDod() + "' AND ";
     }
-    if (sql.size () > 0)  sql.resize (sql.size () - 5);
+        sql += "isActive=1";
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
@@ -201,7 +201,7 @@ void Data::select(Computer comp)
     {
         sql += "built='" + comp.getBuilt() + "' AND ";
     }
-    if (sql.size () > 0)  sql.resize (sql.size () - 5);
+    sql += "isActive=1";
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
@@ -228,7 +228,7 @@ void Data::deleteEntry(Computer comp)
 void Data::insert(CScientist cSci)
 {
     QString qsql;
-    string sql = "INSERT INTO Computerscientists Name, Gender, type, Dob, Dod VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    string sql = "INSERT INTO Computerscientists (Name, Gender, type, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
@@ -236,7 +236,7 @@ void Data::insert(CScientist cSci)
 void Data::insert(Computer comp)
 {
     QString qsql;
-    string sql = "INSERT INTO computers (name, yearbuilt, type, built) VALUES ('"+ comp.getName() +"','"+ comp.getYear() +"','"+ comp.getType() + "')";
+    string sql = "INSERT INTO computers (Name, Type, Built, Year) VALUES ('"+ comp.getName() +"','"+ comp.getType() +"','"+ comp.getBuilt() + "','"+ comp.getYear() + "')";
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
@@ -244,7 +244,7 @@ void Data::insert(Computer comp)
 void Data::update(CScientist cSci)
 {
     QString qsql;
-    string sql = "UPDATE Computers SET ";
+    string sql = "UPDATE Computerscientist SET ";
     if(!cSci.getName().empty())
     {
         sql += "name ='" + cSci.getName() + "%' AND ";
