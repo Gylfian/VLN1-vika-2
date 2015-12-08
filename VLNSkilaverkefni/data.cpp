@@ -445,7 +445,7 @@ void Data::setRelations(Computer comp, CScientist cSci)
     id = comp.getId();
     ss >> id;
     string compId = ss.str();
-    string sql = "INSERT INTO sciectists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
+    string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
     query.exec(qsql);
