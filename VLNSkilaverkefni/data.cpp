@@ -345,17 +345,17 @@ void Data::update(CScientist cSci)
 
     if(!cSci.getGender().empty())
     {
-        sql += "gender='" + cSci.getGender() + "%' AND ";;
+        sql += "gender='" + cSci.getGender() + "%' ";
     }
 
     if(!cSci.getDob().empty())
     {
-        sql += "dob='" + cSci.getDob() + "' AND ";
+        sql += "AND dob='" + cSci.getDob() + "'";
     }
 
     if(!cSci.getDod().empty())
     {
-        sql += "dod='" + cSci.getDod() + "' AND ";
+        sql += "AND dod='" + cSci.getDod() + "'";
     }
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
