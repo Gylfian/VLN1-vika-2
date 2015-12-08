@@ -40,16 +40,44 @@ public:
 
     void updateEntryCom(string sid);
 
+    /*
+     * Name: findLongestName
+     * Parameter/s: vector<CScientist> cSciList
+     * Description: Goes through the whole list and finds the longest name.
+     * Usage: **
+     * Output/Return: The longest scientist name.
+     */
     int findLongestName(vector<CScientist> cSciList);
 
+    /*
+     * Name: findLongestName
+     * Parameter/s: vector<Computer> cComList
+     * Description: Goes through the whole list and finds the longest name.
+     * Usage: **
+     * Output/Return: The longest computer name.
+     */
     int findLongestName(vector<Computer> cComList);
 
+    /*
+     * Name:findLongestType
+     * Parameter/s: vector<Computer> cComList
+     * Description: Goes through the whole list and finds the longest type name.
+     * Usage: **
+     * Output/Return: The longest type.
+     */
     int findLongestType(vector<Computer> cComList);
 
     int checkStrInput(string str);
 
     bool normalizeYear(string born, string death);
 
+    /*
+     * Name: verifyBirthyear
+     * Parameter/s: string year
+     * Description: Makes sure that the input is in correct form and is accurrate.
+     * Usage: verifyBirthyear(-1993)
+     * Output/Return: false
+     */
     bool verifyBirthyear(string year);
 
     /*
