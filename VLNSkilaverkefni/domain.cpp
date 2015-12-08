@@ -160,15 +160,16 @@ void Domain::search(Computer cCom)
 void Domain::addScientist(CScientist cSci)
 {
     data.insert(cSci);
-    //Data data;
-    //insertQuery = data.executeQuery(search);
 }
 
-void Domain::deleteScientist(CScientist cSci)
+void Domain::updateEntry(CScientist cSci)
 {
     data.updateStatus(cSci);
-    //Data data;
-    //deleteQuery = data.executeQuery(search);
+}
+
+void Domain::updateEntry(Computer cCom)
+{
+    data.updateStatus(cCom);
 }
 
 

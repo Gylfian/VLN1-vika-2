@@ -36,6 +36,10 @@ public:
 
     void restoreEntry(vector<Computer> &cSciList);
 
+    void updateEntry(Computer cCom);
+
+    void updateEntry(CScientist cSci);
+
     int findLongestName(vector<CScientist> cSciList);
 
     int findLongestName(vector<Computer> cComList);
@@ -55,8 +59,6 @@ public:
      * Usage: deleteScFFFFFFFFFFFFientist(cSci);
      * (vector<CScientist>)Output/Return: element deleted from database.
      */
-    void deleteScientist(CScientist cSci);
-
     void addScientist(CScientist cSci);
 
     /*
