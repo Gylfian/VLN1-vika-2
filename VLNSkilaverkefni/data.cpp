@@ -373,25 +373,25 @@ void Data::insert(Computer comp)
 void Data::update(CScientist cSci)
 {
     QString qsql;
-    string sql = "UPDATE Computerscientist SET ";
+    string sql = "UPDATE Computerscientist SET id " + cSci.getId();
     if(!cSci.getName().empty())
     {
-        sql += "name ='" + cSci.getName() + "%' AND ";
+        sql += " AND name ='" + cSci.getName() + "'";
     }
 
     if(!cSci.getGender().empty())
     {
-        sql += "gender='" + cSci.getGender() + "%' ";
+        sql += " AND gender='" + cSci.getGender() + "'";
     }
 
     if(!cSci.getDob().empty())
     {
-        sql += "AND dob='" + cSci.getDob() + "'";
+        sql += " AND dob='" + cSci.getDob() + "'";
     }
 
     if(!cSci.getDod().empty())
     {
-        sql += "AND dod='" + cSci.getDod() + "'";
+        sql += " AND dod='" + cSci.getDod() + "'";
     }
     if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";

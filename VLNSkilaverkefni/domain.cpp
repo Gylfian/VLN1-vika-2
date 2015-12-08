@@ -191,6 +191,17 @@ void Domain::updateEntryCom(string sid)
 {
     Computer cCom;
     cCom.setId(convertToInt(sid));
+    data.select(cCom, 1, 1);
+    vector<Computer> cComList = data.getComVector();
+    for(unsigned int i = 0; i < cComList.size(); i++)
+    {
+        cout << cCom.getName() << endl;
+        if(cComList[i].getId() == cCom.getId())
+        {
+            cCom = cComList[i];
+        }
+    }
+
     data.updateStatus(cCom);
 }
 
