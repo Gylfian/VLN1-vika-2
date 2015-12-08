@@ -189,8 +189,6 @@ void Data::select(Computer comp,int index1,int index2)
     sql += " AND isActive=1";
     sortQueryCom(sql,index1,index2);
     sql += ";";
-    cout << "SQL: " << sql << endl;
-    system("PAUSE");
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
