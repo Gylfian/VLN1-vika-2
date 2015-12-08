@@ -244,7 +244,10 @@ void Presentation::searchSci()
         Dod = "";
     }
     CScientist cSci(id, name, gender, Dob, Dod, 1);
-    dom.search(cSci);
+    vector <CScientist> scientists;
+    dom.search(scientists, cSci);
+    printSciList(scientists);
+    printListOptions();
 }
 
 void Presentation::editSciOrCom()
@@ -362,7 +365,10 @@ void Presentation::searchCom()
         built = "";
     }
     Computer com(id, name, year, type, built);
-    dom.search(com);
+    vector<Computer> computers;
+    dom.search(computers,com);
+    printComList(computers);
+    printListOptions();
 
 }
 
@@ -517,9 +523,11 @@ string Presentation::getInputDod(string Dob)
     string Dod;
     cout << "Enter year of death: ";
     cin >> Dod; 
-    bool verify = dom.verifyBirthyear(Dod);
     bool valid = dom.normalizeYear(Dob, Dod);
-    if(verify == true && valid == true)
+    bool verify = !dom.verifyBirthyear(Dod);
+    cout << verify << endl;
+    cout << valid << endl;
+    if(valid == false)
     {
         cout << "Please select a valid death year!" << endl;
         Dod = getInputDod(Dob);
