@@ -312,7 +312,7 @@ void Data::updateStatus(Computer comp)
     }
     else
     {
-        sql = "UPDATE Computers SET isActive=0 WHERE ID = " +id;
+        sql = "UPDATE Computers SET isActive=1 WHERE ID = " +id;
     }
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
