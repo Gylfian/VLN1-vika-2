@@ -66,6 +66,7 @@ private:
     void restoreSci();
     void restoreCom();
     void restoreConnection();
+    string getSearchAlive();
 
 };
 

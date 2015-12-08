@@ -105,6 +105,7 @@ void Presentation::restoreCom()
     cout << "Enter ID: ";
     cin >> id;
     dom.updateEntryCom(id);
+    mainPage();
 
 }
 
@@ -217,8 +218,23 @@ void Presentation::searchSci()
         gender = getSearchGender();
         cout << "Enter year of birth: ";
         getline(cin, Dob);
-        cout << "Enter year of death: ";
-        getline(cin, Dod);
+        string alive = getSearchAlive();
+
+        if (alive == "No")
+        {
+            cout << "Enter year of death: ";
+            cin >> Dod;
+        }
+        else if (alive == "Yes")
+        {
+            Dod = "Alive";
+        }
+        else
+        {
+            Dod = "";
+
+        }
+
     }
     else
     {
@@ -284,6 +300,38 @@ int Presentation::getSearchId()
     int ans = dom.checkStrInput(id);
 
     return ans;
+}
+
+string Presentation::getSearchAlive()
+{
+    string alive;
+    cout << "Is the person alive? [y]es, [n]o, [u]nknown" << endl;
+    char ans = getch();
+
+    switch (ans)
+    {
+        case ('Y'):
+        case ('y'):
+        {
+            alive = "Yes";
+        }break;
+        case ('N'):
+        case ('n'):
+        {
+            alive = "No";
+        }break;
+        case ('U'):
+        case ('u'):
+        {
+            alive = "";
+        }break;
+        default:
+            cout << "Please select a valid option!" << endl;
+            alive = getSearchAlive();
+    }
+
+    return alive;
+
 }
 
 void Presentation::searchCom()
