@@ -85,27 +85,50 @@ void Presentation::restoreSci()
 {
     vector<CScientist> scientists;
     dom.restoreEntry(scientists);
-    printSciList(scientists);
-    string id;
-    cout << "Please select the computer scientist you wish to restore" << endl;
-    cout << "Enter ID: ";
-    cin >> id;
-    dom.updateEntrySci(id);
-    mainPage();
-
+    if (scientists.empty())
+    {
+        cout << "No entries to restore!" << endl;
+        cout << "Press any other key to go to the main menu!" << endl;
+        char ans = getch();
+        mainPage();
+    }
+    else
+    {
+        printSciList(scientists);
+        string id = getListId("scientist", "restore");
+        if (dom.checkIfLegitId(id))
+        {
+            dom.updateEntrySci(id);
+        }
+        else
+        mainPage();
+    }
 }
 
 void Presentation::restoreCom()
 {
     vector<Computer> computers;
     dom.restoreEntry(computers);
-    printComList(computers);
-    string id;
-    cout << "Please select the computer you wish to restore" << endl;
-    cout << "Enter ID: ";
-    cin >> id;
-    dom.updateEntryCom(id);
-    mainPage();
+    if (computers.empty())
+    {
+          cout << "No entries to restore!" << endl;
+          cout << "Press any key to go to the main menu" << endl;
+          char ans = getch();
+          system ("CLS");
+          mainPage();
+    }
+    else
+    {
+        printComList(computers);
+        string id = getListId("computer", "restore");
+        if (dom.checkIfLegitId(id))
+        {
+            dom.updateEntrySci(id);
+        }
+        else
+        mainPage();
+    }
+
 
 }
 
@@ -268,15 +291,33 @@ void Presentation::editSciOrCom()
     {
         case ('1'):
         {
-
+            editSci();
         }break;
         case ('2'):
         {
-
+            editCom();
         }break;
         default:
             mainPage();
     }
+}
+
+void Presentation::editSci()
+{
+    vector<CScientist> scientists;
+    dom.sortBy(scientists, '5','1');
+    printSciList(scientists);
+    string id = getListId("scientist", "edit");
+
+}
+
+void Presentation::editCom()
+{
+    vector<Computer> computers;
+    dom.sortBy(computers, '5','1');
+    printComList(computers);
+    string id = getListId("computer", "edit");
+
 }
 
 string Presentation::getSearchName()
@@ -452,7 +493,13 @@ void Presentation::deleteSci()
     vector<CScientist> scientists;
     dom.sortBy(scientists, '5','1');
     printSciList(scientists);
-    string id = getDeleteId("scientist");
+    string id = getListId("scientist", "delete");
+    if (dom.checkIfLegitId(id))
+    {
+        dom.updateEntrySci(id);
+    }
+    else
+    mainPage();
 }
 
 void Presentation::deleteCom()
@@ -460,13 +507,19 @@ void Presentation::deleteCom()
     vector<Computer> computers;
     dom.sortBy(computers, '5','1');
     printComList(computers);
-    string id = getDeleteId("computer");
+    string id = getListId("computer", "delete");
+    if (dom.checkIfLegitId(id))
+    {
+        dom.updateEntryCom(id);
+    }
+    else
+    mainPage();
 }
 
-string Presentation::getDeleteId(string word)
+string Presentation::getListId(string word1, string word2)
 {
     string id;
-    cout << "Enter the ID of the " << word << " you wish to delete" << endl;
+    cout << "Enter the ID of the " << word1 << " you wish to " << word2 << endl;
     cout << "Press return to cancel" << endl;
     cout << "ID: ";
     getline (cin,id);
@@ -567,7 +620,7 @@ string Presentation::getInputName()
 
 string Presentation::getInputDob()
 {
-    string Dob;
+    string Dob = "";
     cout << "Enter year of birth: ";
     cin >> Dob;
 
@@ -580,6 +633,7 @@ string Presentation::getInputDob()
         cout << "Please enter a valid birth year!" << endl;
         Dob = getInputDob();
     }
+    return "";
 }
 
 string Presentation::getInputDod(string Dob)
@@ -850,7 +904,8 @@ void Presentation::printComList(vector<Computer> computers)
     int longestType = dom.findLongestType(computers);
     cout << "Computers" << endl;
     cout << setfill('-') << setw(longest + longestType + 27) << '-' << endl;
-    cout << setfill(' ') << left << setw(longest + 6) << "ID | Name" << setw(longestType + 3) << "|Type " << "|Built |Year Built" << endl;
+    cout << setfill(' ') << left << setw(longest + 6) << "ID | Name"
+    << setw(longestType + 3) << "|Type " << "|Built |Year Built" << endl;
     cout << setfill('-') << setw(longest + longestType + 27) << '-' << endl;
     for(unsigned int i = 0; i < computers.size(); i++)
     {
@@ -862,69 +917,42 @@ void Presentation::printComList(vector<Computer> computers)
 
 }
 
-void Presentation::deleteFromList()
-{
-    string name;
-    vector <CScientist> searchValue;
-    cout << "Enter the name of the scientist you wish to delete: ";
-    getline(cin, name);
-    //printList(searchValue);
-    int number = 1;
-    if(searchValue.empty())
-    {
-        system("CLS");
-        cout << "That entry does not exist!" << endl;
-        printListText();
-        printListOptions();
-    }
-    if(searchValue.size() > 1)
-    {
-        cout << "Insert the number of the person you wish to delete:" << endl;
-        cin >> number;
-    }
-
-    cout << "Are you sure you wish to delete this person?(y/n) ";
-    char ans = getch();
-    switch (ans)
-    {
-        case ('Y'):
-        case ('y'):
-            break;
-        default:
-            printListText();
-            printListOptions();
-            break;
-    }
-    system("CLS");
-    mainPage();
-}
-
 void Presentation::printListOptions()
 {
     printListText();
 
     char ans = getch();
-    system("CLS");
 
     switch(ans)
     {
         case ('1'):
         {
-
+            analyze();
         }break;
         case ('2'):
         {
-            deleteFromList();
+
         }break;
         default:
+            system("CLS");
             mainPage();
     }
+}
+
+void Presentation::analyze()
+{
+    cout << "Enter the ID of the entry you wish to analyze" << endl;
+    cout << "ID: ";
+    string id;
+    getline(cin, id);
 }
 
 void Presentation::printListText()
 {
     cout << " ____________________________________________ " << endl;
     cout << "|----------What do you want to do ?----------|" << endl;
+    cout << "|-1) Analyse a specific entry----------------|" << endl;
+    cout << "|-2) Blabeebliblu----------------------------|" << endl;
     cout << "|-Press any other key to go to the main menu-|" << endl;
     cout << "|____________________________________________|" << endl;
 }

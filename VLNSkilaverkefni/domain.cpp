@@ -173,6 +173,17 @@ void Domain::updateEntrySci(string sid)
 {
     CScientist cSci;
     cSci.setId(convertToInt(sid));
+    data.select(cSci, 1, 1);
+    vector<CScientist> cSciList = data.getSciVector();
+    for(unsigned int i = 0; i < cSciList.size(); i++)
+    {
+        cout << cSci.getName() << endl;
+        if(cSciList[i].getId() == cSci.getId())
+        {
+            cSci = cSciList[i];
+        }
+    }
+
     data.updateStatus(cSci);
 }
 
@@ -180,6 +191,17 @@ void Domain::updateEntryCom(string sid)
 {
     Computer cCom;
     cCom.setId(convertToInt(sid));
+    data.select(cCom, 1, 1);
+    vector<Computer> cComList = data.getComVector();
+    for(unsigned int i = 0; i < cComList.size(); i++)
+    {
+        cout << cCom.getName() << endl;
+        if(cComList[i].getId() == cCom.getId())
+        {
+            cCom = cComList[i];
+        }
+    }
+
     data.updateStatus(cCom);
 }
 
@@ -245,6 +267,20 @@ int Domain::findLongestName(vector<Computer> cComList)
         }
     }
     return length;
+}
+
+bool Domain::checkIfLegitId(string sid)
+{
+    if(sid == "")
+        return false;
+
+    for(unsigned int i = 0; i < sid.length(); i++)
+    {
+        if(!isdigit(sid[i]))
+            return false;
+    }
+
+    return true;
 }
 
 int Domain::convertToInt(string str)

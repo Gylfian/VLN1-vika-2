@@ -99,6 +99,10 @@ public:
      */
     bool normalizeName(string &name);
 
+    bool checkIfLegitId(string sid);
+
+    string convertToString(int n);
+
 private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
