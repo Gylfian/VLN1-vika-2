@@ -11,6 +11,7 @@ Data::Data()
     sci.push_back(temp);
     com.push_back(temp2);
     setDatabase();
+    QSqlQuery query(database);
 }
 
 QSqlDatabase Data::getDatabase()
@@ -403,9 +404,9 @@ void Data::update(Computer comp)
 void Data::setRelations(Computer comp, CScientist cSci)
 {
     QString qsql;
-    string sql; //= "INSERT INTO Relation (ScientistID, ComputerID) VALUES (" + comp.getId() + "," + cSci.getId() + " )";
+    string sql = "INSERT INTO sciectists_computers (scientistID, computerID, isActive) VALUES (" + to_string(cSci.getId()) + "," + to_string(comp.getId()) + ",1);";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
-    //executeQuery(query,qsql);
+    query.exec(qsql);
     fillVector(database, cSci, qsql);
 }
