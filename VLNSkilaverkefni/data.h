@@ -3,17 +3,17 @@
 #include "computerscientist.h"
 #include "computer.h"
 #include "relation.h"
-#include <QtSql>
 #include <QDebug>
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <QSqlError>
+#include <QtSql>
 #include <sstream>
 #include <fstream>
 #include <vector>
 #include <iostream>
 #include <QVariant>
-#include <QSql>
-#include <QSqlDatabase>
-#include <QSqlQuery>
 using namespace std;
 
 class Data
