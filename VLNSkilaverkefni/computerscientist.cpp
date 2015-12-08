@@ -1,6 +1,5 @@
 #include "computerscientist.h"
 
-
 CScientist::CScientist()
 {
     id = -1;
