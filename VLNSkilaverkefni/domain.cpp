@@ -269,6 +269,20 @@ int Domain::findLongestName(vector<Computer> cComList)
     return length;
 }
 
+bool Domain::checkIfLegitId(string sid)
+{
+    if(sid == "")
+        return false;
+
+    for(unsigned int i = 0; i < sid.length(); i++)
+    {
+        if(!isdigit(sid[i]))
+            return false;
+    }
+
+    return true;
+}
+
 int Domain::convertToInt(string str)
 {
     int n = 0;
