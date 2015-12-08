@@ -160,6 +160,12 @@ void Data::select(CScientist cSci,int index1,int index2)
     {
         sql += " AND Dod='" + cSci.getDod() + "'";
     }
+
+    if(cSci.getId() < 0)
+    {
+        sql += " AND ID='" + cSci.getId();
+        sql += "'";
+    }
     sql += " AND isActive=1 ";
     sortQuerySci(sql,index1,index2);
     sql += ";";
@@ -187,6 +193,12 @@ void Data::select(Computer comp,int index1,int index2)
     if(!comp.getBuilt().empty())
     {
         sql += " AND built='" + comp.getBuilt() + "'";
+    }
+
+    if(comp.getId() < 0)
+    {
+        sql += " AND ID='" + comp.getId();
+        sql += "'";
     }
     sql += " AND isActive=1";
     sortQueryCom(sql,index1,index2);
