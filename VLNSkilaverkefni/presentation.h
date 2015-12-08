@@ -67,6 +67,9 @@ private:
     void restoreCom();
     void restoreConnection();
     string getSearchAlive();
+    void deleteSci();
+    void deleteCom();
+    string getDeleteId(string word);
 
 };
 

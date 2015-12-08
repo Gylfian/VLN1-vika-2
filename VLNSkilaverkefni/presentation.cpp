@@ -223,7 +223,7 @@ void Presentation::searchSci()
         if (alive == "No")
         {
             cout << "Enter year of death: ";
-            cin >> Dod;
+            getline(cin, Dod);
         }
         else if (alive == "Yes")
         {
@@ -246,13 +246,37 @@ void Presentation::searchSci()
     CScientist cSci(id, name, gender, Dob, Dod, 1);
     vector <CScientist> scientists;
     dom.search(scientists, cSci);
-    printSciList(scientists);
-    printListOptions();
+    if (!scientists.empty())
+    {
+        printSciList(scientists);
+        printListOptions();
+    }
+    else
+    {
+        system("CLS");
+        cout << "Sorry nothing was found" << endl;
+        printListOptions();
+    }
 }
 
 void Presentation::editSciOrCom()
 {
+    char ans = getch();
+    system ("CLS");
 
+    switch (ans)
+    {
+        case ('1'):
+        {
+
+        }break;
+        case ('2'):
+        {
+
+        }break;
+        default:
+            mainPage();
+    }
 }
 
 string Presentation::getSearchName()
@@ -405,19 +429,60 @@ string Presentation::getSearchBuilt()
 
 void Presentation::deleteSciOrCom()
 {
+    char ans = getch();
+    system ("CLS");
 
+    switch (ans)
+    {
+        case ('1'):
+        {
+            deleteSci();
+        }break;
+        case ('2'):
+        {
+            deleteCom();
+        }break;
+        default:
+            mainPage();
+    }
+}
+
+void Presentation::deleteSci()
+{
+    vector<CScientist> scientists;
+    dom.sortBy(scientists, '5','1');
+    printSciList(scientists);
+    string id = getDeleteId("scientist");
+}
+
+void Presentation::deleteCom()
+{
+    vector<Computer> computers;
+    dom.sortBy(computers, '5','1');
+    printComList(computers);
+    string id = getDeleteId("computer");
+}
+
+string Presentation::getDeleteId(string word)
+{
+    string id;
+    cout << "Enter the ID of the " << word << " you wish to delete" << endl;
+    cout << "Press return to cancel" << endl;
+    cout << "ID: ";
+    getline (cin,id);
+
+    return id;
 }
 
 void Presentation::addScientist()
 {
     CScientist cSci;
-    vector<CScientist> scientists;
 
     do
     {
         system("CLS");
         cSci = getScientistData();
-        scientists.push_back(cSci);
+        dom.addEntry(cSci);
 
     }while(another("--Person"));
     system("CLS");
@@ -427,13 +492,12 @@ void Presentation::addScientist()
 void Presentation::addComputer()
 {
     Computer com;
-    vector<Computer> coms;
 
     do
     {
         system("CLS");
         com = getComputerData();
-        coms.push_back(com);
+        dom.addEntry(com);
 
     }while(another("Computer"));
     system("CLS");
@@ -524,9 +588,6 @@ string Presentation::getInputDod(string Dob)
     cout << "Enter year of death: ";
     cin >> Dod; 
     bool valid = dom.normalizeYear(Dob, Dod);
-    bool verify = !dom.verifyBirthyear(Dod);
-    cout << verify << endl;
-    cout << valid << endl;
     if(valid == false)
     {
         cout << "Please select a valid death year!" << endl;
@@ -916,8 +977,8 @@ void Presentation::genderOrderText()
 {
     cout << " _____________________________________" << endl;
     cout << "|-In what order do you want the list?-|" << endl;
-    cout << "|-1) Male first-----------------------|" << endl;
-    cout << "|-2) Female first---------------------|" << endl;
+    cout << "|-1) Female first---------------------|" << endl;
+    cout << "|-2) Male first-----------------------|" << endl;
     cout << "|-Press any other key to go back------|" << endl;
     cout << "|_____________________________________|" << endl;
 }
