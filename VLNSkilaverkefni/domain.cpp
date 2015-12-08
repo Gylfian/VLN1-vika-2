@@ -157,9 +157,14 @@ void Domain::search(Computer cCom)
     //data.select(cCom);
 }
 
-void Domain::addScientist(CScientist cSci)
+void Domain::addEntry(CScientist cSci)
 {
     data.insert(cSci);
+}
+
+void Domain::addEntry(Computer cCom)
+{
+    data.insert(cCom);
 }
 
 void Domain::updateEntry(CScientist cSci)

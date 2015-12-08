@@ -59,7 +59,9 @@ public:
      * Usage: deleteScFFFFFFFFFFFFientist(cSci);
      * (vector<CScientist>)Output/Return: element deleted from database.
      */
-    void addScientist(CScientist cSci);
+    void addEntry(CScientist cSci);
+
+    void addEntry(Computer cSci);
 
     /*
      * Name: normalizeName
