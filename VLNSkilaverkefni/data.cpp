@@ -425,7 +425,14 @@ void Data::update(Computer comp)
 void Data::setRelations(Computer comp, CScientist cSci)
 {
     QString qsql;
-    string sql = "INSERT INTO sciectists_computers (scientistID, computerID, isActive) VALUES (" + to_string(cSci.getId()) + "," + to_string(comp.getId()) + ",1);";
+    int id = cSci.getId();
+    stringstream ss;
+    ss << id;
+    string sciId = ss.str();
+    id = comp.getId();
+    ss >> id;
+    string compId = ss.str();
+    string sql = "INSERT INTO sciectists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
     query.exec(qsql);
