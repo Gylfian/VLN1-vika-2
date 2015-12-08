@@ -81,6 +81,7 @@ public:
     void update(Computer comp);
     vector<CScientist> getSciVector();
     vector<Computer> getComVector();
+    vector<Relation> getRelVector();
 
    /*
     * Name: scientistToRestore

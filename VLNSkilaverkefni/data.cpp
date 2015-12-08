@@ -32,6 +32,10 @@ vector<Computer> Data::getComVector()
 {
     return  com;
 }
+vector<Relation> Data::getRelVector()
+{
+    return rel;
+}
 
 bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
