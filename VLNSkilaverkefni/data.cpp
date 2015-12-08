@@ -179,7 +179,7 @@ void Data::select(Computer comp,int index1,int index2)
 
     if(!comp.getType().empty())
     {
-        sql += "type='" + comp.getType() + "' AND ";
+        sql += "type='%" + comp.getType() + "%' AND ";
     }
 
     if(!comp.getBuilt().empty())
