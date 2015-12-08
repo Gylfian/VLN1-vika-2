@@ -71,7 +71,8 @@ private:
     void deleteCom();
     string getListId(string word1, string word2);
     void analyze();
-
+    void editSci();
+    void editCom();
 };
 
 #endif // PRESENTATION_H

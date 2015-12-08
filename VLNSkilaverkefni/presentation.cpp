@@ -88,16 +88,19 @@ void Presentation::restoreSci()
     if (scientists.empty())
     {
         cout << "No entries to restore!" << endl;
-        cout << "Press any key to go to the main menu" << endl;
+        cout << "Press any other key to go to the main menu!" << endl;
         char ans = getch();
-        system ("CLS");
         mainPage();
     }
     else
     {
         printSciList(scientists);
         string id = getListId("scientist", "restore");
-        dom.updateEntrySci(id);
+        if (dom.checkIfLegitId(id))
+        {
+            dom.updateEntrySci(id);
+        }
+        else
         mainPage();
     }
 }
@@ -118,7 +121,11 @@ void Presentation::restoreCom()
     {
         printComList(computers);
         string id = getListId("computer", "restore");
-        dom.updateEntryCom(id);
+        if (dom.checkIfLegitId(id))
+        {
+            dom.updateEntrySci(id);
+        }
+        else
         mainPage();
     }
 
@@ -284,15 +291,33 @@ void Presentation::editSciOrCom()
     {
         case ('1'):
         {
-
+            editSci();
         }break;
         case ('2'):
         {
-
+            editCom();
         }break;
         default:
             mainPage();
     }
+}
+
+void Presentation::editSci()
+{
+    vector<CScientist> scientists;
+    dom.sortBy(scientists, '5','1');
+    printSciList(scientists);
+    string id = getListId("scientist", "edit");
+
+}
+
+void Presentation::editCom()
+{
+    vector<Computer> computers;
+    dom.sortBy(computers, '5','1');
+    printComList(computers);
+    string id = getListId("computer", "edit");
+
 }
 
 string Presentation::getSearchName()
@@ -469,7 +494,11 @@ void Presentation::deleteSci()
     dom.sortBy(scientists, '5','1');
     printSciList(scientists);
     string id = getListId("scientist", "delete");
-    dom.updateEntrySci(id);
+    if (dom.checkIfLegitId(id))
+    {
+        dom.updateEntrySci(id);
+    }
+    else
     mainPage();
 }
 
@@ -479,7 +508,11 @@ void Presentation::deleteCom()
     dom.sortBy(computers, '5','1');
     printComList(computers);
     string id = getListId("computer", "delete");
-    dom.updateEntryCom(id);
+    if (dom.checkIfLegitId(id))
+    {
+        dom.updateEntryCom(id);
+    }
+    else
     mainPage();
 }
 
@@ -587,7 +620,7 @@ string Presentation::getInputName()
 
 string Presentation::getInputDob()
 {
-    string Dob;
+    string Dob = "";
     cout << "Enter year of birth: ";
     cin >> Dob;
 
@@ -600,7 +633,7 @@ string Presentation::getInputDob()
         cout << "Please enter a valid birth year!" << endl;
         Dob = getInputDob();
     }
-    return NULL;
+    return "";
 }
 
 string Presentation::getInputDod(string Dob)
