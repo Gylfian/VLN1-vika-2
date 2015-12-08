@@ -37,11 +37,16 @@ string Computer::getType() const
 {
     return type;
 }
+
 string Computer::getBuilt() const
 {
     return built;
 }
 
+bool Computer::getIsActive() const
+{
+    return isActive;
+}
 
 void Computer::setName(string nameToSet)
 {

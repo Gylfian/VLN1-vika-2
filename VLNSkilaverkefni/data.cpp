@@ -225,7 +225,6 @@ void Data::sortQuerySci(string & sql,int index1, int index2)
     }
 }
 
-
 void Data::sortQueryCom(string & sql,int index1, int index2)
 {
     if(index1 == 1)
@@ -285,20 +284,36 @@ void Data::relationToRestore()
     fillVector(database, temp, qsql);
 }
 
-void Data::deleteEntry(CScientist cSci)
+void Data::updateStatus(CScientist cSci)
 {
     QString qsql;
+    string sql;
     int id = cSci.getId();
-    string sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
+    if(cSci.getIsActive() == 1)
+    {
+        sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
+    }
+    else
+    {
+        sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
+    }
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
 
-void Data::deleteEntry(Computer comp)
+void Data::updateStatus(Computer comp)
 {
     QString qsql;
+    string sql;
     int id = comp.getId();
-    string sql = "UPDATE Computers SET isActive=0 WHERE ID = " +id;
+    if(comp.getIsActive() == 1)
+    {
+        sql = "UPDATE Computers SET isActive=0 WHERE ID = " +id;
+    }
+    else
+    {
+        sql = "UPDATE Computers SET isActive=0 WHERE ID = " +id;
+    }
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }

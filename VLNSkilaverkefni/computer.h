@@ -13,6 +13,7 @@ public:
     string getYear() const;
     string getType() const;
     string getBuilt() const;
+    bool getIsActive() const;
     void setId(int idToSet);
     void setName(string nameToSet);
     void setYear(string yearToSet);

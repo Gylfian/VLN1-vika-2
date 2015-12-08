@@ -23,8 +23,8 @@ public:
     bool editDatabase(QSqlDatabase db, const QString& command);
     void select(CScientist cSci, int index1, int index2);
     void select(Computer comp, int index1, int index2);
-    void deleteEntry(CScientist cSci);
-    void deleteEntry(Computer comp);
+    void updateStatus(CScientist cSci);
+    void updateStatus(Computer comp);
     void insert(CScientist cSci);
     void insert(Computer comp);
     void update(CScientist cSci);

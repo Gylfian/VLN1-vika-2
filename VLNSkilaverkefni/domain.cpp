@@ -166,7 +166,7 @@ void Domain::addScientist(CScientist cSci)
 
 void Domain::deleteScientist(CScientist cSci)
 {
-    data.deleteEntry(cSci);
+    data.updateStatus(cSci);
     //Data data;
     //deleteQuery = data.executeQuery(search);
 }
