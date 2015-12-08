@@ -292,7 +292,7 @@ int Domain::checkStrInput(string str)
     if(str == "")
         return -1;
 
-    convertToInt(str);
+    n = convertToInt(str);
     return n;
 }
 
