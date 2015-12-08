@@ -99,6 +99,10 @@ public:
      */
     bool normalizeName(string &name);
 
+    bool checkIfLegitId(string sid);
+
+    string convertToString(int n);
+
 private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
@@ -112,7 +116,6 @@ private:
     void getYearDeath(vector<CScientist> &cSciList, char child2);
     void getId(vector<CScientist> &cSciList, char child2);
     void getActive(vector<CScientist> &cSciList);
-
     void getComName(vector<Computer> &cComList, char child2);
     void getComYear(vector<Computer> &cComList, char child2);
     void getComType(vector<Computer> &cComList, char child2);

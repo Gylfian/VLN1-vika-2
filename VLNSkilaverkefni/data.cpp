@@ -11,12 +11,13 @@ Data::Data()
     sci.push_back(temp);
     com.push_back(temp2);
     setDatabase();
+    QSqlQuery query(database);
 }
 
-QSqlDatabase Data::getDatabase()
-{
-    return database;
-}
+//QSqlDatabase Data::getDatabase()
+//{
+//    return database;
+//}
 
 void Data::setDatabase()
 {
@@ -139,6 +140,8 @@ void Data::makeQuery(Relation& temp, QSqlQuery query)
 void Data::select(CScientist cSci,int index1,int index2)
 {
     QString qsql;
+    int id = cSci.getId();
+    string SciId = convertId(id);
     string sql = "SELECT *";
     sql += " FROM Computerscientists";
     sql += " WHERE Name LIKE '%" + cSci.getName() + "%'";
@@ -159,6 +162,12 @@ void Data::select(CScientist cSci,int index1,int index2)
     {
         sql += " AND Dod='" + cSci.getDod() + "'";
     }
+
+    if(cSci.getId() > 0)
+    {
+        sql += " AND ID= " + SciId;
+
+    }
     sql += " AND isActive=1 ";
     sortQuerySci(sql,index1,index2);
     sql += ";";
@@ -169,6 +178,8 @@ void Data::select(CScientist cSci,int index1,int index2)
 void Data::select(Computer comp,int index1,int index2)
 {
     QString qsql;
+    int id = comp.getId();
+    string compId = convertId(id);
     string sql = "SELECT *";
     sql += " FROM Computers WHERE ";
     sql += "Name LIKE '%" + comp.getName() + "%'";
@@ -186,6 +197,11 @@ void Data::select(Computer comp,int index1,int index2)
     if(!comp.getBuilt().empty())
     {
         sql += " AND built='" + comp.getBuilt() + "'";
+    }
+
+    if(comp.getId() > 0)
+    {
+        sql += " AND ID = " + compId;
     }
     sql += " AND isActive=1";
     sortQueryCom(sql,index1,index2);
@@ -290,9 +306,7 @@ void Data::updateStatus(CScientist cSci)
     QString qsql;
     string sql;
     int id = cSci.getId();
-    stringstream ss;
-    ss << id;
-    string SciId = ss.str();
+    string SciId = convertId(id);
     if(cSci.getIsActive() == 1)
     {
         sql = "UPDATE Computerscientists SET isActive=0 WHERE ID =  " +SciId;
@@ -310,9 +324,7 @@ void Data::updateStatus(Computer comp)
     QString qsql;
     string sql;
     int id = comp.getId();
-    stringstream ss;
-    ss << id;
-    string ComId = ss.str();
+    string ComId = convertId(id);
     if(comp.getIsActive() == 1)
     {
         sql = "UPDATE Computers SET isActive=0 WHERE ID = " +ComId;
@@ -328,7 +340,16 @@ void Data::updateStatus(Computer comp)
 void Data::insert(CScientist cSci)
 {
     QString qsql;
-    string sql = "INSERT INTO Computerscientists (Name, Gender, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    string deathstatus;
+    if(cSci.getDod().length()==0)
+    {
+     deathstatus = "Alive";
+    }
+    else
+    {
+     deathstatus = cSci.getDod();
+    }
+    string sql = "INSERT INTO Computerscientists (Name, Gender, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+deathstatus+"')";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
@@ -344,27 +365,28 @@ void Data::insert(Computer comp)
 void Data::update(CScientist cSci)
 {
     QString qsql;
-    string sql = "UPDATE Computerscientist SET ";
+    int id = cSci.getId();
+    string SciId = convertId(id);
+    string sql = "UPDATE Computerscientist SET id " + SciId;
     if(!cSci.getName().empty())
     {
-        sql += "name ='" + cSci.getName() + "%' AND ";
+        sql += " AND name ='" + cSci.getName() + "'";
     }
 
     if(!cSci.getGender().empty())
     {
-        sql += "gender='" + cSci.getGender() + "%' ";
+        sql += " AND gender='" + cSci.getGender() + "'";
     }
 
     if(!cSci.getDob().empty())
     {
-        sql += "AND dob='" + cSci.getDob() + "'";
+        sql += " AND dob='" + cSci.getDob() + "'";
     }
 
     if(!cSci.getDod().empty())
     {
-        sql += "AND dod='" + cSci.getDod() + "'";
+        sql += " AND dod='" + cSci.getDod() + "'";
     }
-    if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
@@ -373,28 +395,29 @@ void Data::update(CScientist cSci)
 void Data::update(Computer comp)
 {
     QString qsql;
-    string sql = "UPDATE Computers SET ";
+    int id = comp.getId();
+    string ComId = convertId(id);
+    string sql = "UPDATE Computers SET id " + ComId;
     if(!comp.getName().empty())
     {
-        sql += "name ='" + comp.getName() + "%' AND ";
+        sql += " AND name ='" + comp.getName() + "'";
     }
 
     if(!comp.getYear().empty())
     {
-        sql += "year='" + comp.getYear() + "' AND ";
+        sql += " AND year='" + comp.getYear() + "'";
 
     }
 
     if(!comp.getType().empty())
     {
-        sql += "type='" + comp.getType() + "' AND ";
+        sql += " AND type='" + comp.getType() + "'";
     }
 
     if(!comp.getBuilt().empty())
     {
-        sql += "built='" + comp.getBuilt() + "' AND ";
+        sql += " AND built='" + comp.getBuilt() + "'";
     }
-    if (sql.size () > 0)  sql.resize (sql.size () - 5);
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
@@ -403,9 +426,21 @@ void Data::update(Computer comp)
 void Data::setRelations(Computer comp, CScientist cSci)
 {
     QString qsql;
-    string sql; //= "INSERT INTO Relation (ScientistID, ComputerID) VALUES (" + comp.getId() + "," + cSci.getId() + " )";
+    int id = cSci.getId();
+    string sciId = convertId(id);
+    id = comp.getId();
+    string compId = convertId(id);
+    string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
-    //executeQuery(query,qsql);
+    query.exec(qsql);
     fillVector(database, cSci, qsql);
+}
+
+string Data::convertId(int id)
+{
+    stringstream ss;
+    ss << id;
+    string converted = ss.str();
+    return converted;
 }

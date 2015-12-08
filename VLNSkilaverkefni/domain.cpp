@@ -29,6 +29,7 @@ void Domain::sortBy(vector<CScientist> &cSciList, char child, char child2)
         getId(cSciList, child2);
     }
 }
+
 void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
 {
     if(child == '1') //sort by name
@@ -62,7 +63,6 @@ void Domain::restoreEntry(vector<Computer> &cComList)
 {
     getComActive(cComList);
 }
-
 
 void Domain::getComName(vector<Computer> &cComList, char child2)
 {
@@ -146,7 +146,6 @@ void Domain::getYear(vector<CScientist> &cSciList, char child2)
     cSciList = data.getSciVector();
 }
 
-
 void Domain::search(vector<CScientist> &cSciList, CScientist cSci)
 {
      data.select(cSci, 5, 1);
@@ -173,6 +172,16 @@ void Domain::updateEntrySci(string sid)
 {
     CScientist cSci;
     cSci.setId(convertToInt(sid));
+    data.select(cSci, 1, 1);
+    vector<CScientist> cSciList = data.getSciVector();
+    for(unsigned int i = 0; i < cSciList.size(); i++)
+    {
+        cout << cSci.getName() << endl;
+        if(cSciList[i].getId() == cSci.getId())
+        {
+            cSci = cSciList[i];
+        }
+    }
     data.updateStatus(cSci);
 }
 
@@ -180,9 +189,18 @@ void Domain::updateEntryCom(string sid)
 {
     Computer cCom;
     cCom.setId(convertToInt(sid));
+    data.select(cCom, 1, 1);
+    vector<Computer> cComList = data.getComVector();
+    for(unsigned int i = 0; i < cComList.size(); i++)
+    {
+        cout << cCom.getName() << endl;
+        if(cComList[i].getId() == cCom.getId())
+        {
+            cCom = cComList[i];
+        }
+    }
     data.updateStatus(cCom);
 }
-
 
 bool Domain::checkOption(char child)
 {
@@ -191,7 +209,6 @@ bool Domain::checkOption(char child)
 
     return false;
 }
-
 
 int Domain::findLongestType(vector<Computer> cComList)
 {
@@ -247,6 +264,20 @@ int Domain::findLongestName(vector<Computer> cComList)
     return length;
 }
 
+bool Domain::checkIfLegitId(string sid)
+{
+    if(sid == "")
+        return false;
+
+    for(unsigned int i = 0; i < sid.length(); i++)
+    {
+        if(!isdigit(sid[i]))
+            return false;
+    }
+
+    return true;
+}
+
 int Domain::convertToInt(string str)
 {
     int n = 0;
@@ -299,17 +330,14 @@ bool Domain::normalizeYear(string born, string death)
         if(!isdigit(death[j]))
             return false;
     }
-
     if(yearBorn < 0 || yearBorn > 3000)
     {
         return false;
     }
-
     if(yearDeath < 0 || yearDeath > 3000)
     {
         return false;
     }
-
     return true;
 }
 
@@ -319,7 +347,6 @@ bool Domain::normalizeName(string &name)
     {
         return false;
     }
-
     for(unsigned int i = 0; i < name.length(); i++)
     {
         name[i] = tolower(name[i]);
@@ -337,5 +364,3 @@ bool Domain::normalizeName(string &name)
     }
     return true;
 }
-
-

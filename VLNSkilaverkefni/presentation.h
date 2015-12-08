@@ -228,6 +228,7 @@ private:
      * Output/Return: Prints out the computer list
      */
     void deleteCom();
+<<<<<<< HEAD
 
     /*
      * Name: getDeleteId
@@ -238,6 +239,13 @@ private:
      */
     string getDeleteId(string word);
 
+=======
+    string getListId(string word1, string word2);
+    void analyze();
+    void editSci();
+    void editCom();
+    void restoreFail();
+>>>>>>> c3b078c3ae7cfe6e38e366c78aad051e6037691a
 };
 
 #endif // PRESENTATION_H

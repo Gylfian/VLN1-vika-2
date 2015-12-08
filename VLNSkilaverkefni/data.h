@@ -26,7 +26,7 @@ public:
     * Usage: getDatabase()
     * Output/Return: database
     */
-    QSqlDatabase getDatabase();
+    //QSqlDatabase getDatabase();
 
    /*
     * Name: setDatabase
@@ -128,6 +128,7 @@ private:
     * Output/Return:
     */
    void setRelations(Computer comp, CScientist cSci);
+   string convertId(int id);
 };
 
 #endif // DATA_H
