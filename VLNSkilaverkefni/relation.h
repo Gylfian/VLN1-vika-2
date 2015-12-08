@@ -1,11 +1,8 @@
 #ifndef RELATION_H
 #define RELATION_H
-#include <string>
 #include <iostream>
 #include "computerscientist.h"
 #include "computer.h"
-using namespace std;
-
 
 class Relation
 {

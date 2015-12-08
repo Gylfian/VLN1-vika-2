@@ -1,8 +1,4 @@
 #include "data.h"
-#include <QtSql>
-#include <QDebug>
-#include <QSqlError>
-#include <sstream>
 
 Data::Data()
 {
@@ -152,17 +148,14 @@ void Data::select(CScientist cSci,int index1,int index2)
         else
             sql += " AND Gender='Female'";
     }
-
     if(!cSci.getDob().empty())
     {
         sql += " AND Dob='" + cSci.getDob() + "'";
     }
-
     if(!cSci.getDod().empty())
     {
         sql += " AND Dod='" + cSci.getDod() + "'";
     }
-
     if(cSci.getId() > 0)
     {
         sql += " AND ID= " + SciId;
@@ -198,7 +191,6 @@ void Data::select(Computer comp,int index1,int index2)
     {
         sql += " AND built='" + comp.getBuilt() + "'";
     }
-
     if(comp.getId() > 0)
     {
         sql += " AND ID = " + compId;
