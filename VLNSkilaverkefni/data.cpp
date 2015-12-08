@@ -171,24 +171,26 @@ void Data::select(Computer comp,int index1,int index2)
     string sql = "SELECT *";
     sql += " FROM Computers WHERE ";
     sql += "Name LIKE '%" + comp.getName() + "%'";
-
+    cout << comp.getName() << endl;
     if(!comp.getYear().empty())
     {
-        sql += " AND year=" + comp.getYear() + "$' AND ";
+        sql += " AND year=" + comp.getYear() + "$'";
     }
 
     if(!comp.getType().empty())
     {
-        sql += "type='%" + comp.getType() + "%' AND ";
+        sql += " AND type LIKE '%" + comp.getType() + "%'";
     }
 
     if(!comp.getBuilt().empty())
     {
-        sql += "built='" + comp.getBuilt() + "' AND ";
+        sql += " AND built='" + comp.getBuilt() + "'";
     }
-    sql += " AND isActive=1 ";
+    sql += " AND isActive=1";
     sortQueryCom(sql,index1,index2);
     sql += ";";
+    cout << "SQL: " << sql << endl;
+    system("PAUSE");
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
