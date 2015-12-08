@@ -26,7 +26,7 @@ public:
     * Usage: getDatabase()
     * Output/Return: database
     */
-    QSqlDatabase getDatabase();
+    //QSqlDatabase getDatabase();
 
    /*
     * Name: setDatabase

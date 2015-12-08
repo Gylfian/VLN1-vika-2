@@ -14,10 +14,10 @@ Data::Data()
     QSqlQuery query(database);
 }
 
-QSqlDatabase Data::getDatabase()
-{
-    return database;
-}
+//QSqlDatabase Data::getDatabase()
+//{
+//    return database;
+//}
 
 void Data::setDatabase()
 {

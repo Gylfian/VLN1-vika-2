@@ -128,8 +128,6 @@ void Presentation::restoreCom()
         else
         mainPage();
     }
-
-
 }
 
 void Presentation::restoreConnection()
@@ -226,7 +224,6 @@ void Presentation::searchSciOrCom()
         default:
             mainPage();
     }
-
 }
 
 void Presentation::searchSci()
@@ -257,7 +254,6 @@ void Presentation::searchSci()
             Dod = "";
 
         }
-
     }
     else
     {
@@ -308,7 +304,6 @@ void Presentation::editSci()
     dom.sortBy(scientists, '5','1');
     printSciList(scientists);
     string id = getListId("scientist", "edit");
-
 }
 
 void Presentation::editCom()
@@ -317,7 +312,6 @@ void Presentation::editCom()
     dom.sortBy(computers, '5','1');
     printComList(computers);
     string id = getListId("computer", "edit");
-
 }
 
 string Presentation::getSearchName()
@@ -399,7 +393,6 @@ string Presentation::getSearchAlive()
     }
 
     return alive;
-
 }
 
 void Presentation::searchCom()
@@ -434,7 +427,6 @@ void Presentation::searchCom()
     dom.search(computers,com);
     printComList(computers);
     printListOptions();
-
 }
 
 string Presentation::getSearchBuilt()
@@ -523,14 +515,12 @@ string Presentation::getListId(string word1, string word2)
     cout << "Press return to cancel" << endl;
     cout << "ID: ";
     getline (cin,id);
-
     return id;
 }
 
 void Presentation::addScientist()
 {
     CScientist cSci;
-
     do
     {
         system("CLS");
@@ -690,7 +680,6 @@ Computer Presentation::getComputerData()
     {
         year = "";
     }
-
     Computer com(0, name, year, type, built);
     return com;
 }
@@ -733,7 +722,6 @@ string Presentation::getComBuilt()
             cout << "Please enter a valid option!";
             built = getComBuilt();
     }
-
     return built;
 }
 
@@ -791,7 +779,6 @@ void Presentation::listOptions(char which)
         default:
             sciOrComText('1');
             printSciOrCom();
-
     }
 }
 
@@ -894,12 +881,10 @@ void Presentation::printSciList(vector<CScientist> scientists)
         << scientists[i].getDod() << endl;
         cout << setfill('-') << setw(longest + 36) << '-' << endl;
     }
-
 }
 
 void Presentation::printComList(vector<Computer> computers)
 {
-
     int longest = dom.findLongestName(computers);
     int longestType = dom.findLongestType(computers);
     cout << "Computers" << endl;
@@ -914,7 +899,6 @@ void Presentation::printComList(vector<Computer> computers)
         << setw(7) << computers[i].getBuilt() << computers[i].getYear() << endl;
         cout << setfill('-') << setw(longest + longestType + 27) << '-' << endl;
     }
-
 }
 
 void Presentation::printListOptions()
@@ -1081,7 +1065,6 @@ void Presentation::sciOrComText(char which)
         {
             cout << "|-Which list do you wish to restore from?|" << endl;
         }break;
-
     }
     cout << "|-1) Computer Scientists-----------------|" << endl;
     cout << "|-2) Computers---------------------------|" << endl;
