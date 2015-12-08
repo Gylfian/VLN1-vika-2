@@ -147,14 +147,16 @@ void Domain::getYear(vector<CScientist> &cSciList, char child2)
 }
 
 
-void Domain::search(CScientist cSci)
+void Domain::search(vector<CScientist> &cSciList, CScientist cSci)
 {
-   // data.select(cSci);
+     data.select(cSci, 5, 1);
+     cSciList = data.getSciVector();
 }
 
-void Domain::search(Computer cCom)
+void Domain::search(vector<Computer> &cComList, Computer cCom)
 {
-    //data.select(cCom);
+     data.select(cCom, 5, 1);
+     cComList = data.getComVector();
 }
 
 void Domain::addEntry(CScientist cSci)

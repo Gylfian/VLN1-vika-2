@@ -24,9 +24,9 @@ public:
      * Output/Return: list = allScientists
      */
 
-    void search(CScientist cSci);
+    void search(vector<CScientist> &cSciList, CScientist cSci);
 
-    void search(Computer cCom);
+    void search(vector<Computer> &cComList, Computer cCom);
 
     void sortBy(vector<CScientist> &cSciList, char child, char child2);
 
