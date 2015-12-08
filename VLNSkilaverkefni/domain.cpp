@@ -88,6 +88,12 @@ void Domain::getComId(vector<Computer> &cComList, char child2)
     cComList = data.getComVector();
 }
 
+void Domain::getComActive(vector<Computer> &cComList)
+{
+    data.computerToRestore();
+    cComList = data.getComVector();
+}
+
 void Domain::getName(vector<CScientist> &cSciList, char child2)
 {
     CScientist scientist;
@@ -106,6 +112,12 @@ void Domain::getId(vector<CScientist> &cSciList, char child2)
 {
     CScientist scientist;
     data.select(scientist, 5, charToInt(child2));
+    cSciList = data.getSciVector();
+}
+
+void Domain::getActive(vector<CScientist> &cSciList)
+{
+    data.scientistToRestore();
     cSciList = data.getSciVector();
 }
 

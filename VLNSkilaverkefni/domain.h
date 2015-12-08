@@ -79,12 +79,14 @@ private:
     void getYear(vector<CScientist> &cSciList, char child2);
     void getYearDeath(vector<CScientist> &cSciList, char child2);
     void getId(vector<CScientist> &cSciList, char child2);
+    void getActive(vector<CScientist> &cSciList);
 
     void getComName(vector<Computer> &cComList, char child2);
     void getComYear(vector<Computer> &cComList, char child2);
     void getComType(vector<Computer> &cComList, char child2);
     void getComBuilt(vector<Computer> &cComList, char child2);
     void getComId(vector<Computer> &cComList, char child2);
+    void getComActive(vector<Computer> &cComList);
 
     bool checkOption(char child);
 };
