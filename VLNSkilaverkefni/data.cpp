@@ -141,9 +141,7 @@ void Data::select(CScientist cSci,int index1,int index2)
 {
     QString qsql;
     int id = cSci.getId();
-    stringstream ss;
-    ss << id;
-    string SciId = ss.str();
+    string SciId = convertId(id);
     string sql = "SELECT *";
     sql += " FROM Computerscientists";
     sql += " WHERE Name LIKE '%" + cSci.getName() + "%'";
@@ -181,9 +179,7 @@ void Data::select(Computer comp,int index1,int index2)
 {
     QString qsql;
     int id = comp.getId();
-    stringstream ss;
-    ss << id;
-    string compId = ss.str();
+    string compId = convertId(id);
     string sql = "SELECT *";
     sql += " FROM Computers WHERE ";
     sql += "Name LIKE '%" + comp.getName() + "%'";
@@ -310,9 +306,7 @@ void Data::updateStatus(CScientist cSci)
     QString qsql;
     string sql;
     int id = cSci.getId();
-    stringstream ss;
-    ss << id;
-    string SciId = ss.str();
+    string SciId = convertId(id);
     if(cSci.getIsActive() == 1)
     {
         sql = "UPDATE Computerscientists SET isActive=0 WHERE ID =  " +SciId;
@@ -330,9 +324,7 @@ void Data::updateStatus(Computer comp)
     QString qsql;
     string sql;
     int id = comp.getId();
-    stringstream ss;
-    ss << id;
-    string ComId = ss.str();
+    string ComId = convertId(id);
     if(comp.getIsActive() == 1)
     {
         sql = "UPDATE Computers SET isActive=0 WHERE ID = " +ComId;
@@ -374,9 +366,7 @@ void Data::update(CScientist cSci)
 {
     QString qsql;
     int id = cSci.getId();
-    stringstream ss;
-    ss << id;
-    string SciId = ss.str();
+    string SciId = convertId(id);
     string sql = "UPDATE Computerscientist SET id " + SciId;
     if(!cSci.getName().empty())
     {
@@ -406,9 +396,7 @@ void Data::update(Computer comp)
 {
     QString qsql;
     int id = comp.getId();
-    stringstream ss;
-    ss << id;
-    string ComId = ss.str();
+    string ComId = convertId(id);
     string sql = "UPDATE Computers SET id " + ComId;
     if(!comp.getName().empty())
     {
@@ -439,15 +427,20 @@ void Data::setRelations(Computer comp, CScientist cSci)
 {
     QString qsql;
     int id = cSci.getId();
-    stringstream ss;
-    ss << id;
-    string sciId = ss.str();
+    string sciId = convertId(id);
     id = comp.getId();
-    ss >> id;
-    string compId = ss.str();
+    string compId = convertId(id);
     string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
     query.exec(qsql);
     fillVector(database, cSci, qsql);
+}
+
+string Data::convertId(int id)
+{
+    stringstream ss;
+    ss << id;
+    string converted = ss.str();
+    return converted;
 }
