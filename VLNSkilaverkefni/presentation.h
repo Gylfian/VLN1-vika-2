@@ -69,7 +69,8 @@ private:
     string getSearchAlive();
     void deleteSci();
     void deleteCom();
-    string getDeleteId(string word);
+    string getListId(string word1, string word2);
+    void analyze();
 
 };
 
