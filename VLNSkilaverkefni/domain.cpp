@@ -173,6 +173,17 @@ void Domain::updateEntrySci(string sid)
 {
     CScientist cSci;
     cSci.setId(convertToInt(sid));
+    data.select(cSci, 1, 1);
+    vector<CScientist> cSciList = data.getSciVector();
+    for(unsigned int i = 0; i < cSciList.size(); i++)
+    {
+        cout << cSci.getName() << endl;
+        if(cSciList[i].getId() == cSci.getId())
+        {
+            cSci = cSciList[i];
+        }
+    }
+
     data.updateStatus(cSci);
 }
 

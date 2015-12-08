@@ -99,6 +99,8 @@ public:
      */
     bool normalizeName(string &name);
 
+    string convertToString(int n);
+
 private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
