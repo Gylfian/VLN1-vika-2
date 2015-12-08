@@ -128,6 +128,7 @@ private:
     * Output/Return:
     */
    void setRelations(Computer comp, CScientist cSci);
+   string convertId(int id);
 };
 
 #endif // DATA_H
