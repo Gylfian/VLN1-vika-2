@@ -60,6 +60,13 @@ private:
     void editSciOrCom();
     void printSciList(vector <CScientist> scientists);
     void printComList(vector <Computer> computers);
+    void addConnection();
+    string getNum(string word1, string word2);
+    void restoreSciOrCom();
+    void restoreSci();
+    void restoreCom();
+    void restoreConnection();
+
 };
 
 #endif // PRESENTATION_H

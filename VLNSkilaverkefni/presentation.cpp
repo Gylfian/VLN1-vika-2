@@ -9,6 +9,7 @@ void Presentation::mainPage()
     cout << "|-3) Add to lists-------------|" << endl;
     cout << "|-4) Delete from lists--------|" << endl;
     cout << "|-5) Edit the lists-----------|" << endl;
+    cout << "|-6) Restore deleted entries--|" << endl;
     cout << "|-Press any other key to quit-|" << endl;
     cout << "|_____________________________|" << endl;
     options();
@@ -46,9 +47,71 @@ void Presentation::options()
             sciOrComText(ans);
             editSciOrCom();
         }break;
+        case ('6'):
+        {
+            sciOrComText(ans);
+            restoreSciOrCom();
+        }break;
         default:
            exit(1);
     }
+}
+
+void Presentation::restoreSciOrCom()
+{
+    char ans = getch();
+    system ("CLS");
+
+    switch (ans)
+    {
+        case ('1'):
+        {
+            restoreSci();
+        }break;
+        case ('2'):
+        {
+            restoreCom();
+        }break;
+        case ('3'):
+        {
+            restoreConnection();
+        }break;
+        default:
+            mainPage();
+    }
+}
+
+void Presentation::restoreSci()
+{
+    vector<CScientist> scientists;
+    dom.restoreEntry(scientists);
+    printSciList(scientists);
+    cout << "Please select the computer scientist you wish to restore" << endl;
+    int id = getSearchId();
+
+    CScientist sci;
+    sci.setId(id);
+    dom.updateEntry(sci);
+
+}
+
+void Presentation::restoreCom()
+{
+    vector<Computer> computers;
+    dom.restoreEntry(computers);
+    printComList(computers);
+    cout << "Please select the computer you wish to restore" << endl;
+    int id = getSearchId();
+
+    Computer com;
+    com.setId(id);
+    dom.updateEntry(com);
+
+}
+
+void Presentation::restoreConnection()
+{
+
 }
 
 void Presentation::printSciOrCom()
@@ -92,11 +155,34 @@ void Presentation::addSciOrCom()
         }break;
         case('3'):
         {
-
+            addConnection();
         }break;
         default:
             mainPage();
     }
+}
+
+void Presentation::addConnection()
+{
+    vector<CScientist> scientists;
+    vector<Computer> computers;
+    dom.sortBy(scientists,'5','1');
+    dom.sortBy(computers, '5','1');
+
+    printSciList(scientists);
+    string sci = getNum("scientist/s","computer/s");
+    printComList(computers);
+    string com = getNum("computer/s", "scientist/s");
+}
+
+string Presentation::getNum(string word1, string word2)
+{
+    string ids;
+    cout << "Enter the ID's of the " << word1 << " you wish to connect to the " <<  word2 << endl;
+    cout << "Seperate entries with a comma" << endl;
+    cout << "ID's: ";
+    getline (cin, ids);
+    return ids;
 }
 
 void Presentation::searchSciOrCom()
@@ -375,6 +461,7 @@ string Presentation::getInputDob()
     else
         cout << "Please enter a valid birth year!" << endl;
         Dob = getInputDob();
+
 }
 
 string Presentation::getInputDod(string Dob)
@@ -578,6 +665,7 @@ void Presentation::whichOrderSci(char which, char pChoice)
     }
 
     printSciList(scientists);
+    printListOptions();
 }
 
 void Presentation::whichOrderCom(char which, char pChoice)
@@ -617,6 +705,7 @@ void Presentation::whichOrderCom(char which, char pChoice)
     }
 
     printComList(computers);
+    printListOptions();
 }
 
 void Presentation::printSciList(vector<CScientist> scientists)
@@ -627,7 +716,6 @@ void Presentation::printSciList(vector<CScientist> scientists)
     cout << setfill(' ') << left << setw(longest +6) << "ID | Name"
     << "|Gender |Birth Year" << "|Death Year" << endl;
     cout << setfill('-') << setw(longest + 36) << '-' << endl;
-
     for(unsigned int i = 0; i < scientists.size(); i++)
     {
         cout << setfill(' ') << right << setw(3) << scientists[i].getId() << "| " << left << setw(longest+2)
@@ -635,7 +723,7 @@ void Presentation::printSciList(vector<CScientist> scientists)
         << scientists[i].getDod() << endl;
         cout << setfill('-') << setw(longest + 36) << '-' << endl;
     }
-    printListOptions();
+
 }
 
 void Presentation::printComList(vector<Computer> computers)
@@ -654,7 +742,7 @@ void Presentation::printComList(vector<Computer> computers)
         << setw(7) << computers[i].getBuilt() << computers[i].getYear() << endl;
         cout << setfill('-') << setw(longest + longestType + 27) << '-' << endl;
     }
-    printListOptions();
+
 }
 
 void Presentation::deleteFromList()
@@ -842,7 +930,11 @@ void Presentation::sciOrComText(char which)
         }break;
         case ('5'):
         {
-            cout << "|-Which list fo you wish to edit?--------|" << endl;
+            cout << "|-Which list do you wish to edit?--------|" << endl;
+        }break;
+        case ('6'):
+        {
+            cout << "|-Which list do you wish to restore from?|" << endl;
         }break;
 
     }
@@ -858,6 +950,10 @@ void Presentation::sciOrComText(char which)
         case ('3'):
         {
             cout << "|-3) Add a connection--------------------|" << endl;
+        }break;
+        case ('6'):
+        {
+            cout << "|-3) A connection------------------------|" << endl;
         }break;
     }
     cout << "|-Press any other key to go back---------|" << endl;
