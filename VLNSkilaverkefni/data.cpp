@@ -140,6 +140,10 @@ void Data::makeQuery(Relation& temp, QSqlQuery query)
 void Data::select(CScientist cSci,int index1,int index2)
 {
     QString qsql;
+    int id = cSci.getId();
+    stringstream ss;
+    ss << id;
+    string SciId = ss.str();
     string sql = "SELECT *";
     sql += " FROM Computerscientists";
     sql += " WHERE Name LIKE '%" + cSci.getName() + "%'";
@@ -163,8 +167,8 @@ void Data::select(CScientist cSci,int index1,int index2)
 
     if(cSci.getId() > 0)
     {
-        sql += " AND ID='" + cSci.getId();
-        sql += "'";
+        sql += " AND ID= " + SciId;
+
     }
     sql += " AND isActive=1 ";
     sortQuerySci(sql,index1,index2);
@@ -176,6 +180,10 @@ void Data::select(CScientist cSci,int index1,int index2)
 void Data::select(Computer comp,int index1,int index2)
 {
     QString qsql;
+    int id = comp.getId();
+    stringstream ss;
+    ss << id;
+    string compId = ss.str();
     string sql = "SELECT *";
     sql += " FROM Computers WHERE ";
     sql += "Name LIKE '%" + comp.getName() + "%'";
@@ -197,8 +205,7 @@ void Data::select(Computer comp,int index1,int index2)
 
     if(comp.getId() > 0)
     {
-        sql += " AND ID='" + comp.getId();
-        sql += "'";
+        sql += " AND ID = " + compId;
     }
     sql += " AND isActive=1";
     sortQueryCom(sql,index1,index2);
