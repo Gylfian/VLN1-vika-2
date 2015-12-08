@@ -296,6 +296,82 @@ int Domain::checkStrInput(string str)
     return n;
 }
 
+void Domain::solveIdToDb(vector<CScientist> &cSciList, vector<int> solvedIdList)
+{
+    vector<CScientist> allScientists;
+    CScientist empty;
+    data.select(empty, 5, 1);
+    allScientists = data.getSciVector();
+    for(unsigned int i = 0; i < allScientists.size(); i++)
+    {
+        for(unsigned int j = 0; j < solvedIdList.size(); j++)
+        {
+            if(solvedIdList[j] == allScientists[i].getId())
+            {
+                CScientist cSci = allScientists[i];
+                cSciList.push_back(cSci);
+            }
+        }
+    }
+}
+
+void Domain::createRelation(string scientists, string computers)
+{
+    vector<int> sciId = solveString(scientists);
+    vector<int> comId = solveString(computers);
+    vector<CScientist> cSciList;
+    solveIdToDb(cSciList, sciId);
+    vector<Computer> cComList;
+    solveIdToDb(cComList, comId);
+
+    for(unsigned int i = 0; i < cSciList.size(); i++)
+    {
+        for(unsigned int j = 0; j < cComList.size(); j++)
+        {
+            addRelation(cSciList[i], cComList[j]);
+        }
+    }
+}
+
+void Domain::solveIdToDb(vector<Computer> &cComList, vector<int> solvedIdList)
+{
+    vector<Computer> allComputers;
+    Computer empty;
+    data.select(empty, 5, 1);
+    allComputers = data.getComVector();
+    for(unsigned int i = 0; i < allComputers.size(); i++)
+    {
+        for(unsigned int j = 0; j < solvedIdList.size(); j++)
+        {
+            if(solvedIdList[j] == allComputers[i].getId())
+            {
+                Computer cCom = allComputers[i];
+                cComList.push_back(cCom);
+            }
+        }
+    }
+}
+
+void Domain::addRelation(CScientist cSci, Computer cCom)
+{
+    data.setRelations(cCom, cSci);
+}
+
+vector<int> Domain::solveString(string str)
+{
+    vector<int> vect;
+    stringstream ss(str);
+    int i;
+    while (ss >> i)
+    {
+        vect.push_back(i);
+
+        if (ss.peek() == ',')
+            ss.ignore();
+    }
+    return vect;
+}
+
 bool Domain::verifyBirthyear(string year)
 {
     istringstream buffer(year);

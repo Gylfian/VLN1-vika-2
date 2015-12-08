@@ -92,6 +92,14 @@ public:
     void scientistToRestore();
     void computerToRestore();
     void relationToRestore();
+    /*
+     * Name: setRelations
+     * Parameter/s: Computer comp, CScientist cSci
+     * Description:
+     * Usage:
+     * Output/Return:
+     */
+    void setRelations(Computer comp, CScientist cSci);
 
 private:
    vector<CScientist> sci;
@@ -123,14 +131,6 @@ private:
    void sortQuerySci(string & sql,int index1, int index2);
    void sortQueryCom(string & sql,int index1, int index2);
 
-   /*
-    * Name: setRelations
-    * Parameter/s: Computer comp, CScientist cSci
-    * Description:
-    * Usage:
-    * Output/Return:
-    */
-   void setRelations(Computer comp, CScientist cSci);
    string convertId(int id);
 };
 
