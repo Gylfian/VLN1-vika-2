@@ -86,12 +86,12 @@ void Presentation::restoreSci()
     vector<CScientist> scientists;
     dom.restoreEntry(scientists);
     printSciList(scientists);
+    string id;
     cout << "Please select the computer scientist you wish to restore" << endl;
-    int id = getSearchId();
-
-    CScientist sci;
-    sci.setId(id);
-    dom.updateEntry(sci);
+    cout << "Enter ID: ";
+    cin >> id;
+    dom.updateEntrySci(id);
+    mainPage();
 
 }
 
@@ -102,10 +102,7 @@ void Presentation::restoreCom()
     printComList(computers);
     cout << "Please select the computer you wish to restore" << endl;
     int id = getSearchId();
-
-    Computer com;
-    com.setId(id);
-    dom.updateEntry(com);
+    dom.updateEntryCom(id);
 
 }
 
@@ -459,9 +456,10 @@ string Presentation::getInputDob()
         return Dob;
     }
     else
+    {
         cout << "Please enter a valid birth year!" << endl;
         Dob = getInputDob();
-
+    }
 }
 
 string Presentation::getInputDod(string Dob)
