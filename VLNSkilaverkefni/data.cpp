@@ -2,6 +2,7 @@
 #include <QtSql>
 #include <QDebug>
 #include <QSqlError>
+#include <sstream>
 
 Data::Data()
 {
@@ -289,13 +290,16 @@ void Data::updateStatus(CScientist cSci)
     QString qsql;
     string sql;
     int id = cSci.getId();
+    stringstream ss;
+    ss << id;
+    string SciId = ss.str();
     if(cSci.getIsActive() == 1)
     {
-        sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
+        sql = "UPDATE Computerscientists SET isActive=0 WHERE ID =  " +SciId;
     }
     else
     {
-        sql = "UPDATE Computerscientists SET isActive=0 WHERE ID = " +id;
+        sql = "UPDATE Computerscientists SET isActive=1 WHERE ID =  " +SciId;
     }
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
@@ -306,13 +310,16 @@ void Data::updateStatus(Computer comp)
     QString qsql;
     string sql;
     int id = comp.getId();
+    stringstream ss;
+    ss << id;
+    string ComId = ss.str();
     if(comp.getIsActive() == 1)
     {
-        sql = "UPDATE Computers SET isActive=0 WHERE ID = " +id;
+        sql = "UPDATE Computers SET isActive=0 WHERE ID = " +ComId;
     }
     else
     {
-        sql = "UPDATE Computers SET isActive=1 WHERE ID = " +id;
+        sql = "UPDATE Computers SET isActive=1 WHERE ID = " +ComId;
     }
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
