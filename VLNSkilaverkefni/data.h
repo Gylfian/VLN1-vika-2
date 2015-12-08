@@ -101,6 +101,7 @@ public:
      */
     void setRelations(Computer comp, CScientist cSci);
 
+    void select(Relation Rel);
 private:
    vector<CScientist> sci;
    vector<Computer> com;
