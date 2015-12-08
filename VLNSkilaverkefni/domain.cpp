@@ -53,6 +53,17 @@ void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
     }
 }
 
+void Domain::restoreEntry(vector<CScientist> &cSciList)
+{
+    getActive(cSciList);
+}
+
+void Domain::restoreEntry(vector<Computer> &cComList)
+{
+    getComActive(cComList);
+}
+
+
 void Domain::getComName(vector<Computer> &cComList, char child2)
 {
     Computer com;

@@ -28,13 +28,13 @@ public:
 
     void search(Computer cCom);
 
-    void requestSciSql(QSqlDatabase db, QString sql, vector<CScientist> &cSciList);
-
-    void requestComSql(QSqlDatabase db, QString sql, vector<Computer> &cComList);
-
     void sortBy(vector<CScientist> &cSciList, char child, char child2);
 
     void sortBy(vector<Computer> &cComList, char child, char child2);
+
+    void restoreEntry(vector<CScientist> &cSciList);
+
+    void restoreEntry(vector<Computer> &cSciList);
 
     int findLongestName(vector<CScientist> cSciList);
 
