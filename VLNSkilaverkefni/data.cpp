@@ -161,7 +161,7 @@ void Data::select(CScientist cSci,int index1,int index2)
         sql += " AND Dod='" + cSci.getDod() + "'";
     }
 
-    if(cSci.getId() < 0)
+    if(cSci.getId() > 0)
     {
         sql += " AND ID='" + cSci.getId();
         sql += "'";
@@ -195,7 +195,7 @@ void Data::select(Computer comp,int index1,int index2)
         sql += " AND built='" + comp.getBuilt() + "'";
     }
 
-    if(comp.getId() < 0)
+    if(comp.getId() > 0)
     {
         sql += " AND ID='" + comp.getId();
         sql += "'";
