@@ -103,6 +103,9 @@ public:
 
     string convertToString(int n);
 
+    void createRelation(string scientists, string computers);
+
+
 private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
@@ -122,8 +125,12 @@ private:
     void getComBuilt(vector<Computer> &cComList, char child2);
     void getComId(vector<Computer> &cComList, char child2);
     void getComActive(vector<Computer> &cComList);
-
     bool checkOption(char child);
+
+    void solveIdToDb(vector<CScientist> &cSciList, vector<int> solvedIdList);
+    void solveIdToDb(vector<Computer> &cSciList, vector<int> solvedIdList);
+    void addRelation(CScientist cSci, Computer cCom);
+    vector<int> solveString(string str);
 };
 
 #endif // DOMAIN_H
