@@ -286,9 +286,31 @@ bool Domain::normalizeYear(string born, string death)
 {
     int yearBorn = convertToInt(born);
     int yearDeath = convertToInt(death);
-    if(yearBorn <= yearDeath)
-        return true;
-    return false;
+    if(yearBorn > yearDeath)
+        return false;
+
+    for(unsigned int i = 0; i < born.length(); i++)
+    {
+        if(!isdigit(born[i]))
+            return false;
+    }
+    for(unsigned int j = 0; j < death.length(); j++)
+    {
+        if(!isdigit(death[j]))
+            return false;
+    }
+
+    if(yearBorn < 0 || yearBorn > 3000)
+    {
+        return false;
+    }
+
+    if(yearDeath < 0 || yearDeath > 3000)
+    {
+        return false;
+    }
+
+    return true;
 }
 
 bool Domain::normalizeName(string &name)
