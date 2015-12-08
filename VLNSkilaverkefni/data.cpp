@@ -198,6 +198,15 @@ void Data::select(Computer comp,int index1,int index2)
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
+void Data::select(Relation Rel)
+{
+    QString qsql;
+    string sql = "SELECT Computerscientists.Name, Computers.Name FROM Computerscientists INNER JOIN scientists_computers ";
+    sql+= "ON Computerscientists.ID = scientists_computers.scientistID ";
+    sql+= "INNER JOIN Computers ON Computers.ID = scientists_computers.computerID; ";
+    qsql = QString::fromStdString(sql);
+    fillVector(database, Rel, qsql);
+}
 
 void Data::sortQuerySci(string & sql,int index1, int index2)
 {
