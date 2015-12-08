@@ -167,13 +167,17 @@ void Domain::addEntry(Computer cCom)
     data.insert(cCom);
 }
 
-void Domain::updateEntry(CScientist cSci)
+void Domain::updateEntrySci(string sid)
 {
+    CScientist cSci;
+    cSci.setId(convertToInt(sid));
     data.updateStatus(cSci);
 }
 
-void Domain::updateEntry(Computer cCom)
+void Domain::updateEntryCom(string sid)
 {
+    Computer cCom;
+    cCom.setId(convertToInt(sid));
     data.updateStatus(cCom);
 }
 

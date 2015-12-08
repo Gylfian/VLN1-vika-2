@@ -36,9 +36,9 @@ public:
 
     void restoreEntry(vector<Computer> &cSciList);
 
-    void updateEntry(Computer cCom);
+    void updateEntrySci(string sid);
 
-    void updateEntry(CScientist cSci);
+    void updateEntryCom(string sid);
 
     int findLongestName(vector<CScientist> cSciList);
 
