@@ -87,10 +87,7 @@ void Presentation::restoreSci()
     dom.restoreEntry(scientists);
     if (scientists.empty())
     {
-        cout << "No entries to restore!" << endl;
-        cout << "Press any other key to go to the main menu!" << endl;
-        char ans = getch();
-        mainPage();
+        restoreFail();
     }
     else
     {
@@ -111,11 +108,7 @@ void Presentation::restoreCom()
     dom.restoreEntry(computers);
     if (computers.empty())
     {
-          cout << "No entries to restore!" << endl;
-          cout << "Press any key to go to the main menu" << endl;
-          char ans = getch();
-          system ("CLS");
-          mainPage();
+          restoreFail();
     }
     else
     {
@@ -128,8 +121,15 @@ void Presentation::restoreCom()
         else
         mainPage();
     }
+}
 
-
+void Presentation::restoreFail()
+{
+    cout << "No entries to restore!" << endl;
+    cout << "Press any key to go to the main menu" << endl;
+    char ans = getch();
+    system ("CLS");
+    mainPage();
 }
 
 void Presentation::restoreConnection()
@@ -196,6 +196,8 @@ void Presentation::addConnection()
     string sci = getNum("scientist/s","computer/s");
     printComList(computers);
     string com = getNum("computer/s", "scientist/s");
+
+    //dom.addRelation(sci, com);
 }
 
 string Presentation::getNum(string word1, string word2)

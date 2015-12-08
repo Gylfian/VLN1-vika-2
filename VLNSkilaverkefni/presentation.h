@@ -73,6 +73,7 @@ private:
     void analyze();
     void editSci();
     void editCom();
+    void restoreFail();
 };
 
 #endif // PRESENTATION_H
