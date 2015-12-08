@@ -328,7 +328,7 @@ void Data::updateStatus(Computer comp)
 void Data::insert(CScientist cSci)
 {
     QString qsql;
-    string sql = "INSERT INTO Computerscientists (Name, Gender, type, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    string sql = "INSERT INTO Computerscientists (Name, Gender, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
@@ -381,7 +381,7 @@ void Data::update(Computer comp)
 
     if(!comp.getYear().empty())
     {
-        sql += "year='" + comp.getYear() + "$' AND ";
+        sql += "year='" + comp.getYear() + "' AND ";
 
     }
 
