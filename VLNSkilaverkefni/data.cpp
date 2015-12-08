@@ -24,6 +24,7 @@ void Data::setDatabase()
     database.setDatabaseName(dbName);
     database.open();
 }
+
 vector<CScientist> Data::getSciVector()
 {
     return sci;
@@ -256,7 +257,8 @@ void Data::sortQueryCom(string & sql,int index1, int index2)
         sql += " DESC";
     }
 }
-void Data::selectDeletedSci()
+
+void Data::scientistToRestore()
 {
     QString qsql;
     string sql = "SELECT * FROM Computerscientists WHERE isActive ='0';";
@@ -264,7 +266,8 @@ void Data::selectDeletedSci()
     CScientist temp;
     fillVector(database, temp, qsql);
 }
-void Data::selectDeletedCom()
+
+void Data::computerToRestore()
 {
     QString qsql;
     string sql = "SELECT * FROM Computers WHERE isActive ='0';";
@@ -272,7 +275,8 @@ void Data::selectDeletedCom()
     Computer temp;
     fillVector(database, temp, qsql);
 }
-void Data::selectDeletedRel()
+
+void Data::relationToRestore()
 {
     QString qsql;
     string sql = "SELECT * FROM Relations WHERE isActive ='0';";

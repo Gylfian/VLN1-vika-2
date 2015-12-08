@@ -31,9 +31,9 @@ public:
     void update(Computer comp);
     vector<CScientist> getSciVector();
     vector<Computer> getComVector();
-    void selectDeletedSci();
-    void selectDeletedCom();
-    void selectDeletedRel();
+    void scientistToRestore();
+    void computerToRestore();
+    void relationToRestore();
 
 private:
    vector<CScientist> sci;
