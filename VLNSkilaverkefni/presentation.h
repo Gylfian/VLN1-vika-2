@@ -73,7 +73,8 @@ private:
     void analyze();
     void editSci();
     void editCom();
-    void restoreFail();
+    void textFail();
+    void searchText();
 };
 
 #endif // PRESENTATION_H

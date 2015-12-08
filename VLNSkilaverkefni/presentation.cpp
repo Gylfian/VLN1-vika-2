@@ -87,7 +87,7 @@ void Presentation::restoreSci()
     dom.restoreEntry(scientists);
     if (scientists.empty())
     {
-        restoreFail();
+        textFail();
     }
     else
     {
@@ -108,7 +108,7 @@ void Presentation::restoreCom()
     dom.restoreEntry(computers);
     if (computers.empty())
     {
-          restoreFail();
+          textFail();
     }
     else
     {
@@ -123,9 +123,9 @@ void Presentation::restoreCom()
     }
 }
 
-void Presentation::restoreFail()
+void Presentation::textFail()
 {
-    cout << "No entries to restore!" << endl;
+    cout << "No entries found!" << endl;
     cout << "Press any key to go to the main menu" << endl;
     char ans = getch();
     system ("CLS");
@@ -230,9 +230,16 @@ void Presentation::searchSciOrCom()
     }
 }
 
+void Presentation::searchText()
+{
+    cout << "Enter all the information you know" << endl;
+    cout << "Press return to skip entry and proceed to the next" << endl;
+}
+
 void Presentation::searchSci()
 {
     system("CLS");
+    searchText();
     string name, gender, Dob, Dod;
     int id = getSearchId();
 
@@ -276,9 +283,7 @@ void Presentation::searchSci()
     }
     else
     {
-        system("CLS");
-        cout << "Sorry nothing was found" << endl;
-        printListOptions();
+        textFail();
     }
 }
 
@@ -362,7 +367,7 @@ int Presentation::getSearchId()
 {
     string id;
     cout << "Enter ID: ";
-    getline(cin,id);
+    getline(cin, id);
     int ans = dom.checkStrInput(id);
 
     return ans;
@@ -402,8 +407,10 @@ string Presentation::getSearchAlive()
 void Presentation::searchCom()
 {
     system("CLS");
+    searchText();
     string name, type, year, built;
     int id = getSearchId();
+    cout << id << endl;
     if (id == -1)
     {
         name = getSearchName();
@@ -429,8 +436,15 @@ void Presentation::searchCom()
     Computer com(id, name, year, type, built);
     vector<Computer> computers;
     dom.search(computers,com);
-    printComList(computers);
-    printListOptions();
+    if (!computers.empty())
+    {
+        printComList(computers);
+        printListOptions();
+    }
+    else
+    {
+        textFail();
+    }
 }
 
 string Presentation::getSearchBuilt()
@@ -634,7 +648,7 @@ string Presentation::getInputDod(string Dob)
 {
     string Dod;
     cout << "Enter year of death: ";
-    cin >> Dod; 
+    cin >> Dod;
     bool valid = dom.normalizeYear(Dob, Dod);
     if(valid == false)
     {
@@ -1051,7 +1065,7 @@ void Presentation::sciOrComText(char which)
         }break;
         case ('2'):
         {
-            cout << "|-Which list fo you wish to search from?-|" << endl;
+            cout << "|-Which list do you wish to search from?-|" << endl;
         }break;
         case ('3'):
         {
