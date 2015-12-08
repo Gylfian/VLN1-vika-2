@@ -328,7 +328,16 @@ void Data::updateStatus(Computer comp)
 void Data::insert(CScientist cSci)
 {
     QString qsql;
-    string sql = "INSERT INTO Computerscientists (Name, Gender, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+ cSci.getDod() +"')";
+    string deathstatus;
+    if(cSci.getDod().length()==0)
+    {
+     deathstatus = "Alive";
+    }
+    else
+    {
+     deathstatus = cSci.getDod();
+    }
+    string sql = "INSERT INTO Computerscientists (Name, Gender, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+deathstatus+"')";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
