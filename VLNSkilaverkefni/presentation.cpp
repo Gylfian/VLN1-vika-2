@@ -100,8 +100,10 @@ void Presentation::restoreCom()
     vector<Computer> computers;
     dom.restoreEntry(computers);
     printComList(computers);
+    string id;
     cout << "Please select the computer you wish to restore" << endl;
-    int id = getSearchId();
+    cout << "Enter ID: ";
+    cin >> id;
     dom.updateEntryCom(id);
 
 }
