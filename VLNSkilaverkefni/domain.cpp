@@ -192,7 +192,6 @@ void Domain::updateEntrySci(string sid)
     vector<CScientist> cSciList = data.getSciVector();
     for(unsigned int i = 0; i < cSciList.size(); i++)
     {
-        cout << cSci.getName() << endl;
         if(cSciList[i].getId() == cSci.getId())
         {
             cSci = cSciList[i];
@@ -209,7 +208,6 @@ void Domain::updateEntryCom(string sid)
     vector<Computer> cComList = data.getComVector();
     for(unsigned int i = 0; i < cComList.size(); i++)
     {
-        cout << cCom.getName() << endl;
         if(cComList[i].getId() == cCom.getId())
         {
             cCom = cComList[i];
