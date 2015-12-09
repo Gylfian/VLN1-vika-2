@@ -202,6 +202,13 @@ void Domain::updateEntryCom(string sid)
     data.updateStatus(cCom);
 }
 
+void Domain::getRelationList(vector<Relation> &cRelList)
+{
+    Relation rel;
+    data.select(rel);
+    cRelList = data.getRelVector();
+}
+
 bool Domain::checkOption(char child)
 {
     if(child == '1')
