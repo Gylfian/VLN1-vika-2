@@ -71,6 +71,8 @@ public:
 
     bool normalizeYear(string born, string death);
 
+    void editEntry(string id);
+
     /*
      * Name: verifyBirthyear
      * Parameter/s: string year
@@ -106,6 +108,10 @@ public:
     void createRelation(string scientists, string computers);
 
     void getRelationList(vector<string> &strSci, vector<string> &strCom);
+
+    bool checkIdVector(vector<CScientist> cSciList, string id);
+
+    bool checkIdVector(vector<Computer> cComList, string id);
 private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);

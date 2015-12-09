@@ -168,6 +168,11 @@ void Domain::addEntry(Computer cCom)
     data.insert(cCom);
 }
 
+void Domain::editEntry(string id)
+{
+
+}
+
 void Domain::updateEntrySci(string sid)
 {
     CScientist cSci;
@@ -243,6 +248,32 @@ int Domain::findLongestType(vector<Computer> cComList)
         }
     }
     return length;
+}
+
+bool Domain::checkIdVector(vector<CScientist> cSciList, string sid)
+{
+    int id = convertToInt(sid);
+    for(unsigned int i = 0; i < cSciList.size(); i++)
+    {
+        if(cSciList[i].getId() == id)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Domain::checkIdVector(vector<Computer> cComList, string sid)
+{
+    int id = convertToInt(sid);
+    for(unsigned int i = 0; i < cComList.size(); i++)
+    {
+        if(cComList[i].getId() == id)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 int Domain::charToInt(char chr)
