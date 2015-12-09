@@ -23,86 +23,71 @@ public:
     Data();
 
    /*
-    * Name: getDatabase
-    * Parameter/s: None
-    * Description: represents a connection to the database.
-    * Usage: getDatabase()
-    * Output/Return: database
-    */
-    //QSqlDatabase getDatabase();
-
-   /*
     * Name: setDatabase
     * Parameter/s: None
     * Description: Opens the database so the user can access it.
-    * Usage: setDatabase()
+    * Usage: setDatabase();
     */
     void setDatabase();
-    bool editDatabase(QSqlDatabase db, const QString& command);
 
    /*
     * Name: select
-    * Parameter/s: CScientist cSci, int index1, int index2
-    * Description: Makes search command for the user.
-    * Usage: select(CScientist cSci, int index1, int index2)
-    * Output/Return: **
+    * Parameter/s: (CScientist cSci or Computer Comp, int index1, int index2) or (Relation Rel)
+    * Description: Creates a SELECT query needed for search and display.
+    * Usage: select(CScientist cSci or Computer comp, int index1, int index2) or select(Relation Rel);
     */
     void select(CScientist cSci, int index1, int index2);
     void select(Computer comp, int index1, int index2);
+    void select(Relation Rel);
 
    /*
     * Name: updateStatus
-    * Parameter/s: CScientist cSci
-    * Description: Changes the isActive status to either 1 or 0.
-    * Usage: updateStatus(CScientist cSci)
-    * Output/Return: if the scientist isActive = 0, it returns isActive = 1
+    * Parameter/s: CScientist cSci or Computer comp
+    * Description: Changes the isActive status of an entry so deleted entries are restored and entries that are not deleted are deleted
+    * Usage: updateStatus(CScientist cSci or Computer comp);
     */
     void updateStatus(CScientist cSci);
     void updateStatus(Computer comp);
 
    /*
     * Name: insert
-    * Parameter/s: CScientist cSci
-    * Description: The user is able to add scientists to the list.
-    * Usage: The user answers all informaitions quiestions.
-    * Output/Return: The new scientist/s.
+    * Parameter/s: CScientist cSci or Computer comp
+    * Description: Creates an INSERT query neccesary to add entries to the list
+    * Usage: insert(CScientist cSci or Computer comp);
     */
     void insert(CScientist cSci);
     void insert(Computer comp);
 
    /*
     * Name: update
-    * Parameter/s: CScientist cSci
-    * Description: The user can make changes to the list.
-    * Usage: When selected "Edit the lists", the user can change the informations in the lists.
-    * Output/Return: the new informaitions that the user inputs.
+    * Parameter/s: CScientist cSci or Computer comp
+    * Description: Creates a SET query necessary to edit entries in the list
+    * Usage: update(CScientist cSci); or update(CScientist cSci);
     */
     void update(CScientist cSci);
     void update(Computer comp);
-    vector<CScientist> getSciVector();
-    vector<Computer> getComVector();
-    vector<Relation> getRelVector();
 
    /*
-    * Name: scientistToRestore
+    * Name: ToRestore
     * Parameter/s: None
-    * Description: If the scientists is not active, the user can restore them.
-    * Usage: **
-    * Output/Return: **
+    * Description: Creates a SELECT query for entries that have been deleted
+    * Usage: scientistToRestore(); or computerToRestore(); or relationToRestore();
     */
     void scientistToRestore();
     void computerToRestore();
     void relationToRestore();
-    /*
-     * Name: setRelations
-     * Parameter/s: Computer comp, CScientist cSci
-     * Description:
-     * Usage:
-     * Output/Return:
-     */
+   /*
+    * Name: setRelations
+    * Parameter/s: Computer comp, CScientist cSci
+    * Description: Creates an INSERT query necessary to add Connections to the list
+    * Usage: setRelations(Computer comp, CScientist cSci);
+    */
     void setRelations(Computer comp, CScientist cSci);
 
-    void select(Relation Rel);
+    vector<CScientist> getSciVector();
+    vector<Computer> getComVector();
+    vector<Relation> getRelVector();
+
 private:
    vector<CScientist> sci;
    vector<Computer> com;
@@ -111,10 +96,10 @@ private:
 
    /*
     * Name: fillVector
-    * Parameter/s: QSqlDatabase db, CScientist sci, QString command
-    * Description: Fills the vector with informaition.
-    * Usage: fillVector(database, cSci, qsql)
-    * Output/Return: **
+    * Parameter/s: (QSqlDatabase db, CScientist sci or Computer or Relation Rel, QString command)
+    * Description: Executes the query and fills up the private vector
+    * Usage: fillVector(QSqlDatabase db,CScientis sci or Computer com or Relation rel,Qstring command);
+    * Output/Return: true or false
     */
    bool fillVector(QSqlDatabase db, CScientist sci, QString command);
    bool fillVector(QSqlDatabase db, Computer com, QString command);
@@ -122,17 +107,28 @@ private:
 
    /*
     * Name: makeQuery
-    * Parameter/s: CScientist sci, QSqlQuery query
-    * Description: Makes the query for the scientists
-    * Usage: **
-    * Output/Return: **
+    * Parameter/s: (CScientist & sci or Computer &  comp or Relation & rel, QSql query
+    * Description: Used in fillvector to add the variables from the query table into a variable to be pushed back in the vector
+    * Usage: makeQuery(CScientist sci or Computer comp or Relation Rel,QSqlQuery query);
     */
    void makeQuery(CScientist& sci, QSqlQuery query);
    void makeQuery(Computer & comp, QSqlQuery query);
    void makeQuery(Relation & rel, QSqlQuery query);
+   /*
+    * Name: sortQuery
+    * Parameter/s: (string & sql,int index1,int index2)
+    * Description: adds ORDER BY to the SELECT string created  in select
+    * Usage: sortQuerySci(string & sql,int index1, int index2);
+    */
    void sortQuerySci(string & sql,int index1, int index2);
    void sortQueryCom(string & sql,int index1, int index2);
-
+   /*
+    * Name: convertID
+    * Parameter/s: (int id)
+    * Description: Converts an id from an integer to a string so it can be added to a query string easily
+    * Usage: convertID(int id;
+    * Output/Return: the id as a string
+    */
    string convertId(int id);
 };
 
