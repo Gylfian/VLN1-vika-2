@@ -38,9 +38,8 @@ public:
     * Usage: setDatabase()
     */
     void setDatabase();
-    bool editDatabase(QSqlDatabase db, const QString& command);
 
-   /*
+    /*
     * Name: select
     * Parameter/s: CScientist cSci, int index1, int index2
     * Description: Makes search command for the user.

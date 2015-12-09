@@ -10,11 +10,6 @@ Data::Data()
     QSqlQuery query(database);
 }
 
-//QSqlDatabase Data::getDatabase()
-//{
-//    return database;
-//}
-
 void Data::setDatabase()
 {
     database = QSqlDatabase::addDatabase("QSQLITE");
