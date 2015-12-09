@@ -237,47 +237,6 @@ void Domain::getRelationList(vector<string> &strSci, vector<string> &strCom)
     }
 }
 
-void Domain::analyze(CScientist cSci, vector<Computer> &comConnect)
-{
-    vector<Relation> cRelList;
-    vector<Computer> cComList;
-    Relation rel;
-    CScientist sci;
-    Computer com;
-    data.select(rel);
-    cRelList = data.getRelVector();
-    for(unsigned int i = 0; i < cRelList.size(); i++)
-    {
-        sci = cRelList[i].getScientist();
-        com = cRelList[i].getComputer();
-        if(sci.getId() == cSci.getId())
-        {
-            cComList.push_back(com);
-        }
-    }
-    comConnect = cComList;
-}
-void Domain::analyze(Computer cCom, vector<CScientist> &sciConnect)
-{
-    vector<Relation> cRelList;
-    vector<CScientist> cSciList;
-    Relation rel;
-    CScientist sci;
-    Computer com;
-    data.select(rel);
-    cRelList = data.getRelVector();
-    for(unsigned int i = 0; i < cRelList.size(); i++)
-    {
-        sci = cRelList[i].getScientist();
-        com = cRelList[i].getComputer();
-        if(com.getId() == cCom.getId())
-        {
-            cSciList.push_back(sci);
-        }
-    }
-    sciConnect = cSciList;
-}
-
 bool Domain::checkOption(char child)
 {
     if(child == '1')
@@ -345,6 +304,22 @@ int Domain::findLongestName(vector<CScientist> cSciList)
         if(length < cSciList[i].getName().length())
         {
            length = cSciList[i].getName().length();
+        }
+    }
+    return length;
+}
+
+int Domain::findLongestName(vector<string> cStrList)
+{
+    unsigned int length = 0;
+    for(unsigned int i = 0; i < cStrList.size(); i++)
+    {
+        if(i+1 > cStrList.size())
+            break;
+
+        if(length < cStrList[i].length())
+        {
+           length = cStrList[i].length();
         }
     }
     return length;
