@@ -76,7 +76,7 @@ private:
     void searchText();
     void restoreFail();
     void displayRelation();
-    void printRelations(vector<string> scientists, vector<string> computers);
+    void printRelations(vector<string> scientists, vector<string> computers, vector<int> id);
     void successText(string word);
     CScientist getEditSci(int id);
     Computer getEditCom(int id);

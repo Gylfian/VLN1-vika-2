@@ -195,12 +195,13 @@ void Presentation::displayRelation()
 {
     vector<string> scientists;
     vector<string> computers;
-    dom.getRelationList(scientists, computers);
-    printRelations(scientists, computers);
+    vector<int> id;
+    dom.getRelationList(scientists, computers, id);
+    printRelations(scientists, computers, id);
 
 }
 
-void Presentation::printRelations(vector<string> scientists, vector<string> computers)
+void Presentation::printRelations(vector<string> scientists, vector<string> computers, vector<int> id)
 {
 
     int longestsci = dom.findLongestName(scientists);
@@ -209,7 +210,7 @@ void Presentation::printRelations(vector<string> scientists, vector<string> comp
     cout << setfill('-') << setw(longestsci + longestcom + 8) << '-' << endl;
     for (unsigned int i = 0; i < scientists.size(); i++)
     {
-        cout << right << setfill(' ') << setw(3) << i << "| " << left << setfill(' ') << setw(longestsci+2) << scientists[i]  << computers[i] << endl;
+        cout << right << setfill(' ') << setw(3) << id[i] << "| " << left << setfill(' ') << setw(longestsci+2) << scientists[i]  << computers[i] << endl;
         cout << setfill('-') << setw(longestsci + longestcom + 8) << '-' << endl;
     }
 }
