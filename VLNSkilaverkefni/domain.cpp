@@ -168,9 +168,14 @@ void Domain::addEntry(Computer cCom)
     data.insert(cCom);
 }
 
-void Domain::editEntry(string id)
+void Domain::editEntry(CScientist cSci)
 {
+    data.update(cSci);
+}
 
+void Domain::editEntry(Computer cCom)
+{
+    data.update(cCom);
 }
 
 void Domain::updateEntrySci(string sid)

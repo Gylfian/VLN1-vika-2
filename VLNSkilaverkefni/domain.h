@@ -66,13 +66,9 @@ public:
      * Output/Return: The longest type.
      */
     int findLongestType(vector<Computer> cComList);
-
     int checkStrInput(string str);
-
     bool normalizeYear(string born, string death);
-
     void editEntry(string id);
-
     /*
      * Name: verifyBirthyear
      * Parameter/s: string year
@@ -81,7 +77,6 @@ public:
      * Output/Return: false
      */
     bool verifyBirthyear(string year);
-
     /*
      * Name: deleteScientist
      * Parameter/s: CScientist cSci
@@ -90,7 +85,6 @@ public:
      * (vector<CScientist>)Output/Return: element deleted from database.
      */
     void addEntry(CScientist cSci);
-
     void addEntry(Computer cSci);
 
     /*
@@ -100,18 +94,14 @@ public:
      * (str)Output/Return: Jón Baldursson
      */
     bool normalizeName(string &name);
-
     bool checkIfLegitId(string sid);
-
     string convertToString(int n);
-
     void createRelation(string scientists, string computers);
-
     void getRelationList(vector<string> &strSci, vector<string> &strCom);
-
     bool checkIdVector(vector<CScientist> cSciList, string id);
-
     bool checkIdVector(vector<Computer> cComList, string id);
+    void editEntry(Computer cCom);
+    void editEntry(CScientist cSci);
 private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);
