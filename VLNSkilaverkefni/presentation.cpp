@@ -180,19 +180,21 @@ void Presentation::displayRelation()
     vector<string> computers;
     dom.getRelationList(scientists, computers);
     printRelations(scientists, computers);
+    printListOptions();
 }
 
 void Presentation::printRelations(vector<string> scientists, vector<string> computers)
-{/*
+{
 
     int longestsci = dom.findLongestName(scientists);
     int longestcom = dom.findLongestName(computers);
-    cout << ledt << setw(longestsci) << "Scientists" << setw(longestcom) << "Computers"
+    cout << setfill(' ') << "Scientists" << setw(longestsci+1) << "Computers" << endl;
+    cout << setfill('-') << setw(longestsci + longestcom + 3) << '-' << endl;
     for (unsigned int i = 0; i < scientists.size(); i++)
     {
-        cout <<
+        cout << left << setfill(' ') << setw(longestsci+2) << scientists[i]  << computers[i] << endl;
+        cout << setfill('-') << setw(longestsci + longestcom + 3) << '-' << endl;
     }
-    */
 }
 
 void Presentation::addSciOrCom()
@@ -314,6 +316,7 @@ void Presentation::searchSci()
     if (scientists.size() == 1)
     {
         printSciList(scientists);
+        printListOptions();
     }
     else if (!scientists.empty())
     {
@@ -360,6 +363,7 @@ void Presentation::searchCom()
     if (computers.size() == 1)
     {
         printComList(computers);
+        printListOptions();
     }
     else if (!computers.empty())
     {
