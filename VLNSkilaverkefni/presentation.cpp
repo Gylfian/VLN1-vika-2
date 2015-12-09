@@ -457,11 +457,11 @@ CScientist Presentation::getEditSci(int id)
     string name = getSearchName();
     string gender = getInputGender();
     string Dob, Dod;
-    cout << "Enter birth year: " << endl;
+    cout << "Enter birth year: ";
     getline(cin, Dob);
     if (!getInputAlive())
     {
-        cout << "Enter death year: " << endl;
+        cout << "Enter death year: ";
         getline(cin, Dod);
     }
     else
@@ -482,7 +482,7 @@ Computer Presentation::getEditCom(int id)
     if (built == "Yes")
     {
         cout << "Enter the year the computer was built: ";
-        getline(cin, name);
+        getline(cin, year);
     }
     else
     {
