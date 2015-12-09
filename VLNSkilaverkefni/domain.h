@@ -195,6 +195,7 @@ private:
      */
     int charToInt(char chr);
     Data data;
+    void changeRelation(string sid);
 
     /*
      * Name: get functions
