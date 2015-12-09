@@ -30,7 +30,7 @@ public:
     */
     void setDatabase();
 
-   /*
+    /*
     * Name: select
     * Parameter/s: (CScientist cSci or Computer Comp, int index1, int index2) or (Relation Rel)
     * Description: Creates a SELECT query needed for search and display.
