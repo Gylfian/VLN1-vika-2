@@ -96,6 +96,7 @@ public:
     bool normalizeName(string &name);
     bool checkIfLegitId(string sid);
     string convertToString(int n);
+    int convertToInt(string str);
     void createRelation(string scientists, string computers);
     void getRelationList(vector<string> &strSci, vector<string> &strCom);
     bool checkIdVector(vector<CScientist> cSciList, string id);
@@ -107,7 +108,6 @@ private:
     QString createDeleteQuery(CScientist cSci);
     QString createInsertQuery(CScientist cSci);
     int charToInt(char chr);
-    int convertToInt(string str);
     Data data;
     void getName(vector<CScientist> &cSciList, char child2);
     void getGender(vector<CScientist> &cSciList, char child2);
