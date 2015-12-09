@@ -32,6 +32,10 @@ vector<Computer> Data::getComVector()
 {
     return  com;
 }
+vector<Relation> Data::getRelVector()
+{
+    return rel;
+}
 
 bool Data::fillVector(QSqlDatabase db, CScientist temp, QString command)
 {
@@ -127,10 +131,14 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
 
 void Data::makeQuery(Relation& temp, QSqlQuery query)
 {
-    int qComp = query.value("ScientistID").toUInt();
-    temp.setComputerId(qComp);
-    int qSci = query.value("ComputerID").toUInt();
-    temp.setScientistId(qSci);
+    //int qComp = query.value("scientistID").toUInt();
+    //temp.setComputerId(qComp);
+    //int qSci = query.value("computerID").toUInt();
+    //temp.setScientistId(qSci);
+    string qSci = query.value("name").toString().toStdString();
+    temp.setScientistName(qSci);
+    string qComp = query.value("name").toString().toStdString();
+    temp.setComputerName(qComp);
 }
 
 void Data::select(CScientist cSci,int index1,int index2)

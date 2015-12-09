@@ -40,3 +40,11 @@ void Relation::setScientistId(unsigned int scientistToSet)
 {
     scientist.setId(scientistToSet);
 }
+void Relation::setComputerName(string nameToSet)
+{
+    computer.setName(nameToSet);
+}
+void Relation::setScientistName(string nameToSet)
+{
+    scientist.setName(nameToSet);
+}

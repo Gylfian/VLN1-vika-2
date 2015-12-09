@@ -202,6 +202,25 @@ void Domain::updateEntryCom(string sid)
     data.updateStatus(cCom);
 }
 
+void Domain::getRelationList(vector<string> &strSci, vector<string> &strCom)
+{
+    vector<Relation> cRelList;
+    CScientist sci;
+    Computer com;
+    Relation rel;
+    data.select(rel);
+    cRelList = data.getRelVector();
+    for(unsigned int i = 0; i < cRelList.size(); i++)
+    {
+         sci = cRelList[i].getScientist();
+         com = cRelList[i].getComputer();
+         string sstr = sci.getName();
+         string cstr = com.getName();
+         strSci.push_back(sstr);
+         strCom.push_back(cstr);
+    }
+}
+
 bool Domain::checkOption(char child)
 {
     if(child == '1')

@@ -105,7 +105,7 @@ public:
 
     void createRelation(string scientists, string computers);
 
-
+    void getRelationList(vector<string> &strSci, vector<string> &strCom);
 private:
     QString createSelectQuery(CScientist cSci);
     QString createDeleteQuery(CScientist cSci);

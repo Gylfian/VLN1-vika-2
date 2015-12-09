@@ -238,13 +238,16 @@ private:
      */
     string getDeleteId(string word);
     string getListId(string word1, string word2);
-    void analyze();
+    void findAnalyze();
     void editSci();
     void editCom();
-    void textFail();
+    void failText();
     void searchText();
     void restoreFail();
-
+    void analyze(vector<CScientist> scientists);
+    void analyse(vector<Computer> computers);
+    void displayRelation();
+    void printRelations(vector<Relation> relations);
 };
 
 #endif // PRESENTATION_H
