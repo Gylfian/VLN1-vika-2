@@ -450,7 +450,7 @@ CScientist Presentation::getEditSci(int id)
     string Dob, Dod;
     cout << "Enter birth year: " << endl;
     getline(cin, Dob);
-    if (getInputAlive())
+    if (!getInputAlive())
     {
         cout << "Enter death year: " << endl;
         getline(cin, Dod);
