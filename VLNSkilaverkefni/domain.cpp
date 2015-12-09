@@ -370,11 +370,6 @@ int Domain::checkStrInput(string str)
     if(str == "")
         return -1;
 
-    for(unsigned int i = 0; str.length(); i++)
-    {
-        if(!isdigit(str[i]))
-            return -1;
-    }
     n = convertToInt(str);
     return n;
 }
