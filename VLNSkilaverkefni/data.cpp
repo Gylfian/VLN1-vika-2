@@ -387,7 +387,6 @@ void Data::insert(Computer comp, CScientist cSci)
     string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
     qsql = QString::fromStdString(sql);
     QSqlQuery query;
-    query.exec(qsql);
     fillVector(database, cSci, qsql);
 }
 
