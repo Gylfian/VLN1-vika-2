@@ -365,26 +365,27 @@ void Data::update(CScientist cSci)
     QString qsql;
     int id = cSci.getId();
     string SciId = convertId(id);
-    string sql = "UPDATE Computerscientist SET id " + SciId;
+    string sql = "UPDATE Computerscientist SET ID " + SciId;
     if(!cSci.getName().empty())
     {
-        sql += " AND name ='" + cSci.getName() + "'";
+        sql += ", Name ='" + cSci.getName() + "'";
     }
 
     if(!cSci.getGender().empty())
     {
-        sql += " AND gender='" + cSci.getGender() + "'";
+        sql += ", Gender='" + cSci.getGender() + "'";
     }
 
     if(!cSci.getDob().empty())
     {
-        sql += " AND dob='" + cSci.getDob() + "'";
+        sql += ", Dob='" + cSci.getDob() + "'";
     }
 
     if(!cSci.getDod().empty())
     {
-        sql += " AND dod='" + cSci.getDod() + "'";
+        sql += ", Dod='" + cSci.getDod() + "'";
     }
+    sql += " WHERE ID=" + SciId;
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
