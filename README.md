@@ -66,6 +66,9 @@ Oh my god i made an error, how do I delete persons from the list?
     The program will display all the scientists and their ID's
     Now enter the ID of the computer you wish to delete and press return. If you change your mind press 1 to go back
     The system will prompt you and ask if you are sure, press y to delete and n to cancel
+    If you wish to delete a connection press 3
+    The program will display all the scientists and their ID's
+    Now enter the ID of the computer you wish to delete and press return. 
 
 How do I edit lists?
     From the main menu press 5
@@ -83,4 +86,3 @@ Oh sweet baby Jesus i deleted the wrong entry, is there a way to undo my catastr
     From there simply press 1 to restore a scientist, 2 to restore a computer or 3 to restore a connection
     After you've made your choice the program will display all the entries
     Enter the ID of the entry you wish to restore and then press return. If you change your mind and don't wan't to restore an entry just press return
-
