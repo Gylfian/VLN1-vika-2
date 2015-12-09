@@ -248,6 +248,7 @@ private:
     void analyse(vector<Computer> computers);
     void displayRelation();
     void printRelations(vector<string> scientists, vector<string> computer);
+    void successText(string word);
 };
 
 #endif // PRESENTATION_H
