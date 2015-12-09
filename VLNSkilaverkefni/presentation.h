@@ -9,9 +9,9 @@ class Presentation
 {
 public:
     void mainPage();
+
 private:
     Domain dom;
-
     void addScientist();
     void options();
     bool another(string word);

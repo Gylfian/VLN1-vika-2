@@ -87,7 +87,7 @@ public:
     vector<CScientist> getSciVector();
     vector<Computer> getComVector();
     vector<Relation> getRelVector();
-
+    void updateStatus(Relation rel);
 private:
    vector<CScientist> sci;
    vector<Computer> com;

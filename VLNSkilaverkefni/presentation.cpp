@@ -539,7 +539,6 @@ int Presentation::getSearchId()
     cout << "Enter ID: ";
     getline(cin, id);
     int ans = dom.checkStrInput(id);
-
     return ans;
 }
 
@@ -674,7 +673,6 @@ void Presentation::deleteCom()
         system("CLS");
         mainPage();
     }
-
 }
 
 string Presentation::getListId(string word1, string word2)
