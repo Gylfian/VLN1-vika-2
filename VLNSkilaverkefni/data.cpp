@@ -127,14 +127,14 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
 
 void Data::makeQuery(Relation& temp, QSqlQuery query)
 {
-    int qId = query.value("ID").toUInt();
-    temp.setId(qId);
+   int qId = query.value("ID").toUInt();
+   temp.setId(qId);
     string qSci = query.value("SName").toString().toStdString();
     temp.setScientistName(qSci);
     string qComp = query.value("CName").toString().toStdString();
     temp.setComputerName(qComp);
-    bool qIsActive = query.value("isActive").toBool();
-    temp.setIsActive(qIsActive);
+   bool qIsActive = query.value("isActive").toBool();
+   temp.setIsActive(qIsActive);
 }
 
 void Data::select(CScientist cSci,int index1,int index2)
@@ -206,9 +206,9 @@ void Data::select(Computer comp,int index1,int index2)
 void Data::select(Relation Rel)
 {
     QString qsql;
-    string sql = "SELECT Computerscientists.Name as 'SName', Computers.Name as 'CName' FROM Computerscientists INNER JOIN scientists_computers ";
-    sql+= "ON Computerscientists.ID = scientists_computers.scientistID ";
-    sql+= "INNER JOIN Computers ON Computers.ID = scientists_computers.computerID ORDER BY SName; ";
+    string sql = "SELECT Computerscientists.Name as 'SName', Computers.Name as'CName',scientists_computers.ID,scientists_computers.isActive ";
+    sql += "FROM Computerscientists INNER JOIN scientists_computers ON Computerscientists.ID = scientists_computers.scientistID ";
+    sql += " INNER JOIN Computers ON Computers.ID = scientists_computers.computerID";
     qsql = QString::fromStdString(sql);
     fillVector(database, Rel, qsql);
 }
@@ -344,14 +344,11 @@ void Data::updateStatus(Relation rel)
 {
     QString qsql;
     string sql;
-    if(rel.getIsActive() == 1)
-    {
-        sql = "UPDATE scientists_computers SET isActive=0 WHERE ID = " + rel.getId();
-    }
-    else
-    {
-        sql = "UPDATE scientists_computers SET isActive=1 WHERE ID = " + rel.getId();
-    }
+    int id = rel.getId();
+    string reId = convertId(id);
+
+        sql = "UPDATE scientists_computers SET isActive=0 WHERE ID = " + reId;
+
     qsql = QString::fromStdString(sql);
     fillVector(database, rel, qsql);
 }
