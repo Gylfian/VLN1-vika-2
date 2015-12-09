@@ -127,10 +127,6 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
 
 void Data::makeQuery(Relation& temp, QSqlQuery query)
 {
-    //int qComp = query.value("scientistID").toUInt();
-    //temp.setComputerId(qComp);
-    //int qSci = query.value("computerID").toUInt();
-    //temp.setScientistId(qSci);
     string qSci = query.value("SName").toString().toStdString();
     temp.setScientistName(qSci);
     string qComp = query.value("CName").toString().toStdString();
@@ -338,6 +334,22 @@ void Data::updateStatus(Computer comp)
     }
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
+}
+
+void Data::updateStatus(Relation rel)
+{
+    QString qsql;
+    string sql;
+    if(rel.getIsActive() == 1)
+    {
+        sql = "UPDATE scientists_computers SET isActive=0 WHERE ID = " + rel.getId();
+    }
+    else
+    {
+        sql = "UPDATE scientists_computers SET isActive=1 WHERE ID = " + rel.getId();
+    }
+    qsql = QString::fromStdString(sql);
+    fillVector(database, rel, qsql);
 }
 
 void Data::insert(CScientist cSci)

@@ -184,6 +184,7 @@ public:
      */
     void editEntry(Computer cCom);
     void editEntry(CScientist cSci);
+
 private:
     /*
      * Name: charToInt

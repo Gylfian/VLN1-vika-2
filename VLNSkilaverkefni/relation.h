@@ -11,6 +11,8 @@ public:
     Relation(Computer computerToSet, CScientist scientistToSet);
     Computer getComputer();
     CScientist getScientist();
+    int getId();
+    bool getIsActive();
     void setComputer(Computer computerToSet);
     void setScientist(CScientist scientistToSet);
     void setComputerId(unsigned int computerIdToSet);
@@ -21,6 +23,8 @@ public:
 private:
     Computer computer;
     CScientist scientist;
+    int id;
+    bool isActive;
 };
 
 #endif // RELATION_H
