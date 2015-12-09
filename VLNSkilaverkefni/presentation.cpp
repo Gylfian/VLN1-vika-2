@@ -188,7 +188,7 @@ void Presentation::printRelations(vector<string> scientists, vector<string> comp
 
     int longestsci = dom.findLongestName(scientists);
     int longestcom = dom.findLongestName(computers);
-    cout << setfill(' ') << "Scientists" << setw(longestsci+1) << "Computers" << endl;
+    cout << "Scientists" << string(longestsci - 8 , ' ') << "Computers" << endl;
     cout << setfill('-') << setw(longestsci + longestcom + 3) << '-' << endl;
     for (unsigned int i = 0; i < scientists.size(); i++)
     {

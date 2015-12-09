@@ -12,15 +12,15 @@ void Domain::sortBy(vector<CScientist> &cSciList, char child, char child2)
     {
         getName(cSciList, child2);
     }
-    else if(child == '2') //gender
+    else if(child == '2') //sort by gender
     {
         getGender(cSciList, child2);
     }
-    else if(child == '3') //year
+    else if(child == '3') //sort by year born
     {
         getYear(cSciList, child2);
     }
-    else if(child == '4') //yeardeath
+    else if(child == '4') //sort by year of death
     {
         getYearDeath(cSciList, child2);
     }
@@ -36,15 +36,15 @@ void Domain::sortBy(vector<Computer> &cComList, char child, char child2)
     {
         getComName(cComList, child2);
     }
-    else if(child == '2')//type
+    else if(child == '2')//sort by type
     {
         getComType(cComList, child2);
     }
-    else if(child == '3')//year
+    else if(child == '3')//sort by if built
     {
         getComBuilt(cComList, child2);
     }
-    else if(child == '4')//ya
+    else if(child == '4')//sort by year built
     {
         getComYear(cComList, child2);
     }
@@ -179,8 +179,11 @@ void Domain::editEntry(CScientist cSci)
 void Domain::editEntry(Computer cCom)
 {
     string str = cCom.getName();
+    string type = cCom.getType();
+    normalizeName(type);
     normalizeName(str);
     cCom.setName(str);
+    cCom.setType(type);
     data.update(cCom);
 }
 
@@ -429,7 +432,7 @@ void Domain::solveIdToDb(vector<Computer> &cComList, vector<int> solvedIdList)
 
 void Domain::addRelation(CScientist cSci, Computer cCom)
 {
-    data.setRelations(cCom, cSci);
+    data.insert(cCom, cSci);
 }
 
 vector<int> Domain::solveString(string str)

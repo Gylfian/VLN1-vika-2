@@ -51,12 +51,13 @@ public:
 
    /*
     * Name: insert
-    * Parameter/s: CScientist cSci or Computer comp
+    * Parameter/s: (CScientist cSci or Computer comp) or (Computer comp, CScientist cSci)
     * Description: Creates an INSERT query neccesary to add entries to the list
-    * Usage: insert(CScientist cSci or Computer comp);
+    * Usage: insert(CScientist cSci or Computer comp); or insert(Computer comp, CScientist cSci);
     */
     void insert(CScientist cSci);
     void insert(Computer comp);
+    void insert(Computer comp, CScientist cSci);
 
    /*
     * Name: update
@@ -76,13 +77,6 @@ public:
     void scientistToRestore();
     void computerToRestore();
     void relationToRestore();
-   /*
-    * Name: setRelations
-    * Parameter/s: Computer comp, CScientist cSci
-    * Description: Creates an INSERT query necessary to add Connections to the list
-    * Usage: setRelations(Computer comp, CScientist cSci);
-    */
-    void setRelations(Computer comp, CScientist cSci);
 
     vector<CScientist> getSciVector();
     vector<Computer> getComVector();

@@ -204,7 +204,7 @@ void Data::select(Relation Rel)
     QString qsql;
     string sql = "SELECT Computerscientists.Name as 'SName', Computers.Name as 'CName' FROM Computerscientists INNER JOIN scientists_computers ";
     sql+= "ON Computerscientists.ID = scientists_computers.scientistID ";
-    sql+= "INNER JOIN Computers ON Computers.ID = scientists_computers.computerID; ";
+    sql+= "INNER JOIN Computers ON Computers.ID = scientists_computers.computerID ORDER BY SName; ";
     qsql = QString::fromStdString(sql);
     fillVector(database, Rel, qsql);
 }
@@ -377,6 +377,20 @@ void Data::insert(Computer comp)
     fillVector(database, comp, qsql);
 }
 
+void Data::insert(Computer comp, CScientist cSci)
+{
+    QString qsql;
+    int id = cSci.getId();
+    string sciId = convertId(id);
+    id = comp.getId();
+    string compId = convertId(id);
+    string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
+    qsql = QString::fromStdString(sql);
+    QSqlQuery query;
+    query.exec(qsql);
+    fillVector(database, cSci, qsql);
+}
+
 void Data::update(CScientist cSci)
 {
     QString qsql;
@@ -439,20 +453,6 @@ void Data::update(Computer comp)
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
-}
-
-void Data::setRelations(Computer comp, CScientist cSci)
-{
-    QString qsql;
-    int id = cSci.getId();
-    string sciId = convertId(id);
-    id = comp.getId();
-    string compId = convertId(id);
-    string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
-    qsql = QString::fromStdString(sql);
-    QSqlQuery query;
-    query.exec(qsql);
-    fillVector(database, cSci, qsql);
 }
 
 string Data::convertId(int id)
