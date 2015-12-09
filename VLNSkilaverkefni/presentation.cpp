@@ -72,10 +72,6 @@ void Presentation::restoreSciOrCom()
         {
             restoreCom();
         }break;
-        case ('3'):
-        {
-            restoreConnection();
-        }break;
         default:
             mainPage();
     }
@@ -145,10 +141,20 @@ void Presentation::restoreCom()
     }
 }
 
-void Presentation::restoreConnection()
+void Presentation::delConnection()
 {
     displayRelation();
-    string id = getListId("connection", "restore");
+    string id = getListId("connection", "delete");
+    if(dom.checkIfLegitId(id))
+    {
+        dom.changeRelation(id);
+        successText("deleted");
+    }
+    else
+    {
+        system("CLS");
+        mainPage();
+    }
 }
 
 void Presentation::failText()
@@ -550,6 +556,7 @@ int Presentation::getSearchId()
     cout << "Enter ID: ";
     getline(cin, id);
     int ans = dom.checkStrInput(id);
+
     return ans;
 }
 
@@ -632,7 +639,7 @@ void Presentation::deleteSciOrCom()
         }break;
         case ('3'):
         {
-            deleteConnection();
+            delConnection();
         }break;
         default:
             mainPage();
@@ -688,12 +695,6 @@ void Presentation::deleteCom()
         system("CLS");
         mainPage();
     }
-}
-
-void Presentation::deleteConnection()
-{
-    displayRelation();
-    string id = getListId("connection", "delete");
 
 }
 
@@ -1265,10 +1266,6 @@ void Presentation::sciOrComText(char which)
         case ('4'):
         {
             cout << "|-3) Delete a connection-----------------|" << endl;
-        }break;
-        case ('6'):
-        {
-            cout << "|-3) Restore a connection-----------------|" << endl;
         }break;
     }
     cout << "|-Press any other key to go back---------|" << endl;

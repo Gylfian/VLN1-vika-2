@@ -65,7 +65,6 @@ private:
     void restoreSciOrCom();
     void restoreSci();
     void restoreCom();
-    void restoreConnection();
     string getSearchAlive();
     void deleteSci();
     void deleteCom();
@@ -81,7 +80,8 @@ private:
     void successText(string word);
     CScientist getEditSci(int id);
     Computer getEditCom(int id);
-    void deleteConnection();
+    void delConnection();
+    void resConnection();
 };
 
 #endif // PRESENTATION_H
