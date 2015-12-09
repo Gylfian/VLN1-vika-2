@@ -256,6 +256,15 @@ bool Domain::checkOption(char child)
     return false;
 }
 
+bool Domain::idHigher(string id, vector<int> ids)
+{
+    if(id > ids[ids.size()])
+    {
+        return false;
+    }
+    return true;
+}
+
 int Domain::findLongestType(vector<Computer> cComList)
 {
     unsigned int length = 0;
