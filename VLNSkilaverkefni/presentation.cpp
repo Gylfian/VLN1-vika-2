@@ -87,7 +87,7 @@ void Presentation::restoreSci()
     dom.restoreEntry(scientists);
     if (scientists.empty())
     {
-        textFail();
+        failText();
     }
     else
     {
@@ -108,7 +108,7 @@ void Presentation::restoreCom()
     dom.restoreEntry(computers);
     if (computers.empty())
     {
-          textFail();
+          failText();
     }
     else
     {
@@ -123,7 +123,7 @@ void Presentation::restoreCom()
     }
 }
 
-void Presentation::textFail()
+void Presentation::failText()
 {
     cout << "No entries found!" << endl;
     cout << "Press any key to go to the main menu" << endl;
@@ -154,10 +154,32 @@ void Presentation::printSciOrCom()
         }break;
         case ('3'):
         {
-
+            displayRelation();
         }break;
         default:
             mainPage();
+    }
+}
+
+void Presentation::displayRelation()
+{
+    vector<Relation> relations;
+    dom.getRelationList(relations);
+
+    printRelations(relations);
+
+}
+
+void Presentation::printRelations(vector<Relation> relations)
+{
+    CScientist sci;
+    Computer com;
+
+    for (unsigned int i = 0; i < relations.size(); i++)
+    {
+       sci = relations[i].getScientist();
+       com = relations[i].getComputer();
+       cout << sci.getName() << '\t' << com.getName();
     }
 }
 
@@ -197,7 +219,7 @@ void Presentation::addConnection()
     printComList(computers);
     string com = getNum("computer/s", "scientist/s");
 
-    //dom.addRelation(sci, com);
+    dom.createRelation(sci, com);
 }
 
 string Presentation::getNum(string word1, string word2)
@@ -276,14 +298,64 @@ void Presentation::searchSci()
     CScientist cSci(id, name, gender, Dob, Dod, 1);
     vector <CScientist> scientists;
     dom.search(scientists, cSci);
-    if (!scientists.empty())
+    if (scientists.size() == 1)
+    {
+        printSciList(scientists);
+    }
+    else if (!scientists.empty())
     {
         printSciList(scientists);
         printListOptions();
     }
     else
     {
-        textFail();
+        failText();
+    }
+}
+
+void Presentation::searchCom()
+{
+    system("CLS");
+    searchText();
+    string name, type, year, built;
+    int id = getSearchId();
+    if (id == -1)
+    {
+        name = getSearchName();
+        cout << "Enter type: ";
+        getline(cin,type);
+        built = getSearchBuilt();
+        if (built == "Yes")
+        {
+            cout << "Enter the year the computer was built: ";
+            getline(cin, name);
+        }
+        else
+        {
+            year = "";
+        }
+    }
+    else
+    {
+        name = "";
+        type = "";
+        built = "";
+    }
+    Computer com(id, name, year, type, built);
+    vector<Computer> computers;
+    dom.search(computers,com);
+    if (computers.size() == 1)
+    {
+        printComList(computers);
+    }
+    else if (!computers.empty())
+    {
+        printComList(computers);
+        printListOptions();
+    }
+    else
+    {
+        failText();
     }
 }
 
@@ -402,49 +474,6 @@ string Presentation::getSearchAlive()
     }
 
     return alive;
-}
-
-void Presentation::searchCom()
-{
-    system("CLS");
-    searchText();
-    string name, type, year, built;
-    int id = getSearchId();
-    cout << id << endl;
-    if (id == -1)
-    {
-        name = getSearchName();
-        cout << "Enter type: ";
-        getline(cin,type);
-        built = getSearchBuilt();
-        if (built == "Yes")
-        {
-            cout << "Enter the year the computer was built: ";
-            getline(cin, name);
-        }
-        else
-        {
-            year = "";
-        }
-    }
-    else
-    {
-        name = "";
-        type = "";
-        built = "";
-    }
-    Computer com(id, name, year, type, built);
-    vector<Computer> computers;
-    dom.search(computers,com);
-    if (!computers.empty())
-    {
-        printComList(computers);
-        printListOptions();
-    }
-    else
-    {
-        textFail();
-    }
 }
 
 string Presentation::getSearchBuilt()
@@ -929,7 +958,7 @@ void Presentation::printListOptions()
     {
         case ('1'):
         {
-            analyze();
+            findAnalyze();
         }break;
         case ('2'):
         {
@@ -941,12 +970,22 @@ void Presentation::printListOptions()
     }
 }
 
-void Presentation::analyze()
+void Presentation::findAnalyze()
 {
     cout << "Enter the ID of the entry you wish to analyze" << endl;
     cout << "ID: ";
     string id;
     getline(cin, id);
+}
+
+void Presentation::analyze(vector<CScientist> scientists)
+{
+
+}
+
+void Presentation::analyse(vector<Computer> computers)
+{
+
 }
 
 void Presentation::printListText()
