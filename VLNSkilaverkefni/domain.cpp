@@ -219,7 +219,7 @@ void Domain::updateEntryCom(string sid)
     data.updateStatus(cCom);
 }
 
-void Domain::getRelationList(vector<string> &strSci, vector<string> &strCom)
+void Domain::getRelationList(vector<string> &strSci, vector<string> &strCom, vector<int> &idRelations)
 {
     vector<Relation> cRelList;
     CScientist sci;
@@ -233,6 +233,8 @@ void Domain::getRelationList(vector<string> &strSci, vector<string> &strCom)
          com = cRelList[i].getComputer();
          string sstr = sci.getName();
          string cstr = com.getName();
+         int id = cRelList[i].getId();
+         idRelations.push_back(id);
          strSci.push_back(sstr);
          strCom.push_back(cstr);
     }
