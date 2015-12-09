@@ -135,9 +135,9 @@ void Data::makeQuery(Relation& temp, QSqlQuery query)
     //temp.setComputerId(qComp);
     //int qSci = query.value("computerID").toUInt();
     //temp.setScientistId(qSci);
-    string qSci = query.value("name").toString().toStdString();
+    string qSci = query.value("SName").toString().toStdString();
     temp.setScientistName(qSci);
-    string qComp = query.value("name").toString().toStdString();
+    string qComp = query.value("CName").toString().toStdString();
     temp.setComputerName(qComp);
 }
 
@@ -212,7 +212,7 @@ void Data::select(Computer comp,int index1,int index2)
 void Data::select(Relation Rel)
 {
     QString qsql;
-    string sql = "SELECT Computerscientists.Name, Computers.Name FROM Computerscientists INNER JOIN scientists_computers ";
+    string sql = "SELECT Computerscientists.Name as 'SName', Computers.Name as 'CName' FROM Computerscientists INNER JOIN scientists_computers ";
     sql+= "ON Computerscientists.ID = scientists_computers.scientistID ";
     sql+= "INNER JOIN Computers ON Computers.ID = scientists_computers.computerID; ";
     qsql = QString::fromStdString(sql);
