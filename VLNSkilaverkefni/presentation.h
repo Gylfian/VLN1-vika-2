@@ -247,7 +247,7 @@ private:
     void analyze(vector<CScientist> scientists);
     void analyse(vector<Computer> computers);
     void displayRelation();
-    void printRelations(vector<Relation> relations);
+    void printRelations(vector<string> scientists, vector<string> computer);
 };
 
 #endif // PRESENTATION_H
