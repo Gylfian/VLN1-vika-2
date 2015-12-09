@@ -131,9 +131,9 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
 
 void Data::makeQuery(Relation& temp, QSqlQuery query)
 {
-    int qComp = query.value("ScientistID").toUInt();
+    int qComp = query.value("scientistID").toUInt();
     temp.setComputerId(qComp);
-    int qSci = query.value("ComputerID").toUInt();
+    int qSci = query.value("computerID").toUInt();
     temp.setScientistId(qSci);
 }
 
