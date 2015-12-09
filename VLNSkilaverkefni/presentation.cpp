@@ -163,23 +163,20 @@ void Presentation::printSciOrCom()
 
 void Presentation::displayRelation()
 {
-    vector<Relation> relations;
-    dom.getRelationList(relations);
+    vector<string> scientists;
+    vector<string> computers;
+    dom.getRelationList(scientists, computers);
 
-    printRelations(relations);
+
+    printRelations(scientists, computers);
 
 }
 
-void Presentation::printRelations(vector<Relation> relations)
+void Presentation::printRelations(vector<string> scientists, vector<string> computer)
 {
-    CScientist sci;
-    Computer com;
-
-    for (unsigned int i = 0; i < relations.size(); i++)
+    for (unsigned int i = 0; i < scientists.size(); i++)
     {
-       sci = relations[i].getScientist();
-       com = relations[i].getComputer();
-       cout << sci.getName() << '\t' << com.getName();
+       cout << scientists[i] << '\t' << computer[i] << endl;
     }
 }
 
@@ -393,6 +390,12 @@ void Presentation::editCom()
     dom.sortBy(computers, '5','1');
     printComList(computers);
     string id = getListId("computer", "edit");
+    if (dom.checkIfLegitId(id))
+    {
+
+    }
+    else
+        ;
 }
 
 string Presentation::getSearchName()
