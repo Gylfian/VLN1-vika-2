@@ -227,6 +227,7 @@ void Presentation::addConnection()
     string com = getNum("computer/s", "scientist/s");
 
     dom.createRelation(sci, com);
+    successText("connected");
 }
 
 string Presentation::getNum(string word1, string word2)
@@ -392,12 +393,27 @@ void Presentation::editSci()
     dom.sortBy(scientists, '5','1');
     printSciList(scientists);
     string id = getListId("scientist", "edit");
-    if (dom.checkIfLegitId(id))
+    if(dom.checkIfLegitId(id))
     {
-
+        if (dom.checkIdVector(scientists, id))
+        {
+            CScientist sci;
+            sci = getScientistData();
+            int sid = dom.convertToInt(id);
+            sci.setId(sid);
+            dom.editEntry(sci);
+            successText("edited");
+        }
+        else
+        {
+            failText();
+        }
     }
     else
-        ;
+    {
+        system("CLS");
+        mainPage();
+    }
 }
 
 void Presentation::editCom()
@@ -406,12 +422,27 @@ void Presentation::editCom()
     dom.sortBy(computers, '5','1');
     printComList(computers);
     string id = getListId("computer", "edit");
-    if (dom.checkIfLegitId(id))
+    if(dom.checkIfLegitId(id))
     {
-
+        if (dom.checkIdVector(computers, id))
+        {
+            Computer com;
+            com = getComputerData();
+            int cid = dom.convertToInt(id);
+            com.setId(cid);
+            dom.editEntry(com);
+            successText("edited");
+        }
+        else
+        {
+            failText();
+        }
     }
     else
-        ;
+    {
+        system("CLS");
+        mainPage();
+    }
 }
 
 string Presentation::getSearchName()
