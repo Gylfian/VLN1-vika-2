@@ -17,7 +17,7 @@ public:
     Domain();
 
     /*
-     * Name: getScientistList
+     * Name: search
      * Parameter/s: none
      * Description: Returns a list of scientists from text file
      * Usage: vector<CScientist> list = getScientistList()
@@ -58,6 +58,8 @@ public:
      */
     int findLongestName(vector<Computer> cComList);
 
+    int findLongestName(vector<string> cStrList);
+
     /*
      * Name:findLongestType
      * Parameter/s: vector<Computer> cComList
@@ -66,6 +68,7 @@ public:
      * Output/Return: The longest type.
      */
     int findLongestType(vector<Computer> cComList);
+
     int checkStrInput(string str);
     bool normalizeYear(string born, string death);
     void editEntry(string id);
@@ -77,12 +80,13 @@ public:
      * Output/Return: false
      */
     bool verifyBirthyear(string year);
+
     /*
-     * Name: deleteScientist
-     * Parameter/s: CScientist cSci
-     * Description: Deletes a specific scientist from the list
-     * Usage: deleteScFFFFFFFFFFFFientist(cSci);
-     * (vector<CScientist>)Output/Return: element deleted from database.
+     * Name: addEntry
+     * Parameter/s: CScientist cSci or Computer cSci
+     * Description: Adds an entry to database.
+     * Usage: addEntry(cSci);
+     * (void)Output/Return: element deleted from database.
      */
     void addEntry(CScientist cSci);
     void addEntry(Computer cSci);
@@ -103,8 +107,6 @@ public:
     bool checkIdVector(vector<Computer> cComList, string id);
     void editEntry(Computer cCom);
     void editEntry(CScientist cSci);
-    void analyze(CScientist cSci, vector<Computer> &comConnect);
-    void analyze(Computer cCom, vector<CScientist> &sciConnect);
 private:
     int charToInt(char chr);
     Data data;
