@@ -365,6 +365,20 @@ void Data::insert(Computer comp)
     fillVector(database, comp, qsql);
 }
 
+void Data::insert(Computer comp, CScientist cSci)
+{
+    QString qsql;
+    int id = cSci.getId();
+    string sciId = convertId(id);
+    id = comp.getId();
+    string compId = convertId(id);
+    string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
+    qsql = QString::fromStdString(sql);
+    QSqlQuery query;
+    query.exec(qsql);
+    fillVector(database, cSci, qsql);
+}
+
 void Data::update(CScientist cSci)
 {
     QString qsql;
@@ -427,20 +441,6 @@ void Data::update(Computer comp)
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
-}
-
-void Data::setRelations(Computer comp, CScientist cSci)
-{
-    QString qsql;
-    int id = cSci.getId();
-    string sciId = convertId(id);
-    id = comp.getId();
-    string compId = convertId(id);
-    string sql = "INSERT INTO scientists_computers (scientistID, computerID, isActive) VALUES (" + sciId + "," + compId + ",1);";
-    qsql = QString::fromStdString(sql);
-    QSqlQuery query;
-    query.exec(qsql);
-    fillVector(database, cSci, qsql);
 }
 
 string Data::convertId(int id)
