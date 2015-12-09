@@ -103,10 +103,9 @@ public:
     bool checkIdVector(vector<Computer> cComList, string id);
     void editEntry(Computer cCom);
     void editEntry(CScientist cSci);
+    void analyze(CScientist cSci, vector<Computer> &comConnect);
+    void analyze(Computer cCom, vector<CScientist> &sciConnect);
 private:
-    QString createSelectQuery(CScientist cSci);
-    QString createDeleteQuery(CScientist cSci);
-    QString createInsertQuery(CScientist cSci);
     int charToInt(char chr);
     Data data;
     void getName(vector<CScientist> &cSciList, char child2);
