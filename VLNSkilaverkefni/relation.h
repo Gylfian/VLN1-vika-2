@@ -13,13 +13,10 @@ public:
     CScientist getScientist();
     int getId();
     bool getIsActive();
-    void setComputer(Computer computerToSet);
-    void setScientist(CScientist scientistToSet);
-    void setComputerId(unsigned int computerIdToSet);
-    void setScientistId(unsigned int scientistIdToSet);
     void setComputerName(string nameToSet);
     void setScientistName(string nameToSet);
-
+    void setId(int idToSet);
+    void setIsActive(bool isAcToSet);
 private:
     Computer computer;
     CScientist scientist;

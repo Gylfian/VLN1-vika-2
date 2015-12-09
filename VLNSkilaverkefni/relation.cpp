@@ -31,26 +31,6 @@ int Relation::getId()
     return id;
 }
 
-void Relation::setComputer(Computer computerToSet)
-{
-    computer = computerToSet;
-}
-
-void Relation::setScientist(CScientist scientistToSet)
-{
-    scientist = scientistToSet;
-}
-
-void Relation::setComputerId(unsigned int computerToSet)
-{
-    computer.setId(computerToSet);
-}
-
-void Relation::setScientistId(unsigned int scientistToSet)
-{
-    scientist.setId(scientistToSet);
-}
-
 void Relation::setComputerName(string nameToSet)
 {
     computer.setName(nameToSet);
@@ -59,4 +39,14 @@ void Relation::setComputerName(string nameToSet)
 void Relation::setScientistName(string nameToSet)
 {
     scientist.setName(nameToSet);
+}
+
+void Relation::setIsActive(bool isAcToSet)
+{
+    isActive = isAcToSet;
+}
+
+void Relation::setId(int idToSet)
+{
+    id = idToSet;
 }

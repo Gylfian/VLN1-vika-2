@@ -238,6 +238,13 @@ void Domain::getRelationList(vector<string> &strSci, vector<string> &strCom)
     }
 }
 
+void Domain::changeRelation(string sid)
+{
+    Relation rel;
+    int id = convertToInt(sid);
+
+}
+
 bool Domain::checkOption(char child)
 {
     if(child == '1')

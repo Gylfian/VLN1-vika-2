@@ -127,10 +127,14 @@ void Data::makeQuery(Computer& temp, QSqlQuery query)
 
 void Data::makeQuery(Relation& temp, QSqlQuery query)
 {
+    int qId = query.value("ID").toUInt();
+    temp.setId(qId);
     string qSci = query.value("SName").toString().toStdString();
     temp.setScientistName(qSci);
     string qComp = query.value("CName").toString().toStdString();
     temp.setComputerName(qComp);
+    bool qIsActive = query.value("isActive").toBool();
+    temp.setIsActive(qIsActive);
 }
 
 void Data::select(CScientist cSci,int index1,int index2)
