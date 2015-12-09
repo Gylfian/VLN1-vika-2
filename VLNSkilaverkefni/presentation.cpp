@@ -466,7 +466,7 @@ CScientist Presentation::getEditSci(int id)
     }
     else
     {
-        Dod = "";
+        Dod = "Alive";
     }
     CScientist sci(id, name, gender, Dob, Dod, 1);
     return sci;
