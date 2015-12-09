@@ -17,8 +17,7 @@ How do I display the list of computers?
     The system will now prompt you and ask you how you want the list displayed
     Press 1 to display it alphabetically and then 1 to display it in ascending order and 2 to display it in descending order.
     Press 2 to display it sorted by type and then 1 to display it in ascending order and 2 to display it in descending order.
-    Press 3 to display it sorted by wether it was built or not. From there press 1 to display the computers that weren't built
-    first. Press 2 to display those that were built first
+    Press 3 to display it sorted by wether it was built or not. From there press 1 to display the computers that weren't built first. Press 2 to display those that were built first
     Press 4 to display it by year when built and then 1 to display the first built first and 2 to display the last built first.
     Press 5 to display it by computer ID the 1 to display it in ascending order and 2 to display it in descending order.
 
@@ -29,11 +28,8 @@ How do I display the the connections between computers and scientists?
 How do I search the list?
     From the main menu press 2
     From there press 1 to search for scientists, 2 to search for computers
-    If you wish to search scientists please enter the ID/name/gender/birthyear/deathyear. After inputing an entry press return. If
-    you are unsure about one or more details about the person just press return and you will be asked for the next detail.
-    If you wish to search scientists please enter the ID/name/type/wheter it was built/year built. After inputing an entry press
-    return. If you are unsure about one or more details about the person just press return and you will be asked for the next
-    detail.
+    If you wish to search scientists please enter the ID/name/gender/birthyear/deathyear. After inputing an entry press return. If you are unsure about one or more details about the person just press return and you will be asked for the next detail.
+    If you wish to search scientists please enter the ID/name/type/wheter it was built/year built. After inputing an entry press return. If you are unsure about one or more details about the person just press return and you will be asked for the next detail.
 
 How to enter scientists?
     From the main menu press 3
@@ -43,26 +39,22 @@ How to enter scientists?
     Enter the persons year of birth in digits and then press return
     Press y on your keyboard if the person is alive or n if the person has passed
     Enter the persons year of death in digits if the person has passed and then press return
-    The console will now prompt you if you want to add another scientist, press y to add another one or press n to return to the
-    main menu
+    The console will now prompt you if you want to add another scientist, press y to add another one or press n to return to the main menu
 
 How to enter computers?
     From the main menu press 3
     From there press 2
     Enter the name of the computer when finished entering info press return
     Enter the type of the computer when finished entering info press return
-    If the computer was built press y on your keyboard. Press n if it wasnÂ´t
+    If the computer was built press y on your keyboard. Press n if it wasn´t
     If the computer was built enter the it was built
-    The console will now prompt you if you want to add another computer, press y to add another one or press n to return to the main
-    menu
+    The console will now prompt you if you want to add another computer, press y to add another one or press n to return to the main menu
 
 How to enter connection between computerscientists and computers?
     From the main menu press 3
     From there press 3
-    Enter the ID of the computers(s) you wish to connect to the scientists. Seperate the entries with a comma. Press return when
-    finished. Then enter the scientist(s) ID an press return when finished.
-    The console will now prompt you if you want to add another connection, press y to add another one or press n to return to the
-    main menu
+    Enter the ID of the computers(s) you wish to connect to the scientists. Seperate the entries with a comma. Press return when finished. Then enter the scientist(s) ID an press return when finished.
+    The console will now prompt you if you want to add another connection, press y to add another one or press n to return to the main menu
 
 Oh my god i made an error, how do I delete persons from the list?
     From the main menu press 4
@@ -90,6 +82,5 @@ Oh sweet baby Jesus i deleted the wrong entry, is there a way to undo my catastr
     Yes there is! From the main menu press 6
     From there simply press 1 to restore a scientist, 2 to restore a computer or 3 to restore a connection
     After you've made your choice the program will display all the entries
-    Enter the ID of the entry you wish to restore and then press return. If you change your mind and don't wan't to restore an entry
-    just press return
+    Enter the ID of the entry you wish to restore and then press return. If you change your mind and don't wan't to restore an entry just press return
 
