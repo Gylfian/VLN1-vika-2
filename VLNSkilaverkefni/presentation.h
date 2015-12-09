@@ -249,6 +249,8 @@ private:
     void displayRelation();
     void printRelations(vector<string> scientists, vector<string> computer);
     void successText(string word);
+    CScientist getEditSci(int id);
+    Computer getEditCom(int id);
 };
 
 #endif // PRESENTATION_H

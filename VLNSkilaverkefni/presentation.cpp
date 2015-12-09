@@ -398,9 +398,8 @@ void Presentation::editSci()
         if (dom.checkIdVector(scientists, id))
         {
             CScientist sci;
-            sci = getScientistData();
             int sid = dom.convertToInt(id);
-            sci.setId(sid);
+            sci = getEditSci(sid);
             dom.editEntry(sci);
             successText("edited");
         }
@@ -427,9 +426,8 @@ void Presentation::editCom()
         if (dom.checkIdVector(computers, id))
         {
             Computer com;
-            com = getComputerData();
             int cid = dom.convertToInt(id);
-            com.setId(cid);
+            com = getEditCom(cid);
             dom.editEntry(com);
             successText("edited");
         }
@@ -443,6 +441,47 @@ void Presentation::editCom()
         system("CLS");
         mainPage();
     }
+}
+
+CScientist Presentation::getEditSci(int id)
+{
+    string name = getSearchName();
+    string gender = getInputGender();
+    string Dob, Dod;
+    cout << "Enter birth year: " << endl;
+    getline(cin, Dob);
+    if (getInputAlive())
+    {
+        cout << "Enter death year: " << endl;
+        getline(cin, Dod);
+    }
+    else
+    {
+        Dod = "";
+    }
+    CScientist sci(id, name, gender, Dob, Dod, 1);
+    return sci;
+}
+
+Computer Presentation::getEditCom(int id)
+{
+    string name = getSearchName();
+    string type, built, year;
+    cout << "Enter type: ";
+    getline(cin,type);
+    built = getSearchBuilt();
+    if (built == "Yes")
+    {
+        cout << "Enter the year the computer was built: ";
+        getline(cin, name);
+    }
+    else
+    {
+        year = "";
+    }
+
+    Computer com(id, name, year, type ,built);
+    return com;
 }
 
 string Presentation::getSearchName()
@@ -809,7 +848,7 @@ string Presentation::getComName()
 {
     string name;
     cout << "Enter the name of the computer: ";
-    cin >> name;
+    getline (cin, name);
     return name;
 }
 
@@ -817,7 +856,7 @@ string Presentation::getComType()
 {
     string type;
     cout << "Enter the type of computer: ";
-    cin >> type;
+    getline (cin, type);
     return type;
 }
 
@@ -851,7 +890,16 @@ string Presentation::getComYear()
     string year;
     cout << "Enter the year the computer was built: ";
     cin >> year;
-    return year;
+    if (dom.verifyBirthyear(year))
+    {
+        return year;
+    }
+    else
+    {
+        cout << "Please select a valid build year!" << endl;
+        year = getComYear();
+    }
+    return "";
 }
 
 bool Presentation::another(string word)
