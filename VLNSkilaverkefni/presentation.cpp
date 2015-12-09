@@ -1140,6 +1140,7 @@ void Presentation::successText(string word)
     cout << "Entry was successfully " << word << endl;
     cout << "Press any key to go to the main menu" << endl;
     char ans = getch();
+    system("CLS");
     mainPage();
 }
 
