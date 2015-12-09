@@ -208,7 +208,7 @@ void Data::select(Relation Rel)
     QString qsql;
     string sql = "SELECT Computerscientists.Name as 'SName', Computers.Name as 'CName' FROM Computerscientists INNER JOIN scientists_computers ";
     sql+= "ON Computerscientists.ID = scientists_computers.scientistID ";
-    sql+= "INNER JOIN Computers ON Computers.ID = scientists_computers.computerID; ";
+    sql+= "INNER JOIN Computers ON Computers.ID = scientists_computers.computerID ORDER BY SName; ";
     qsql = QString::fromStdString(sql);
     fillVector(database, Rel, qsql);
 }
