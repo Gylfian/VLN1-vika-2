@@ -432,7 +432,7 @@ void Domain::solveIdToDb(vector<Computer> &cComList, vector<int> solvedIdList)
 
 void Domain::addRelation(CScientist cSci, Computer cCom)
 {
-    data.setRelations(cCom, cSci);
+    data.insert(cCom, cSci);
 }
 
 vector<int> Domain::solveString(string str)
