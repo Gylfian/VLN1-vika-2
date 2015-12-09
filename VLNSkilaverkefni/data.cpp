@@ -344,14 +344,7 @@ void Data::updateStatus(Relation rel)
 {
     QString qsql;
     string sql;
-    if(rel.getIsActive() == 1)
-    {
-        sql = "UPDATE scientists_computers SET isActive=0 WHERE ID = " + rel.getId();
-    }
-    else
-    {
-        sql = "UPDATE scientists_computers SET isActive=1 WHERE ID = " + rel.getId();
-    }
+    sql = "UPDATE scientists_computers SET isActive=0 WHERE ID = " + rel.getId();
     qsql = QString::fromStdString(sql);
     fillVector(database, rel, qsql);
 }
