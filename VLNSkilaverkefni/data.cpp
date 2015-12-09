@@ -32,6 +32,7 @@ vector<Computer> Data::getComVector()
 {
     return  com;
 }
+
 vector<Relation> Data::getRelVector()
 {
     return rel;
@@ -145,7 +146,7 @@ void Data::select(CScientist cSci,int index1,int index2)
 {
     QString qsql;
     int id = cSci.getId();
-    string SciId = convertId(id);
+    string sciId = convertId(id);
     string sql = "SELECT *";
     sql += " FROM Computerscientists";
     sql += " WHERE Name LIKE '%" + cSci.getName() + "%'";
@@ -166,7 +167,7 @@ void Data::select(CScientist cSci,int index1,int index2)
     }
     if(cSci.getId() > 0)
     {
-        sql += " AND ID= " + SciId;
+        sql += " AND ID= " + sciId;
 
     }
     sql += " AND isActive=1 ";
@@ -206,6 +207,7 @@ void Data::select(Computer comp,int index1,int index2)
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
 }
+
 void Data::select(Relation Rel)
 {
     QString qsql;
@@ -312,14 +314,14 @@ void Data::updateStatus(CScientist cSci)
     QString qsql;
     string sql;
     int id = cSci.getId();
-    string SciId = convertId(id);
+    string sciId = convertId(id);
     if(cSci.getIsActive() == 1)
     {
-        sql = "UPDATE Computerscientists SET isActive=0 WHERE ID =  " +SciId;
+        sql = "UPDATE Computerscientists SET isActive=0 WHERE ID =  " +sciId;
     }
     else
     {
-        sql = "UPDATE Computerscientists SET isActive=1 WHERE ID =  " +SciId;
+        sql = "UPDATE Computerscientists SET isActive=1 WHERE ID =  " +sciId;
     }
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
@@ -330,14 +332,14 @@ void Data::updateStatus(Computer comp)
     QString qsql;
     string sql;
     int id = comp.getId();
-    string ComId = convertId(id);
+    string comId = convertId(id);
     if(comp.getIsActive() == 1)
     {
-        sql = "UPDATE Computers SET isActive=0 WHERE ID = " +ComId;
+        sql = "UPDATE Computers SET isActive=0 WHERE ID = " +comId;
     }
     else
     {
-        sql = "UPDATE Computers SET isActive=1 WHERE ID = " +ComId;
+        sql = "UPDATE Computers SET isActive=1 WHERE ID = " +comId;
     }
     qsql = QString::fromStdString(sql);
     fillVector(database, comp, qsql);
@@ -346,16 +348,16 @@ void Data::updateStatus(Computer comp)
 void Data::insert(CScientist cSci)
 {
     QString qsql;
-    string deathstatus;
+    string deathStatus;
     if(cSci.getDod().length()==0)
     {
-     deathstatus = "Alive";
+     deathStatus = "Alive";
     }
     else
     {
-     deathstatus = cSci.getDod();
+     deathStatus = cSci.getDod();
     }
-    string sql = "INSERT INTO Computerscientists (Name, Gender, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+deathstatus+"')";
+    string sql = "INSERT INTO Computerscientists (Name, Gender, Dob, Dod) VALUES ('"+ cSci.getName() +"','"+ cSci.getGender() +"','"+ cSci.getDob() +"','"+deathStatus+"')";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
 }
@@ -372,8 +374,8 @@ void Data::update(CScientist cSci)
 {
     QString qsql;
     int id = cSci.getId();
-    string SciId = convertId(id);
-    string sql = "UPDATE Computerscientist SET ID " + SciId;
+    string sciId = convertId(id);
+    string sql = "UPDATE Computerscientist SET ID " +sciId;
     if(!cSci.getName().empty())
     {
         sql += ", Name ='" + cSci.getName() + "'";
@@ -393,7 +395,7 @@ void Data::update(CScientist cSci)
     {
         sql += ", Dod='" + cSci.getDod() + "'";
     }
-    sql += " WHERE ID=" + SciId;
+    sql += " WHERE ID=" + sciId;
     sql += ";";
     qsql = QString::fromStdString(sql);
     fillVector(database, cSci, qsql);
@@ -403,24 +405,20 @@ void Data::update(Computer comp)
 {
     QString qsql;
     int id = comp.getId();
-    string ComId = convertId(id);
-    string sql = "UPDATE Computers SET id " + ComId;
+    string comId = convertId(id);
+    string sql = "UPDATE Computers SET id " + comId;
     if(!comp.getName().empty())
     {
         sql += " AND name ='" + comp.getName() + "'";
     }
-
     if(!comp.getYear().empty())
     {
         sql += " AND year='" + comp.getYear() + "'";
-
     }
-
     if(!comp.getType().empty())
     {
         sql += " AND type='" + comp.getType() + "'";
     }
-
     if(!comp.getBuilt().empty())
     {
         sql += " AND built='" + comp.getBuilt() + "'";
