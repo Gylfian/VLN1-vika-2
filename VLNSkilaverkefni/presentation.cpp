@@ -72,6 +72,10 @@ void Presentation::restoreSciOrCom()
         {
             restoreCom();
         }break;
+        case ('3'):
+        {
+            restoreConnection();
+        }break;
         default:
             mainPage();
     }
@@ -141,6 +145,12 @@ void Presentation::restoreCom()
     }
 }
 
+void Presentation::restoreConnection()
+{
+    displayRelation();
+    string id = getListId("connection", "restore");
+}
+
 void Presentation::failText()
 {
     cout << "No entries found!" << endl;
@@ -168,6 +178,7 @@ void Presentation::printSciOrCom()
         case ('3'):
         {
             displayRelation();
+            printListOptions();
         }break;
         default:
             mainPage();
@@ -180,7 +191,7 @@ void Presentation::displayRelation()
     vector<string> computers;
     dom.getRelationList(scientists, computers);
     printRelations(scientists, computers);
-    printListOptions();
+
 }
 
 void Presentation::printRelations(vector<string> scientists, vector<string> computers)
@@ -188,12 +199,12 @@ void Presentation::printRelations(vector<string> scientists, vector<string> comp
 
     int longestsci = dom.findLongestName(scientists);
     int longestcom = dom.findLongestName(computers);
-    cout << "Scientists" << string(longestsci - 8 , ' ') << "Computers" << endl;
-    cout << setfill('-') << setw(longestsci + longestcom + 3) << '-' << endl;
+    cout << " ID| Scientists" << string(longestsci - 8 , ' ') << "Computers" << endl;
+    cout << setfill('-') << setw(longestsci + longestcom + 8) << '-' << endl;
     for (unsigned int i = 0; i < scientists.size(); i++)
     {
-        cout << left << setfill(' ') << setw(longestsci+2) << scientists[i]  << computers[i] << endl;
-        cout << setfill('-') << setw(longestsci + longestcom + 3) << '-' << endl;
+        cout << right << setfill(' ') << setw(3) << i << "| " << left << setfill(' ') << setw(longestsci+2) << scientists[i]  << computers[i] << endl;
+        cout << setfill('-') << setw(longestsci + longestcom + 8) << '-' << endl;
     }
 }
 
@@ -620,6 +631,10 @@ void Presentation::deleteSciOrCom()
         {
             deleteCom();
         }break;
+        case ('3'):
+        {
+            deleteConnection();
+        }break;
         default:
             mainPage();
     }
@@ -674,6 +689,13 @@ void Presentation::deleteCom()
         system("CLS");
         mainPage();
     }
+
+}
+
+void Presentation::deleteConnection()
+{
+    displayRelation();
+    string id = getListId("connection", "delete");
 
 }
 
@@ -1241,6 +1263,14 @@ void Presentation::sciOrComText(char which)
         case ('3'):
         {
             cout << "|-3) Add a connection--------------------|" << endl;
+        }break;
+        case ('4'):
+        {
+            cout << "|-3) Delete a connection-----------------|" << endl;
+        }break;
+        case ('6'):
+        {
+            cout << "|-3) Restore a connection-----------------|" << endl;
         }break;
     }
     cout << "|-Press any other key to go back---------|" << endl;

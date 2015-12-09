@@ -81,6 +81,7 @@ private:
     void successText(string word);
     CScientist getEditSci(int id);
     Computer getEditCom(int id);
+    void deleteConnection();
 };
 
 #endif // PRESENTATION_H
