@@ -720,7 +720,7 @@ CScientist Presentation::getScientistData()
     }
     else
     {
-        Dod = "";
+        Dod = "Alive";
     }
 
     CScientist cSci(0,name, gender, Dob, Dod, 1);
@@ -1082,10 +1082,6 @@ void Presentation::printListOptions()
         {
             findAnalyze();
         }break;
-        case ('2'):
-        {
-
-        }break;
         default:
             system("CLS");
             mainPage();
@@ -1115,7 +1111,6 @@ void Presentation::printListText()
     cout << " ____________________________________________ " << endl;
     cout << "|----------What do you want to do ?----------|" << endl;
     cout << "|-1) Analyse a specific entry----------------|" << endl;
-    cout << "|-2) Blabeebliblu----------------------------|" << endl;
     cout << "|-Press any other key to go to the main menu-|" << endl;
     cout << "|____________________________________________|" << endl;
 }
