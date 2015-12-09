@@ -415,6 +415,10 @@ void Data::update(Computer comp)
     {
         sql += ", year='" + comp.getYear() + "'";
     }
+    else if((comp.getYear().empty())&&(comp.getBuilt()=="No"))
+    {
+        sql += ", year= ''";
+    }
     if(!comp.getType().empty())
     {
         sql += ", type='" + comp.getType() + "'";
@@ -423,10 +427,7 @@ void Data::update(Computer comp)
     {
         sql += ", built='" + comp.getBuilt() + "'";
     }
-    else if(comp.getBuilt().empty())
-    {
-        //setja fix
-    }
+
     sql += " WHERE ID=" + comId;
     sql += ";";
     qsql = QString::fromStdString(sql);
