@@ -40,6 +40,8 @@ public:
 
     void sortBy(vector<Computer> &cComList, char child, char child2);
 
+    void changeRelation(string sid);
+
     /*
      * Name: restoreEntry
      * Parameter/s: vector<CScientist> &cSciList
@@ -195,7 +197,7 @@ private:
      */
     int charToInt(char chr);
     Data data;
-    void changeRelation(string sid);
+
 
     /*
      * Name: get functions

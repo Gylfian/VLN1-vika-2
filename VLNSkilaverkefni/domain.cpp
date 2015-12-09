@@ -242,7 +242,8 @@ void Domain::changeRelation(string sid)
 {
     Relation rel;
     int id = convertToInt(sid);
-
+    rel.setId(id);
+    data.updateStatus(rel);
 }
 
 bool Domain::checkOption(char child)
