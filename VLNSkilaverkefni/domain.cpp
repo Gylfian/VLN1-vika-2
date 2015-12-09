@@ -170,11 +170,17 @@ void Domain::addEntry(Computer cCom)
 
 void Domain::editEntry(CScientist cSci)
 {
+    string str = cSci.getName();
+    normalizeName(str);
+    cSci.setName(str);
     data.update(cSci);
 }
 
 void Domain::editEntry(Computer cCom)
 {
+    string str = cCom.getName();
+    normalizeName(str);
+    cCom.setName(str);
     data.update(cCom);
 }
 

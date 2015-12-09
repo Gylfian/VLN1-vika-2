@@ -17,7 +17,7 @@ public:
     Domain();
 
     /*
-     * Name: getScientistList
+     * Name: search
      * Parameter/s: none
      * Description: Returns a list of scientists from text file
      * Usage: vector<CScientist> list = getScientistList()
