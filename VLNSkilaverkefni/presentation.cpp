@@ -182,12 +182,17 @@ void Presentation::displayRelation()
     printRelations(scientists, computers);
 }
 
-void Presentation::printRelations(vector<string> scientists, vector<string> computer)
-{
+void Presentation::printRelations(vector<string> scientists, vector<string> computers)
+{/*
+
+    int longestsci = dom.findLongestName(scientists);
+    int longestcom = dom.findLongestName(computers);
+    cout << ledt << setw(longestsci) << "Scientists" << setw(longestcom) << "Computers"
     for (unsigned int i = 0; i < scientists.size(); i++)
     {
-       cout << scientists[i] << '\t' << computer[i] << endl;
+        cout <<
     }
+    */
 }
 
 void Presentation::addSciOrCom()
@@ -1073,45 +1078,16 @@ void Presentation::printComList(vector<Computer> computers)
 void Presentation::printListOptions()
 {
     printListText();
-
     char ans = getch();
-
-    switch(ans)
-    {
-        case ('1'):
-        {
-            findAnalyze();
-        }break;
-        default:
-            system("CLS");
-            mainPage();
-    }
-}
-
-void Presentation::findAnalyze()
-{
-    cout << "Enter the ID of the entry you wish to analyze" << endl;
-    cout << "ID: ";
-    string id;
-    getline(cin, id);
-}
-
-void Presentation::analyze(vector<CScientist> scientists)
-{
-
-}
-
-void Presentation::analyse(vector<Computer> computers)
-{
+    system("CLS");
+    mainPage();
 
 }
 
 void Presentation::printListText()
 {
     cout << " ____________________________________________ " << endl;
-    cout << "|----------What do you want to do ?----------|" << endl;
-    cout << "|-1) Analyse a specific entry----------------|" << endl;
-    cout << "|-Press any other key to go to the main menu-|" << endl;
+    cout << "|----Press any key to go to the main menu----|" << endl;
     cout << "|____________________________________________|" << endl;
 }
 
