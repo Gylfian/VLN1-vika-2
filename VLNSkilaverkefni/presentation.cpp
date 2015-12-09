@@ -72,10 +72,6 @@ void Presentation::restoreSciOrCom()
         {
             restoreCom();
         }break;
-        case ('3'):
-        {
-            restoreConnection();
-        }break;
         default:
             mainPage();
     }
@@ -93,12 +89,23 @@ void Presentation::restoreSci()
     {
         printSciList(scientists);
         string id = getListId("scientist", "restore");
-        if (dom.checkIfLegitId(id))
+        if(dom.checkIfLegitId(id))
         {
-            dom.updateEntrySci(id);
+            if (dom.checkIdVector(scientists, id))
+            {
+                dom.updateEntryCom(id);
+                successText("restored");
+            }
+            else
+            {
+                failText();
+            }
         }
         else
-        mainPage();
+        {
+            system("CLS");
+            mainPage();
+        }
     }
 }
 
@@ -114,12 +121,23 @@ void Presentation::restoreCom()
     {
         printComList(computers);
         string id = getListId("computer", "restore");
-        if (dom.checkIfLegitId(id))
+        if(dom.checkIfLegitId(id))
         {
-            dom.updateEntrySci(id);
+            if (dom.checkIdVector(computers, id))
+            {
+                dom.updateEntryCom(id);
+                successText("restored");
+            }
+            else
+            {
+                failText();
+            }
         }
         else
-        mainPage();
+        {
+            system("CLS");
+            mainPage();
+        }
     }
 }
 
@@ -130,11 +148,6 @@ void Presentation::failText()
     char ans = getch();
     system ("CLS");
     mainPage();
-}
-
-void Presentation::restoreConnection()
-{
-
 }
 
 void Presentation::printSciOrCom()
@@ -166,10 +179,7 @@ void Presentation::displayRelation()
     vector<string> scientists;
     vector<string> computers;
     dom.getRelationList(scientists, computers);
-
-
     printRelations(scientists, computers);
-
 }
 
 void Presentation::printRelations(vector<string> scientists, vector<string> computer)
@@ -382,6 +392,12 @@ void Presentation::editSci()
     dom.sortBy(scientists, '5','1');
     printSciList(scientists);
     string id = getListId("scientist", "edit");
+    if (dom.checkIfLegitId(id))
+    {
+
+    }
+    else
+        ;
 }
 
 void Presentation::editCom()
@@ -536,12 +552,23 @@ void Presentation::deleteSci()
     dom.sortBy(scientists, '5','1');
     printSciList(scientists);
     string id = getListId("scientist", "delete");
-    if (dom.checkIfLegitId(id))
+    if(dom.checkIfLegitId(id))
     {
-        dom.updateEntrySci(id);
+        if (dom.checkIdVector(scientists, id))
+        {
+            dom.updateEntryCom(id);
+            successText("deleted");
+        }
+        else
+        {
+            failText();
+        }
     }
     else
-    mainPage();
+    {
+        system("CLS");
+        mainPage();
+    }
 }
 
 void Presentation::deleteCom()
@@ -549,13 +576,26 @@ void Presentation::deleteCom()
     vector<Computer> computers;
     dom.sortBy(computers, '5','1');
     printComList(computers);
-    string id = getListId("computer", "delete");
-    if (dom.checkIfLegitId(id))
+    string id;
+    id = getListId("computer", "delete");
+    if(dom.checkIfLegitId(id))
     {
-        dom.updateEntryCom(id);
+        if (dom.checkIdVector(computers, id))
+        {
+            dom.updateEntryCom(id);
+            successText("deleted");
+        }
+        else
+        {
+            failText();
+        }
     }
     else
-    mainPage();
+    {
+        system("CLS");
+        mainPage();
+    }
+
 }
 
 string Presentation::getListId(string word1, string word2)
@@ -1095,6 +1135,15 @@ void Presentation::buildYearText()
     cout << "|_____________________________________|" << endl;
 }
 
+void Presentation::successText(string word)
+{
+    cout << "Entry was successfully " << word << endl;
+    cout << "Press any key to go to the main menu" << endl;
+    char ans = getch();
+    system("CLS");
+    mainPage();
+}
+
 void Presentation::sciOrComText(char which)
 {
 
@@ -1138,10 +1187,6 @@ void Presentation::sciOrComText(char which)
         case ('3'):
         {
             cout << "|-3) Add a connection--------------------|" << endl;
-        }break;
-        case ('6'):
-        {
-            cout << "|-3) A connection------------------------|" << endl;
         }break;
     }
     cout << "|-Press any other key to go back---------|" << endl;
