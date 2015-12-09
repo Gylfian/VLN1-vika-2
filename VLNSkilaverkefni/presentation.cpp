@@ -93,7 +93,7 @@ void Presentation::restoreSci()
         {
             if (dom.checkIdVector(scientists, id))
             {
-                dom.updateEntryCom(id);
+                dom.updateEntrySci(id);
                 successText("restored");
             }
             else
@@ -626,7 +626,7 @@ void Presentation::deleteSci()
     {
         if (dom.checkIdVector(scientists, id))
         {
-            dom.updateEntryCom(id);
+            dom.updateEntrySci(id);
             successText("deleted");
         }
         else
